@@ -14,7 +14,8 @@ export interface LocationData {
 export interface FormData {
   locationFrom: LocationData | null;
   locationTo: LocationData | null;
-  cargoType: 'envelope' | 'package' | '';
+  cargoType: 'envelope' | 'small-package' | 'medium-package' | 'large-package' | 'oversized-package' | '';
+  cargoWeight: '1-2kg' | '2-5kg' | '5-10kg' | '10-15kg' | '15-20kg' | '20kg+' | '';
   cargoDetails: string;
   timePreference: 'asap' | 'today' | 'later' | '';
   scheduledDate?: Date;
@@ -149,13 +150,27 @@ export function formatWhatsAppMessage(formData: FormData): string {
                    formData.timePreference === 'today' ? 'Bugün İçinde' :
                    formData.scheduledDate ? `İleri Tarih: ${formData.scheduledDate.toLocaleDateString('tr-TR')}` : '';
   
-  const cargoTypeText = formData.cargoType === 'envelope' ? 'Zarf' : 'Kutu/Paket';
+  const cargoTypeText = 
+    formData.cargoType === 'envelope' ? 'Evrak/Zarf' :
+    formData.cargoType === 'small-package' ? 'Küçük Paket' :
+    formData.cargoType === 'medium-package' ? 'Orta Paket' :
+    formData.cargoType === 'large-package' ? 'Büyük Paket' :
+    formData.cargoType === 'oversized-package' ? 'Çanta Aşan Paket' : 'Belirtilmedi';
+  
+  const weightText = 
+    formData.cargoWeight === '1-2kg' ? '1-2 kg' :
+    formData.cargoWeight === '2-5kg' ? '2-5 kg' :
+    formData.cargoWeight === '5-10kg' ? '5-10 kg' :
+    formData.cargoWeight === '10-15kg' ? '10-15 kg' :
+    formData.cargoWeight === '15-20kg' ? '15-20 kg' :
+    formData.cargoWeight === '20kg+' ? '20 kg üstü' : 'Belirtilmedi';
   
   return `Merhaba, yeni bir kurye talebim var:
 
 📍 Nereden: ${formData.locationFrom?.district} - ${formData.locationFrom?.neighborhood}
 📍 Nereye: ${formData.locationTo?.district} - ${formData.locationTo?.neighborhood}
-📦 Kargo: ${cargoTypeText}${formData.cargoDetails ? ' - ' + formData.cargoDetails : ''}
+📦 Kargo Türü: ${cargoTypeText}
+⚖️ Ağırlık: ${weightText}${formData.cargoDetails ? '\n📝 Detay: ' + formData.cargoDetails : ''}
 ⏰ Zamanlama: ${timeText}
 
 Teşekkürler!`;

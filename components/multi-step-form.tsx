@@ -1,9 +1,8 @@
 "use client"
-import { Combobox } from './ui/combobox'
 
-import React, { useState, useEffect } from 'react'
-import { FormData, LocationData, loadDistricts, loadNeighborhoods, formatWhatsAppMessage, createWhatsAppUrl, DistrictOption, NeighborhoodOption } from '@/lib/utils'
-import { MessageCircle, MapPin, Package, Clock, ChevronRight, ChevronLeft } from 'lucide-react'
+import React, { useState } from 'react'
+import { FormData, LocationData, formatWhatsAppMessage, createWhatsAppUrl } from '@/lib/utils'
+import { MessageCircle, MapPin, Package, Clock, ChevronRight, ChevronLeft, Weight } from 'lucide-react'
 import MapComponent from './map-component'
 import { Button } from './ui/button'
 import { Progress } from './ui/progress'
@@ -12,16 +11,35 @@ import { Label } from './ui/label'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea'
 import { RadioGroup, RadioGroupItem } from './ui/radio-group'
-// ...existing code...
+
+// Test için sabit mahalle verileri
+const testNeighborhoods = [
+  { value: 'kadikoy-moda', label: 'Moda', district: 'Kadıköy', coordinates: [29.0276, 40.9856] as [number, number] },
+  { value: 'kadikoy-fenerbahce', label: 'Fenerbahçe', district: 'Kadıköy', coordinates: [29.0385, 40.9759] as [number, number] },
+  { value: 'besiktas-etiler', label: 'Etiler', district: 'Beşiktaş', coordinates: [29.0377, 41.0777] as [number, number] },
+  { value: 'besiktas-levent', label: 'Levent', district: 'Beşiktaş', coordinates: [29.0166, 41.0805] as [number, number] },
+  { value: 'sisli-mecidiyekoy', label: 'Mecidiyeköy', district: 'Şişli', coordinates: [28.9947, 41.0638] as [number, number] },
+  { value: 'sisli-osmanbey', label: 'Osmanbey', district: 'Şişli', coordinates: [28.9858, 41.0524] as [number, number] },
+  { value: 'atasehir-atasehir', label: 'Ataşehir Merkez', district: 'Ataşehir', coordinates: [29.1244, 40.9827] as [number, number] },
+  { value: 'umraniye-umraniye', label: 'Ümraniye Merkez', district: 'Ümraniye', coordinates: [29.1244, 41.0195] as [number, number] },
+]
+
+// Kargo türü bilgilendirmeleri
+const cargoTypeInfo: Record<string, string> = {
+  'envelope': 'A4 zarflar, belgeler, evraklar için ideal. Hafif ve küçük boyutlu gönderiler.',
+  'small-package': 'Küçük hediyeler, elektronik aksesuarlar, kitaplar gibi küçük ürünler için uygundur.',
+  'medium-package': 'Ayakkabı kutusu, küçük cihazlar, orta boy hediye paketleri için idealdir.',
+  'large-package': 'Büyük elektronik ürünler, hacimli paketler için uygundur.',
+  'oversized-package': 'Çanta boyutunu aşan, büyük ve ağır yükler için özel kurye hizmeti.',
+}
 
 export default function MultiStepForm() {
   const [step, setStep] = useState(1)
-  const [districts, setDistricts] = useState<DistrictOption[]>([])
-  const [neighborhoods, setNeighborhoods] = useState<NeighborhoodOption[]>([])
   const [formData, setFormData] = useState<FormData>({
     locationFrom: null,
     locationTo: null,
     cargoType: '',
+    cargoWeight: '',
     cargoDetails: '',
     timePreference: '',
     scheduledDate: undefined
@@ -30,20 +48,15 @@ export default function MultiStepForm() {
   const [selectedFromLocation, setSelectedFromLocation] = useState('')
   const [selectedToLocation, setSelectedToLocation] = useState('')
 
-  useEffect(() => {
-    loadDistricts().then(setDistricts)
-    loadNeighborhoods().then(setNeighborhoods)
-  }, [])
-
   const handleFromLocationChange = (value: string) => {
     setSelectedFromLocation(value)
-    const neighborhood = neighborhoods.find(n => n.value === value)
+    const neighborhood = testNeighborhoods.find(n => n.value === value)
     if (neighborhood) {
       setFormData({ 
         ...formData, 
         locationFrom: {
           district: neighborhood.district,
-          neighborhood: neighborhood.label.split(' (')[0],
+          neighborhood: neighborhood.label,
           coordinates: neighborhood.coordinates
         }
       })
@@ -52,13 +65,13 @@ export default function MultiStepForm() {
 
   const handleToLocationChange = (value: string) => {
     setSelectedToLocation(value)
-    const neighborhood = neighborhoods.find(n => n.value === value)
+    const neighborhood = testNeighborhoods.find(n => n.value === value)
     if (neighborhood) {
       setFormData({ 
         ...formData, 
         locationTo: {
           district: neighborhood.district,
-          neighborhood: neighborhood.label.split(' (')[0],
+          neighborhood: neighborhood.label,
           coordinates: neighborhood.coordinates
         }
       })
@@ -66,7 +79,7 @@ export default function MultiStepForm() {
   }
 
   const nextStep = () => {
-    if (step < 4) setStep(step + 1)
+    if (step < 5) setStep(step + 1)
   }
 
   const prevStep = () => {
@@ -79,12 +92,13 @@ export default function MultiStepForm() {
     window.open(url, '_blank')
   }
 
-  const progress = (step / 4) * 100
+  const progress = (step / 5) * 100
 
   // Validation logic
   const canProceedStep1 = formData.locationFrom && formData.locationTo
   const canProceedStep2 = formData.cargoType !== ''
-  const canProceedStep3 = formData.timePreference !== ''
+  const canProceedStep3 = formData.cargoWeight !== ''
+  const canProceedStep4 = formData.timePreference !== ''
 
   return (
     <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20">
@@ -94,13 +108,15 @@ export default function MultiStepForm() {
             <CardTitle className="flex items-center gap-2 text-gray-900">
               {step === 1 && <MapPin className="h-6 w-6 text-primary" />}
               {step === 2 && <Package className="h-6 w-6 text-primary" />}
-              {step === 3 && <Clock className="h-6 w-6 text-primary" />}
-              {step === 4 && <MessageCircle className="h-6 w-6 text-primary" />}
+              {step === 3 && <Weight className="h-6 w-6 text-primary" />}
+              {step === 4 && <Clock className="h-6 w-6 text-primary" />}
+              {step === 5 && <MessageCircle className="h-6 w-6 text-primary" />}
               
-              Adım {step} / 4: {
+              Adım {step} / 5: {
                 step === 1 ? 'Konum Bilgileri' :
-                step === 2 ? 'Kargo Detayları' :
-                step === 3 ? 'Zamanlama' : 'Onay ve Gönderim'
+                step === 2 ? 'Kargo Türü' :
+                step === 3 ? 'Ağırlık' :
+                step === 4 ? 'Zamanlama' : 'Onay ve Gönderim'
               }
             </CardTitle>
             <div className="text-sm text-muted-foreground">
@@ -121,15 +137,18 @@ export default function MultiStepForm() {
                     <div className="space-y-4">
                       <div className="space-y-2">
                         <Label className="text-gray-700">Nereden (Mahalle)</Label>
-                        <Combobox
-                          options={neighborhoods.map(n => ({ value: n.value, label: n.label }))}
+                        <select
                           value={selectedFromLocation}
-                          onSelect={handleFromLocationChange}
-                          placeholder="Mahalle seçin..."
-                          searchPlaceholder="Mahalle ara (en az 3 harf)..."
-                          emptyMessage="Mahalle bulunamadı"
-                          minSearchLength={3}
-                        />
+                          onChange={(e) => handleFromLocationChange(e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                        >
+                          <option value="">Mahalle seçin...</option>
+                          {testNeighborhoods.map((n) => (
+                            <option key={n.value} value={n.value}>
+                              {n.label} ({n.district})
+                            </option>
+                          ))}
+                        </select>
                         {formData.locationFrom && (
                           <p className="text-sm text-muted-foreground">
                             {formData.locationFrom.district} - {formData.locationFrom.neighborhood}
@@ -139,15 +158,18 @@ export default function MultiStepForm() {
                       
                       <div className="space-y-2">
                         <Label className="text-gray-700">Nereye (Mahalle)</Label>
-                        <Combobox
-                          options={neighborhoods.map(n => ({ value: n.value, label: n.label }))}
+                        <select
                           value={selectedToLocation}
-                          onSelect={handleToLocationChange}
-                          placeholder="Mahalle seçin..."
-                          searchPlaceholder="Mahalle ara (en az 3 harf)..."
-                          emptyMessage="Mahalle bulunamadı"
-                          minSearchLength={3}
-                        />
+                          onChange={(e) => handleToLocationChange(e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                        >
+                          <option value="">Mahalle seçin...</option>
+                          {testNeighborhoods.map((n) => (
+                            <option key={n.value} value={n.value}>
+                              {n.label} ({n.district})
+                            </option>
+                          ))}
+                        </select>
                         {formData.locationTo && (
                           <p className="text-sm text-muted-foreground">
                             {formData.locationTo.district} - {formData.locationTo.neighborhood}
@@ -164,19 +186,54 @@ export default function MultiStepForm() {
                   <div>
                     <h3 className="text-lg font-medium mb-4 text-gray-900">Kargo türünü seçin</h3>
                     <RadioGroup
-                      className="grid w-full grid-cols-1 sm:grid-cols-2 gap-3"
+                      className="grid w-full grid-cols-1 gap-3"
                       value={formData.cargoType}
-                      onValueChange={(value) => setFormData({ ...formData, cargoType: value as 'envelope' | 'package' })}
+                      onValueChange={(value) => setFormData({ ...formData, cargoType: value as 'envelope' | 'small-package' | 'medium-package' | 'large-package' | 'oversized-package' })}
                     >
-                      <Label className="cursor-pointer">
-                        <RadioGroupItem value="envelope" className="mr-3" />
-                        <span className="font-medium flex items-center gap-2"><Package className="h-5 w-5" />Zarf / Döküman</span>
-                      </Label>
-                      <Label className="cursor-pointer">
-                        <RadioGroupItem value="package" className="mr-3" />
-                        <span className="font-medium flex items-center gap-2"><Package className="h-5 w-5" />Kutu / Paket</span>
-                      </Label>
+                      <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <RadioGroupItem value="envelope" id="envelope" />
+                        <Label htmlFor="envelope" className="cursor-pointer flex items-center gap-2 flex-1">
+                          <Package className="h-5 w-5 text-blue-600" />
+                          <span className="font-medium">Evrak / Zarf</span>
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <RadioGroupItem value="small-package" id="small-package" />
+                        <Label htmlFor="small-package" className="cursor-pointer flex items-center gap-2 flex-1">
+                          <Package className="h-5 w-5 text-blue-600" />
+                          <span className="font-medium">Küçük Paket</span>
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <RadioGroupItem value="medium-package" id="medium-package" />
+                        <Label htmlFor="medium-package" className="cursor-pointer flex items-center gap-2 flex-1">
+                          <Package className="h-5 w-5 text-blue-600" />
+                          <span className="font-medium">Orta Paket</span>
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <RadioGroupItem value="large-package" id="large-package" />
+                        <Label htmlFor="large-package" className="cursor-pointer flex items-center gap-2 flex-1">
+                          <Package className="h-5 w-5 text-blue-600" />
+                          <span className="font-medium">Büyük Paket</span>
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <RadioGroupItem value="oversized-package" id="oversized-package" />
+                        <Label htmlFor="oversized-package" className="cursor-pointer flex items-center gap-2 flex-1">
+                          <Package className="h-5 w-5 text-blue-600" />
+                          <span className="font-medium">Çanta Aşan Paket</span>
+                        </Label>
+                      </div>
                     </RadioGroup>
+                    
+                    {formData.cargoType && (
+                      <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                        <p className="text-sm text-blue-800">
+                          <strong>Bilgi:</strong> {cargoTypeInfo[formData.cargoType]}
+                        </p>
+                      </div>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <Label className="text-gray-700">Kargo detayları (opsiyonel)</Label>
@@ -193,20 +250,82 @@ export default function MultiStepForm() {
               {step === 3 && (
                 <div className="space-y-6">
                   <div>
+                    <h3 className="text-lg font-medium mb-4 text-gray-900">Ağırlık seçin</h3>
+                    <RadioGroup
+                      className="grid w-full grid-cols-1 gap-3"
+                      value={formData.cargoWeight}
+                      onValueChange={(value) => setFormData({ ...formData, cargoWeight: value as '1-2kg' | '2-5kg' | '5-10kg' | '10-15kg' | '15-20kg' | '20kg+' })}
+                    >
+                      <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <RadioGroupItem value="1-2kg" id="1-2kg" />
+                        <Label htmlFor="1-2kg" className="cursor-pointer flex items-center gap-2 flex-1">
+                          <Weight className="h-5 w-5 text-blue-600" />
+                          <span className="font-medium">1-2 kg</span>
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <RadioGroupItem value="2-5kg" id="2-5kg" />
+                        <Label htmlFor="2-5kg" className="cursor-pointer flex items-center gap-2 flex-1">
+                          <Weight className="h-5 w-5 text-blue-600" />
+                          <span className="font-medium">2-5 kg</span>
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <RadioGroupItem value="5-10kg" id="5-10kg" />
+                        <Label htmlFor="5-10kg" className="cursor-pointer flex items-center gap-2 flex-1">
+                          <Weight className="h-5 w-5 text-blue-600" />
+                          <span className="font-medium">5-10 kg</span>
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <RadioGroupItem value="10-15kg" id="10-15kg" />
+                        <Label htmlFor="10-15kg" className="cursor-pointer flex items-center gap-2 flex-1">
+                          <Weight className="h-5 w-5 text-blue-600" />
+                          <span className="font-medium">10-15 kg</span>
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <RadioGroupItem value="15-20kg" id="15-20kg" />
+                        <Label htmlFor="15-20kg" className="cursor-pointer flex items-center gap-2 flex-1">
+                          <Weight className="h-5 w-5 text-blue-600" />
+                          <span className="font-medium">15-20 kg</span>
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <RadioGroupItem value="20kg+" id="20kg+" />
+                        <Label htmlFor="20kg+" className="cursor-pointer flex items-center gap-2 flex-1">
+                          <Weight className="h-5 w-5 text-blue-600" />
+                          <span className="font-medium">20 kg üstü yük</span>
+                        </Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                </div>
+              )}
+
+              {step === 4 && (
+                <div className="space-y-6">
+                  <div>
                     <h3 className="text-lg font-medium mb-4 text-gray-900">Ne zaman gönderilsin?</h3>
                     <RadioGroup
-                      className="grid w-full grid-cols-1 sm:grid-cols-2 gap-3"
+                      className="grid w-full grid-cols-1 gap-3"
                       value={formData.timePreference}
                       onValueChange={(value) => setFormData({ ...formData, timePreference: value as 'asap' | 'today' | 'later' })}
                     >
-                      <Label className="cursor-pointer">
-                        <RadioGroupItem value="asap" className="mr-3" />
-                        <span className="font-medium flex items-center gap-2"><Clock className="h-5 w-5" />Hemen (En Kısa Sürede)</span>
-                      </Label>
-                      <Label className="cursor-pointer">
-                        <RadioGroupItem value="today" className="mr-3" />
-                        <span className="font-medium flex items-center gap-2"><Clock className="h-5 w-5" />Bugün İçinde</span>
-                      </Label>
+                      <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <RadioGroupItem value="asap" id="asap" />
+                        <Label htmlFor="asap" className="cursor-pointer flex items-center gap-2 flex-1">
+                          <Clock className="h-5 w-5 text-blue-600" />
+                          <span className="font-medium">Hemen (En Kısa Sürede)</span>
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <RadioGroupItem value="today" id="today" />
+                        <Label htmlFor="today" className="cursor-pointer flex items-center gap-2 flex-1">
+                          <Clock className="h-5 w-5 text-blue-600" />
+                          <span className="font-medium">Bugün İçinde</span>
+                        </Label>
+                      </div>
                     </RadioGroup>
                   </div>
                   {formData.timePreference === 'later' && (
@@ -226,7 +345,7 @@ export default function MultiStepForm() {
                 </div>
               )}
 
-              {step === 4 && (
+              {step === 5 && (
                 <div className="space-y-6">
                   <h3 className="text-lg font-medium text-gray-900">Sipariş Özeti</h3>
                   
@@ -245,10 +364,29 @@ export default function MultiStepForm() {
                     <div className="flex items-start space-x-3">
                       <Package className="h-5 w-5 text-primary mt-0.5" />
                       <div>
-                        <p className="font-medium">Kargo</p>
+                        <p className="font-medium">Kargo Türü</p>
                         <p className="text-sm text-muted-foreground">
-                          {formData.cargoType === 'envelope' ? 'Zarf / Döküman' : 'Kutu / Paket'}
+                          {formData.cargoType === 'envelope' ? 'Evrak / Zarf' :
+                           formData.cargoType === 'small-package' ? 'Küçük Paket' :
+                           formData.cargoType === 'medium-package' ? 'Orta Paket' :
+                           formData.cargoType === 'large-package' ? 'Büyük Paket' :
+                           formData.cargoType === 'oversized-package' ? 'Çanta Aşan Paket' : ''}
                           {formData.cargoDetails && ` - ${formData.cargoDetails}`}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start space-x-3">
+                      <Weight className="h-5 w-5 text-primary mt-0.5" />
+                      <div>
+                        <p className="font-medium">Ağırlık</p>
+                        <p className="text-sm text-muted-foreground">
+                          {formData.cargoWeight === '1-2kg' ? '1-2 kg' :
+                           formData.cargoWeight === '2-5kg' ? '2-5 kg' :
+                           formData.cargoWeight === '5-10kg' ? '5-10 kg' :
+                           formData.cargoWeight === '10-15kg' ? '10-15 kg' :
+                           formData.cargoWeight === '15-20kg' ? '15-20 kg' :
+                           formData.cargoWeight === '20kg+' ? '20 kg üstü' : ''}
                         </p>
                       </div>
                     </div>
@@ -299,13 +437,14 @@ export default function MultiStepForm() {
               Önceki
             </Button>
             
-            {step < 4 && (
+            {step < 5 && (
               <Button
                 onClick={nextStep}
                 disabled={
                   (step === 1 && !canProceedStep1) ||
                   (step === 2 && !canProceedStep2) ||
-                  (step === 3 && !canProceedStep3)
+                  (step === 3 && !canProceedStep3) ||
+                  (step === 4 && !canProceedStep4)
                 }
                 className="bg-blue-600 hover:bg-blue-700 text-white"
               >
