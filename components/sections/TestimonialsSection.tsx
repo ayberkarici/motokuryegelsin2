@@ -116,14 +116,14 @@ const TestimonialsSection = () => {
               <div className="flex justify-center mb-2">
                 <Star size={40} className="text-yellow-400" />
               </div>
-              <div className="text-3xl font-bold text-gray-900 mb-2">4.9/5</div>
+              <div className="text-3xl font-bold text-gray-900 mb-2">4,9/5</div>
               <div className="text-gray-600">Ortalama Puan</div>
             </div>
             <div>
               <div className="flex justify-center mb-2">
                 <MessageCircle size={40} className="text-blue-400" />
               </div>
-              <div className="text-3xl font-bold text-gray-900 mb-2">15,000+</div>
+              <div className="text-3xl font-bold text-gray-900 mb-2">1000+</div>
               <div className="text-gray-600">Müşteri Yorumu</div>
             </div>
             <div>

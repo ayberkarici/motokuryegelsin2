@@ -1,5 +1,5 @@
 import React from 'react'
-import { Zap, Shield, Smartphone, Clock, DollarSign, Users } from 'lucide-react'
+import { Zap, Shield, Clock, DollarSign, Users } from 'lucide-react'
 
 const FeaturesSection = () => {
   const features = [
@@ -14,12 +14,6 @@ const FeaturesSection = () => {
       title: "Güvenli Taşıma",
       description: "Paketleriniz özel koruma ambalajları ve sigorta güvencesi altında taşınır.",
       color: "bg-green-500"
-    },
-    {
-      icon: <Smartphone size={32} className="text-white" />,
-      title: "Anlık Takip",
-      description: "Paketinizin konumunu WhatsApp üzerinden anlık olarak takip edebilirsiniz.",
-      color: "bg-blue-500"
     },
     {
       icon: <Clock size={32} className="text-white" />,
@@ -82,14 +76,10 @@ const FeaturesSection = () => {
         </div>
 
         {/* Stats Row */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="text-center">
-            <div className="text-4xl font-bold text-blue-600 mb-2">50,000+</div>
+            <div className="text-4xl font-bold text-blue-600 mb-2">5,000+</div>
             <div className="text-gray-600">Başarılı Teslimat</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-blue-600 mb-2">30dk</div>
-            <div className="text-gray-600">Ortalama Süre</div>
           </div>
           <div className="text-center">
             <div className="text-4xl font-bold text-blue-600 mb-2">39</div>

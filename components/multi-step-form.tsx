@@ -1,7 +1,8 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { FormData, LocationData, formatWhatsAppMessage, createWhatsAppUrl } from '@/lib/utils'
+import { supabase, District, Neighborhood } from '@/lib/supabase'
 import { MessageCircle, MapPin, Package, Clock, ChevronRight, ChevronLeft, Weight } from 'lucide-react'
 import MapComponent from './map-component'
 import { Button } from './ui/button'
@@ -11,18 +12,7 @@ import { Label } from './ui/label'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea'
 import { RadioGroup, RadioGroupItem } from './ui/radio-group'
-
-// Test için sabit mahalle verileri
-const testNeighborhoods = [
-  { value: 'kadikoy-moda', label: 'Moda', district: 'Kadıköy', coordinates: [29.0276, 40.9856] as [number, number] },
-  { value: 'kadikoy-fenerbahce', label: 'Fenerbahçe', district: 'Kadıköy', coordinates: [29.0385, 40.9759] as [number, number] },
-  { value: 'besiktas-etiler', label: 'Etiler', district: 'Beşiktaş', coordinates: [29.0377, 41.0777] as [number, number] },
-  { value: 'besiktas-levent', label: 'Levent', district: 'Beşiktaş', coordinates: [29.0166, 41.0805] as [number, number] },
-  { value: 'sisli-mecidiyekoy', label: 'Mecidiyeköy', district: 'Şişli', coordinates: [28.9947, 41.0638] as [number, number] },
-  { value: 'sisli-osmanbey', label: 'Osmanbey', district: 'Şişli', coordinates: [28.9858, 41.0524] as [number, number] },
-  { value: 'atasehir-atasehir', label: 'Ataşehir Merkez', district: 'Ataşehir', coordinates: [29.1244, 40.9827] as [number, number] },
-  { value: 'umraniye-umraniye', label: 'Ümraniye Merkez', district: 'Ümraniye', coordinates: [29.1244, 41.0195] as [number, number] },
-]
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 // Kargo türü bilgilendirmeleri
 const cargoTypeInfo: Record<string, string> = {
@@ -44,35 +34,107 @@ export default function MultiStepForm() {
     timePreference: '',
     scheduledDate: undefined
   })
-  
-  const [selectedFromLocation, setSelectedFromLocation] = useState('')
-  const [selectedToLocation, setSelectedToLocation] = useState('')
 
-  const handleFromLocationChange = (value: string) => {
-    setSelectedFromLocation(value)
-    const neighborhood = testNeighborhoods.find(n => n.value === value)
-    if (neighborhood) {
-      setFormData({ 
-        ...formData, 
+  // Districts and neighborhoods from Supabase
+  const [districts, setDistricts] = useState<District[]>([])
+  const [fromDistrict, setFromDistrict] = useState<string>('')
+  const [toDistrict, setToDistrict] = useState<string>('')
+  const [fromNeighborhoods, setFromNeighborhoods] = useState<Neighborhood[]>([])
+  const [toNeighborhoods, setToNeighborhoods] = useState<Neighborhood[]>([])
+  const [selectedFromNeighborhood, setSelectedFromNeighborhood] = useState<string>('')
+  const [selectedToNeighborhood, setSelectedToNeighborhood] = useState<string>('')
+  const [loading, setLoading] = useState(true)
+
+  // Auto-animate ref for smooth height transitions
+  const [animateRef] = useAutoAnimate<HTMLDivElement>()
+
+  // Load districts on mount
+  useEffect(() => {
+    loadDistricts()
+  }, [])
+
+  // Load "from" neighborhoods when district changes
+  useEffect(() => {
+    if (fromDistrict) {
+      loadNeighborhoods(fromDistrict, 'from')
+    } else {
+      setFromNeighborhoods([])
+      setSelectedFromNeighborhood('')
+    }
+  }, [fromDistrict])
+
+  // Load "to" neighborhoods when district changes
+  useEffect(() => {
+    if (toDistrict) {
+      loadNeighborhoods(toDistrict, 'to')
+    } else {
+      setToNeighborhoods([])
+      setSelectedToNeighborhood('')
+    }
+  }, [toDistrict])
+
+  async function loadDistricts() {
+    setLoading(true)
+    const { data, error } = await supabase
+      .from('districts')
+      .select('*')
+      .order('name')
+
+    if (!error && data) {
+      setDistricts(data)
+    }
+    setLoading(false)
+  }
+
+  async function loadNeighborhoods(districtId: string, type: 'from' | 'to') {
+    const { data, error } = await supabase
+      .from('neighborhoods')
+      .select('*')
+      .eq('district_id', districtId)
+      .order('name')
+
+    if (!error && data) {
+      if (type === 'from') {
+        setFromNeighborhoods(data)
+      } else {
+        setToNeighborhoods(data)
+      }
+    }
+  }
+
+  const handleFromNeighborhoodChange = (neighborhoodId: string) => {
+    setSelectedFromNeighborhood(neighborhoodId)
+    const neighborhood = fromNeighborhoods.find(n => n.id === neighborhoodId)
+    const district = districts.find(d => d.id === fromDistrict)
+
+    if (neighborhood && district) {
+      setFormData({
+        ...formData,
         locationFrom: {
-          district: neighborhood.district,
-          neighborhood: neighborhood.label,
-          coordinates: neighborhood.coordinates
+          district: district.name,
+          neighborhood: neighborhood.name,
+          coordinates: [neighborhood.center_lng, neighborhood.center_lat],
+          geometry: neighborhood.geometry,
+          bbox: neighborhood.bbox
         }
       })
     }
   }
 
-  const handleToLocationChange = (value: string) => {
-    setSelectedToLocation(value)
-    const neighborhood = testNeighborhoods.find(n => n.value === value)
-    if (neighborhood) {
-      setFormData({ 
-        ...formData, 
+  const handleToNeighborhoodChange = (neighborhoodId: string) => {
+    setSelectedToNeighborhood(neighborhoodId)
+    const neighborhood = toNeighborhoods.find(n => n.id === neighborhoodId)
+    const district = districts.find(d => d.id === toDistrict)
+
+    if (neighborhood && district) {
+      setFormData({
+        ...formData,
         locationTo: {
-          district: neighborhood.district,
-          neighborhood: neighborhood.label,
-          coordinates: neighborhood.coordinates
+          district: district.name,
+          neighborhood: neighborhood.name,
+          coordinates: [neighborhood.center_lng, neighborhood.center_lat],
+          geometry: neighborhood.geometry,
+          bbox: neighborhood.bbox
         }
       })
     }
@@ -129,53 +191,92 @@ export default function MultiStepForm() {
         <CardContent className="pt-0">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Form Area */}
-            <div className="space-y-6">
+            <div ref={animateRef} className="space-y-6">
               {step === 1 && (
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-lg font-medium mb-4 text-gray-900">Kargo nereye gidecek?</h3>
+
+                    {/* From Location */}
+                    <div className="space-y-4 mb-6">
+                      <div className="space-y-2">
+                        <Label className="text-gray-700 font-semibold">Nereden</Label>
+                        <select
+                          value={fromDistrict}
+                          onChange={(e) => {
+                            setFromDistrict(e.target.value)
+                            setFormData({ ...formData, locationFrom: null })
+                          }}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                          disabled={loading}
+                        >
+                          <option value="">İlçe seçin...</option>
+                          {districts.map((d) => (
+                            <option key={d.id} value={d.id}>
+                              {d.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      {fromDistrict && (
+                        <div className="space-y-2">
+                          <Label className="text-gray-700">Mahalle</Label>
+                          <select
+                            value={selectedFromNeighborhood}
+                            onChange={(e) => handleFromNeighborhoodChange(e.target.value)}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                          >
+                            <option value="">Mahalle seçin...</option>
+                            {fromNeighborhoods.map((n) => (
+                              <option key={n.id} value={n.id}>
+                                {n.name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* To Location */}
                     <div className="space-y-4">
                       <div className="space-y-2">
-                        <Label className="text-gray-700">Nereden (Mahalle)</Label>
+                        <Label className="text-gray-700 font-semibold">Nereye</Label>
                         <select
-                          value={selectedFromLocation}
-                          onChange={(e) => handleFromLocationChange(e.target.value)}
+                          value={toDistrict}
+                          onChange={(e) => {
+                            setToDistrict(e.target.value)
+                            setFormData({ ...formData, locationTo: null })
+                          }}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                          disabled={loading}
                         >
-                          <option value="">Mahalle seçin...</option>
-                          {testNeighborhoods.map((n) => (
-                            <option key={n.value} value={n.value}>
-                              {n.label} ({n.district})
+                          <option value="">İlçe seçin...</option>
+                          {districts.map((d) => (
+                            <option key={d.id} value={d.id}>
+                              {d.name}
                             </option>
                           ))}
                         </select>
-                        {formData.locationFrom && (
-                          <p className="text-sm text-muted-foreground">
-                            {formData.locationFrom.district} - {formData.locationFrom.neighborhood}
-                          </p>
-                        )}
                       </div>
-                      
-                      <div className="space-y-2">
-                        <Label className="text-gray-700">Nereye (Mahalle)</Label>
-                        <select
-                          value={selectedToLocation}
-                          onChange={(e) => handleToLocationChange(e.target.value)}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
-                        >
-                          <option value="">Mahalle seçin...</option>
-                          {testNeighborhoods.map((n) => (
-                            <option key={n.value} value={n.value}>
-                              {n.label} ({n.district})
-                            </option>
-                          ))}
-                        </select>
-                        {formData.locationTo && (
-                          <p className="text-sm text-muted-foreground">
-                            {formData.locationTo.district} - {formData.locationTo.neighborhood}
-                          </p>
-                        )}
-                      </div>
+
+                      {toDistrict && (
+                        <div className="space-y-2">
+                          <Label className="text-gray-700">Mahalle</Label>
+                          <select
+                            value={selectedToNeighborhood}
+                            onChange={(e) => handleToNeighborhoodChange(e.target.value)}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                          >
+                            <option value="">Mahalle seçin...</option>
+                            {toNeighborhoods.map((n) => (
+                              <option key={n.id} value={n.id}>
+                                {n.name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -306,42 +407,44 @@ export default function MultiStepForm() {
               {step === 4 && (
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-lg font-medium mb-4 text-gray-900">Ne zaman gönderilsin?</h3>
+                    <h3 className="text-lg font-medium mb-4 text-gray-900">Teslimat hızını seçin</h3>
                     <RadioGroup
                       className="grid w-full grid-cols-1 gap-3"
                       value={formData.timePreference}
-                      onValueChange={(value) => setFormData({ ...formData, timePreference: value as 'asap' | 'today' | 'later' })}
+                      onValueChange={(value) => setFormData({ ...formData, timePreference: value as 'vip' | 'express' | 'standard' })}
                     >
                       <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
-                        <RadioGroupItem value="asap" id="asap" />
-                        <Label htmlFor="asap" className="cursor-pointer flex items-center gap-2 flex-1">
+                        <RadioGroupItem value="vip" id="vip" />
+                        <Label htmlFor="vip" className="cursor-pointer flex items-center gap-2 flex-1">
                           <Clock className="h-5 w-5 text-blue-600" />
-                          <span className="font-medium">Hemen (En Kısa Sürede)</span>
+                          <div className="flex-1">
+                            <span className="font-medium block">VIP Teslimat</span>
+                            <span className="text-sm text-gray-500">1 saat içinde</span>
+                          </div>
                         </Label>
                       </div>
                       <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
-                        <RadioGroupItem value="today" id="today" />
-                        <Label htmlFor="today" className="cursor-pointer flex items-center gap-2 flex-1">
+                        <RadioGroupItem value="express" id="express" />
+                        <Label htmlFor="express" className="cursor-pointer flex items-center gap-2 flex-1">
                           <Clock className="h-5 w-5 text-blue-600" />
-                          <span className="font-medium">Bugün İçinde</span>
+                          <div className="flex-1">
+                            <span className="font-medium block">Ekspres Teslimat</span>
+                            <span className="text-sm text-gray-500">1-2 saat içinde</span>
+                          </div>
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <RadioGroupItem value="standard" id="standard" />
+                        <Label htmlFor="standard" className="cursor-pointer flex items-center gap-2 flex-1">
+                          <Clock className="h-5 w-5 text-blue-600" />
+                          <div className="flex-1">
+                            <span className="font-medium block">Normal Teslimat</span>
+                            <span className="text-sm text-gray-500">2-4 saat içinde</span>
+                          </div>
                         </Label>
                       </div>
                     </RadioGroup>
                   </div>
-                  {formData.timePreference === 'later' && (
-                    <div className="space-y-2">
-                      <Label className="text-gray-700">Tarih ve saat seçin</Label>
-                      <Input
-                        type="datetime-local"
-                        placeholder=""
-                        value={formData.scheduledDate?.toISOString().slice(0, -8) || ''}
-                        onChange={(e) => setFormData({ 
-                          ...formData, 
-                          scheduledDate: e.target.value ? new Date(e.target.value) : undefined 
-                        })}
-                      />
-                    </div>
-                  )}
                 </div>
               )}
 
@@ -396,9 +499,9 @@ export default function MultiStepForm() {
                       <div>
                         <p className="font-medium">Zamanlama</p>
                         <p className="text-sm text-muted-foreground">
-                          {formData.timePreference === 'asap' ? 'Hemen (En Kısa Sürede)' :
-                           formData.timePreference === 'today' ? 'Bugün İçinde' :
-                           formData.scheduledDate ? formData.scheduledDate.toLocaleString('tr-TR') : ''}
+                          {formData.timePreference === 'vip' ? 'VIP Teslimat (1 saat)' :
+                           formData.timePreference === 'express' ? 'Ekspres Teslimat (1-2 saat)' :
+                           formData.timePreference === 'standard' ? 'Normal Teslimat (2-4 saat)' : ''}
                         </p>
                       </div>
                     </div>

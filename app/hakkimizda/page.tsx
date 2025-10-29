@@ -59,7 +59,7 @@ export default function HakkimizdaPage() {
                     <div className="flex justify-center mb-2">
                       <Package size={40} className="text-blue-600" />
                     </div>
-                    <div className="text-2xl font-bold text-blue-600">50K+</div>
+                    <div className="text-2xl font-bold text-blue-600">5K+</div>
                     <div className="text-gray-600">Teslimat</div>
                   </div>
                   <div className="text-center">

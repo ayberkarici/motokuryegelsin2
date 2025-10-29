@@ -1,3 +1,5 @@
+@import 'leaflet/dist/leaflet.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -58,8 +60,42 @@
   }
 }
 
-/* Leaflet CSS için gerekli stilleer */
+/* Leaflet CSS için gerekli stiller */
 .leaflet-container {
   height: 100%;
   width: 100%;
+  z-index: 0;
+}
+
+/* Custom marker styles */
+.custom-marker {
+  background: transparent;
+  border: none;
+}
+
+/* Popup styles */
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.2);
+}
+
+.leaflet-popup-content {
+  margin: 12px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.leaflet-popup-tip {
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* Make controls more visible */
+.leaflet-control-zoom a {
+  color: #333;
+  font-weight: bold;
+}
+
+/* Attribution styling */
+.leaflet-container .leaflet-control-attribution {
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.8);
 }
