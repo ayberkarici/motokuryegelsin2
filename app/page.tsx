@@ -4,7 +4,7 @@ import HeroSection from '@/components/sections/HeroSection'
 import FeaturesSection from '@/components/sections/FeaturesSection'
 import ServicesSection from '@/components/sections/ServicesSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
-import FloatingWhatsAppButton from '@/components/floating-whatsapp-button'
+import FixedWhatsAppButton from '@/components/fixed-whatsapp-button'
 import './globals.css'
 
 export default function Home() {
@@ -18,7 +18,7 @@ export default function Home() {
         <TestimonialsSection />
       </main>
       <Footer />
-      <FloatingWhatsAppButton />
+      <FixedWhatsAppButton />
     </div>
   )
 }

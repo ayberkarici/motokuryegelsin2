@@ -6,9 +6,10 @@ import { LocationData } from '@/lib/utils'
 interface MapComponentProps {
   fromLocation: LocationData | null
   toLocation: LocationData | null
+  height?: number
 }
 
-const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation }) => {
+const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation, height = 400 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<any>(null)
   const layersRef = useRef<any>({})
@@ -18,7 +19,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation })
   useEffect(() => {
     return () => {
       if (mapRef.current) {
-        console.log('Component unmount - harita temizleniyor')
         mapRef.current.remove()
         mapRef.current = null
       }
@@ -27,18 +27,8 @@ const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation })
 
   // Initialize map when locations are available and container is rendered
   useEffect(() => {
-    // Don't initialize if locations not selected yet
-    if (!fromLocation || !toLocation) return
-
-    console.log('Map useEffect çalıştı, mapContainerRef.current:', !!mapContainerRef.current)
-    if (!mapContainerRef.current) {
-      console.log('mapContainerRef.current yok, return ediliyor')
-      return
-    }
-
-    // Don't reinitialize if map already exists
+    if (!fromLocation || !toLocation || !mapContainerRef.current) return
     if (mapRef.current) {
-      console.log('Map zaten var, initialization atlanıyor')
       setIsLoading(false)
       return
     }
@@ -47,12 +37,8 @@ const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation })
 
     const initMap = async () => {
       try {
-        console.log('initMap başladı')
-        // Dynamic import - only load on client side
         const L = (await import('leaflet')).default
-        console.log('Leaflet yüklendi')
 
-        // Fix default marker icons in Next.js
         delete (L.Icon.Default.prototype as any)._getIconUrl
         L.Icon.Default.mergeOptions({
           iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -61,27 +47,22 @@ const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation })
         })
 
         if (!isMounted || mapRef.current) {
-          console.log('isMounted:', isMounted, 'mapRef.current var mı:', !!mapRef.current)
           setIsLoading(false)
           return
         }
 
-        console.log('Harita oluşturuluyor...')
         const map = L.map(mapContainerRef.current!, {
           zoomControl: true,
           scrollWheelZoom: true,
           dragging: true,
-          attributionControl: true,
+          attributionControl: false,
         }).setView([41.0082, 28.9784], 11)
 
-        console.log('Tile layer ekleniyor...')
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
           maxZoom: 18,
         }).addTo(map)
 
         mapRef.current = map
-        console.log('Harita başarıyla oluşturuldu!')
         setIsLoading(false)
       } catch (error) {
         console.error('Harita yüklenirken hata:', error)
@@ -96,6 +77,15 @@ const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation })
     }
   }, [fromLocation, toLocation])
 
+  // Update map size when height changes
+  useEffect(() => {
+    if (mapRef.current && height) {
+      setTimeout(() => {
+        mapRef.current.invalidateSize()
+      }, 100)
+    }
+  }, [height])
+
   // Update map when locations change
   useEffect(() => {
     if (!mapRef.current || !fromLocation || !toLocation || isLoading) return
@@ -108,26 +98,11 @@ const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation })
         // Clear previous layers
         if (layersRef.current.fromBoundary) map.removeLayer(layersRef.current.fromBoundary)
         if (layersRef.current.toBoundary) map.removeLayer(layersRef.current.toBoundary)
+        if (layersRef.current.routeLine) map.removeLayer(layersRef.current.routeLine)
         if (layersRef.current.fromMarker) map.removeLayer(layersRef.current.fromMarker)
         if (layersRef.current.toMarker) map.removeLayer(layersRef.current.toMarker)
-        if (layersRef.current.routeLine) map.removeLayer(layersRef.current.routeLine)
 
         const bounds = L.latLngBounds([])
-
-        // Custom marker icons
-        const greenIcon = L.divIcon({
-          className: 'custom-marker',
-          html: `<div style="background-color: #22c55e; width: 24px; height: 24px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></div>`,
-          iconSize: [24, 24],
-          iconAnchor: [12, 12],
-        })
-
-        const redIcon = L.divIcon({
-          className: 'custom-marker',
-          html: `<div style="background-color: #ef4444; width: 24px; height: 24px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></div>`,
-          iconSize: [24, 24],
-          iconAnchor: [12, 12],
-        })
 
         // Add FROM boundary
         if (fromLocation.geometry) {
@@ -161,37 +136,9 @@ const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation })
           bounds.extend(toBoundary.getBounds())
         }
 
-        // Add FROM marker
-        const fromLatLng: [number, number] = [fromLocation.coordinates[1], fromLocation.coordinates[0]]
-        const fromMarker = L.marker(fromLatLng, { icon: greenIcon })
-          .bindPopup(`
-            <div style="text-align: center;">
-              <strong style="color: #22c55e;">📍 Başlangıç</strong><br/>
-              <span style="font-size: 13px;">${fromLocation.neighborhood}</span><br/>
-              <span style="font-size: 11px; color: #666;">${fromLocation.district}</span>
-            </div>
-          `)
-          .addTo(map)
-
-        layersRef.current.fromMarker = fromMarker
-        bounds.extend(fromLatLng)
-
-        // Add TO marker
-        const toLatLng: [number, number] = [toLocation.coordinates[1], toLocation.coordinates[0]]
-        const toMarker = L.marker(toLatLng, { icon: redIcon })
-          .bindPopup(`
-            <div style="text-align: center;">
-              <strong style="color: #ef4444;">🎯 Hedef</strong><br/>
-              <span style="font-size: 13px;">${toLocation.neighborhood}</span><br/>
-              <span style="font-size: 11px; color: #666;">${toLocation.district}</span>
-            </div>
-          `)
-          .addTo(map)
-
-        layersRef.current.toMarker = toMarker
-        bounds.extend(toLatLng)
-
         // Add route line
+        const fromLatLng: [number, number] = [fromLocation.coordinates[1], fromLocation.coordinates[0]]
+        const toLatLng: [number, number] = [toLocation.coordinates[1], toLocation.coordinates[0]]
         const routeLine = L.polyline([fromLatLng, toLatLng], {
           color: '#3b82f6',
           weight: 3,
@@ -201,6 +148,28 @@ const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation })
 
         layersRef.current.routeLine = routeLine
 
+        // Add circular markers
+        const fromMarker = L.circleMarker(fromLatLng, {
+          radius: 8,
+          fillColor: '#3b82f6',
+          color: '#ffffff',
+          weight: 2,
+          opacity: 1,
+          fillOpacity: 0.9,
+        }).addTo(map)
+
+        const toMarker = L.circleMarker(toLatLng, {
+          radius: 8,
+          fillColor: '#ef4444',
+          color: '#ffffff',
+          weight: 2,
+          opacity: 1,
+          fillOpacity: 0.9,
+        }).addTo(map)
+
+        layersRef.current.fromMarker = fromMarker
+        layersRef.current.toMarker = toMarker
+
         // Fit bounds
         if (bounds.isValid()) {
           map.fitBounds(bounds, {
@@ -209,11 +178,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation })
             animate: true,
           })
         }
-
-        // Auto-open popup
-        setTimeout(() => {
-          fromMarker.openPopup()
-        }, 500)
       } catch (error) {
         console.error('Harita güncellenirken hata:', error)
       }
@@ -224,7 +188,10 @@ const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation })
 
   if (!fromLocation || !toLocation) {
     return (
-      <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
+      <div
+        className="w-full bg-gray-100 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300"
+        style={{ height: `${height}px` }}
+      >
         <div className="text-center text-gray-500">
           <p className="text-lg">🗺️</p>
           <p className="mt-2">Konum seçtikten sonra harita görünecek</p>
@@ -233,9 +200,15 @@ const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation })
     )
   }
 
+  const headerHeight = 60 // Approximate height of header
+  const mapContentHeight = height - headerHeight
+
   return (
-    <div className="w-full h-64 bg-white rounded-lg border shadow-sm overflow-hidden">
-      <div className="p-3 bg-gray-50 border-b">
+    <div
+      className="w-full bg-white rounded-lg border shadow-sm overflow-hidden flex flex-col"
+      style={{ height: `${height}px` }}
+    >
+      <div className="p-3 bg-gray-50 border-b shrink-0">
         <h4 className="font-medium text-gray-900 flex items-center">
           🗺️ Rota Haritası
         </h4>
@@ -244,7 +217,9 @@ const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation })
         </p>
       </div>
 
-      <div className="relative h-52">
+      <div
+        className="relative flex-1"
+      >
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-50 z-10">
             <div className="text-center">
@@ -259,23 +234,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation })
           className="w-full h-full"
           style={{ background: '#f0f9ff' }}
         />
-
-        {/* Info overlay */}
-        {!isLoading && (
-          <div className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm px-3 py-2 rounded-lg shadow-md text-xs space-y-1 z-[1000]">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span className="font-medium">{fromLocation.district}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-              <span className="font-medium">{toLocation.district}</span>
-            </div>
-            <div className="text-gray-500 text-[10px] mt-1 pt-1 border-t">
-              🏍️ Kurye rotası
-            </div>
-          </div>
-        )}
       </div>
     </div>
   )

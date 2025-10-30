@@ -18,7 +18,7 @@ const HeroSection = () => {
   return (
     <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white overflow-hidden min-h-screen">
       <div className="container mx-auto px-4 py-12 md:py-16 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-screen">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1fr] gap-12 items-center min-h-screen">
           {/* Left Side - Heading and Form */}
           <div className="space-y-8">
             {/* Header Content */}
