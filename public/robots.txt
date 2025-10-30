@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://motokuryegelsin.com/sitemap.xml
+
+# Disallow admin or private pages (if any)
+# Disallow: /admin/

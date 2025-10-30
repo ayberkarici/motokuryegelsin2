@@ -186,8 +186,8 @@ export default function MultiStepForm() {
   const canProceedStep4 = formData.timePreference !== ''
 
   return (
-    <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20">
-      <Card className="border-0 bg-transparent shadow-none">
+    <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20 transition-all duration-500 ease-in-out">
+      <Card className="border-0 bg-transparent shadow-none transition-all duration-300 ease-in-out">
         <CardHeader className="pb-6">
           <div className="flex items-center justify-between mb-4">
             <CardTitle className="flex items-center gap-2 text-gray-900">
@@ -211,7 +211,7 @@ export default function MultiStepForm() {
           <Progress value={progress} />
         </CardHeader>
         
-        <CardContent className="pt-0">
+        <CardContent className="pt-0 transition-all duration-300 ease-in-out">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Form Area */}
             <div ref={animateRef}>
@@ -441,30 +441,21 @@ export default function MultiStepForm() {
                         <RadioGroupItem value="vip" id="vip" />
                         <Label htmlFor="vip" className="cursor-pointer flex items-center gap-2 flex-1">
                           <Clock className="h-5 w-5 text-blue-600" />
-                          <div className="flex-1">
-                            <span className="font-medium block">VIP Teslimat</span>
-                            <span className="text-sm text-gray-500">1 saat içinde</span>
-                          </div>
+                          <span className="font-medium">VIP Teslimat</span>
                         </Label>
                       </div>
                       <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
                         <RadioGroupItem value="express" id="express" />
                         <Label htmlFor="express" className="cursor-pointer flex items-center gap-2 flex-1">
                           <Clock className="h-5 w-5 text-blue-600" />
-                          <div className="flex-1">
-                            <span className="font-medium block">Ekspres Teslimat</span>
-                            <span className="text-sm text-gray-500">1-2 saat içinde</span>
-                          </div>
+                          <span className="font-medium">Ekspres Teslimat</span>
                         </Label>
                       </div>
                       <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
                         <RadioGroupItem value="standard" id="standard" />
                         <Label htmlFor="standard" className="cursor-pointer flex items-center gap-2 flex-1">
                           <Clock className="h-5 w-5 text-blue-600" />
-                          <div className="flex-1">
-                            <span className="font-medium block">Normal Teslimat</span>
-                            <span className="text-sm text-gray-500">2-4 saat içinde</span>
-                          </div>
+                          <span className="font-medium">Normal Teslimat</span>
                         </Label>
                       </div>
                     </RadioGroup>
@@ -523,9 +514,9 @@ export default function MultiStepForm() {
                       <div>
                         <p className="font-medium">Zamanlama</p>
                         <p className="text-sm text-muted-foreground">
-                          {formData.timePreference === 'vip' ? 'VIP Teslimat (1 saat)' :
-                           formData.timePreference === 'express' ? 'Ekspres Teslimat (1-2 saat)' :
-                           formData.timePreference === 'standard' ? 'Normal Teslimat (2-4 saat)' : ''}
+                          {formData.timePreference === 'vip' ? 'VIP Teslimat' :
+                           formData.timePreference === 'express' ? 'Ekspres Teslimat' :
+                           formData.timePreference === 'standard' ? 'Normal Teslimat' : ''}
                         </p>
                       </div>
                     </div>

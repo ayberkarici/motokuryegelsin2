@@ -280,10 +280,6 @@ export default function IletisimPage() {
                 {
                   question: "Ödeme nasıl yapılır?",
                   answer: "Nakit, kredi kartı ve online ödeme seçenekleri bulunmaktadır. Kurumsal müşterilerimiz için faturalandırma imkanı da mevcuttur."
-                },
-                {
-                  question: "Paketimi takip edebilir miyim?",
-                  answer: "Evet, WhatsApp ve SMS ile anlık konum takibi yapabilirsiniz. Kurye bilgileri de paylaşılır."
                 }
               ].map((faq, index) => (
                 <div key={index} className="bg-gray-50 p-6 rounded-lg">

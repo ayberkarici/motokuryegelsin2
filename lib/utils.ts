@@ -148,9 +148,9 @@ export async function loadLocationData(): Promise<DistrictData> {
 
 // WhatsApp mesaj formatı
 export function formatWhatsAppMessage(formData: FormData): string {
-  const timeText = formData.timePreference === 'vip' ? 'VIP Teslimat (1 saat)' :
-                   formData.timePreference === 'express' ? 'Ekspres Teslimat (1-2 saat)' :
-                   formData.timePreference === 'standard' ? 'Normal Teslimat (2-4 saat)' : '';
+  const timeText = formData.timePreference === 'vip' ? 'VIP Teslimat' :
+                   formData.timePreference === 'express' ? 'Ekspres Teslimat' :
+                   formData.timePreference === 'standard' ? 'Normal Teslimat' : '';
 
   const cargoTypeText =
     formData.cargoType === 'envelope' ? 'Evrak/Zarf' :

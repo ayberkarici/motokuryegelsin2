@@ -73,6 +73,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/blog" className="text-gray-300 hover:text-white transition-colors">
+                  Blog
+                </Link>
+              </li>
+              <li>
                 <Link href="/iletisim" className="text-gray-300 hover:text-white transition-colors">
                   İletişim
                 </Link>
@@ -89,25 +94,35 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4 text-blue-400">Hizmetlerimiz</h4>
             <ul className="space-y-2">
-              <li className="flex items-center space-x-2 text-gray-300">
-                <FileText size={16} />
-                <span>Döküman Teslimatı</span>
+              <li>
+                <Link href="/hizmetler/dokuman-teslimat" className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
+                  <FileText size={16} />
+                  <span>Döküman Teslimatı</span>
+                </Link>
               </li>
-              <li className="flex items-center space-x-2 text-gray-300">
-                <Package size={16} />
-                <span>Paket Kargo</span>
+              <li>
+                <Link href="/hizmetler/paket-kargo" className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
+                  <Package size={16} />
+                  <span>Paket Kargo</span>
+                </Link>
               </li>
-              <li className="flex items-center space-x-2 text-gray-300">
-                <Zap size={16} />
-                <span>Acil Kurye</span>
+              <li>
+                <Link href="/hizmetler/acil-kurye" className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
+                  <Zap size={16} />
+                  <span>Acil Kurye</span>
+                </Link>
               </li>
-              <li className="flex items-center space-x-2 text-gray-300">
-                <Building size={16} />
-                <span>Kurumsal Çözümler</span>
+              <li>
+                <Link href="/hizmetler/kurumsal-cozumler" className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
+                  <Building size={16} />
+                  <span>Kurumsal Çözümler</span>
+                </Link>
               </li>
-              <li className="flex items-center space-x-2 text-gray-300">
-                <Clock size={16} />
-                <span>7/24 Hizmet</span>
+              <li>
+                <Link href="/hizmetler/724-hizmet" className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
+                  <Clock size={16} />
+                  <span>7/24 Hizmet</span>
+                </Link>
               </li>
             </ul>
           </div>

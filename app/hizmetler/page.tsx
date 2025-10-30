@@ -1,7 +1,7 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
-import { FileText, Package, Zap, Building2, Truck, Moon, Smartphone, Shield, Bike, MessageCircle } from 'lucide-react'
+import { FileText, Package, Zap, Building2, Truck, Moon, Shield, Bike, MessageCircle } from 'lucide-react'
 
 export default function HizmetlerPage() {
   const services = [
@@ -50,8 +50,7 @@ export default function HizmetlerPage() {
       features: [
         "Öncelikli işlem garantisi",
         "Doğrudan rota planlaması",
-        "SMS ile anlık güncellemeler",
-        "15 dakika garanti süresi",
+        "Hızlı teslimat garantisi",
         "7/24 hizmet"
       ],
       pricing: {
@@ -93,11 +92,6 @@ export default function HizmetlerPage() {
       icon: <Moon size={48} className="text-blue-600" />,
       title: "Gece Kurye",
       description: "24 saat hizmet ile gece teslimatları"
-    },
-    {
-      icon: <Smartphone size={48} className="text-blue-600" />,
-      title: "Dijital Takip",
-      description: "WhatsApp ve SMS ile anlık konum takibi"
     },
     {
       icon: <Shield size={48} className="text-blue-600" />,
@@ -202,37 +196,6 @@ export default function HizmetlerPage() {
                       </Link>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Additional Services */}
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Ek Hizmetlerimiz
-              </h2>
-              <p className="text-xl text-gray-600">
-                Standart hizmetlerimize ek olarak sunduğumuz özel çözümler
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {additionalServices.map((service, index) => (
-                <div 
-                  key={index}
-                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center"
-                >
-                  <div className="flex justify-center mb-4">{service.icon}</div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    {service.description}
-                  </p>
                 </div>
               ))}
             </div>
