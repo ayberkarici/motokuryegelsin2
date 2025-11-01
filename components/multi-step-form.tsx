@@ -52,6 +52,22 @@ export default function MultiStepForm() {
   const formAreaRef = useRef<HTMLDivElement>(null)
   const [mapHeight, setMapHeight] = useState<number>(400)
 
+  // Ref for step title to scroll to
+  const stepTitleRef = useRef<HTMLParagraphElement>(null)
+
+  // Track if component has mounted (to prevent scroll on initial load)
+  const isInitialMount = useRef(true)
+
+  // Track previous step to prevent auto-advance on backwards navigation
+  const previousStep = useRef(step)
+
+  // Track which steps have already auto-advanced (to prevent multiple auto-advances)
+  const hasAutoAdvanced = useRef({
+    step2: false,
+    step3: false,
+    step4: false
+  })
+
   // Load districts on mount
   useEffect(() => {
     loadDistricts()
@@ -95,6 +111,65 @@ export default function MultiStepForm() {
       resizeObserver.disconnect()
     }
   }, [formAreaRef.current])
+
+  // Auto-advance to next step after selection in steps 2, 3, and 4
+  // Only auto-advance on FIRST selection in each step (one-time use per step)
+  useEffect(() => {
+    if (step === 2 && formData.cargoType && !hasAutoAdvanced.current.step2) {
+      hasAutoAdvanced.current.step2 = true
+      const timer = setTimeout(() => nextStep(), 500)
+      return () => clearTimeout(timer)
+    }
+  }, [formData.cargoType])
+
+  useEffect(() => {
+    if (step === 3 && formData.cargoWeight && !hasAutoAdvanced.current.step3) {
+      hasAutoAdvanced.current.step3 = true
+      const timer = setTimeout(() => nextStep(), 500)
+      return () => clearTimeout(timer)
+    }
+  }, [formData.cargoWeight])
+
+  useEffect(() => {
+    if (step === 4 && formData.timePreference && !hasAutoAdvanced.current.step4) {
+      hasAutoAdvanced.current.step4 = true
+      const timer = setTimeout(() => nextStep(), 500)
+      return () => clearTimeout(timer)
+    }
+  }, [formData.timePreference])
+
+  // Scroll to step title when step changes (but not on initial mount)
+  useEffect(() => {
+    // Skip scroll on initial mount
+    if (isInitialMount.current) {
+      isInitialMount.current = false
+      previousStep.current = step
+      return
+    }
+
+    // Only scroll if step actually changed
+    if (previousStep.current === step) {
+      return
+    }
+
+    // Scroll to "Adım x / 5" title with offset for navbar
+    if (stepTitleRef.current) {
+      setTimeout(() => {
+        if (stepTitleRef.current) {
+          // Extra offset for mobile (1rem = 16px more)
+          const isMobile = window.innerWidth < 1024
+          const yOffset = isMobile ? -116 : -100 // Offset for navbar and some padding
+          const element = stepTitleRef.current
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
+
+          window.scrollTo({ top: y, behavior: 'smooth' })
+        }
+      }, 50) // Small delay to ensure DOM is updated
+    }
+
+    // Update previous step
+    previousStep.current = step
+  }, [step])
 
   async function loadDistricts() {
     setLoading(true)
@@ -190,13 +265,13 @@ export default function MultiStepForm() {
       <Card className="border-0 bg-transparent shadow-none transition-all duration-300 ease-in-out">
         <CardHeader className="pb-6">
           <div className="flex items-center justify-between mb-4">
-            <CardTitle className="flex items-center gap-2 text-gray-900">
+            <CardTitle ref={stepTitleRef} className="flex items-center gap-2 text-gray-900">
               {step === 1 && <MapPin className="h-6 w-6 text-primary" />}
               {step === 2 && <Package className="h-6 w-6 text-primary" />}
               {step === 3 && <Weight className="h-6 w-6 text-primary" />}
               {step === 4 && <Clock className="h-6 w-6 text-primary" />}
               {step === 5 && <MessageCircle className="h-6 w-6 text-primary" />}
-              
+
               Adım {step} / 5: {
                 step === 1 ? 'Konum Bilgileri' :
                 step === 2 ? 'Kargo Türü' :
@@ -441,21 +516,21 @@ export default function MultiStepForm() {
                         <RadioGroupItem value="vip" id="vip" />
                         <Label htmlFor="vip" className="cursor-pointer flex items-center gap-2 flex-1">
                           <Clock className="h-5 w-5 text-blue-600" />
-                          <span className="font-medium">VIP Teslimat</span>
+                          <span className="font-medium">VIP Teslimat (1 saat)</span>
                         </Label>
                       </div>
                       <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
                         <RadioGroupItem value="express" id="express" />
                         <Label htmlFor="express" className="cursor-pointer flex items-center gap-2 flex-1">
                           <Clock className="h-5 w-5 text-blue-600" />
-                          <span className="font-medium">Ekspres Teslimat</span>
+                          <span className="font-medium">Ekspres Teslimat (1-2 saat)</span>
                         </Label>
                       </div>
                       <div className="flex items-center space-x-3 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors">
                         <RadioGroupItem value="standard" id="standard" />
                         <Label htmlFor="standard" className="cursor-pointer flex items-center gap-2 flex-1">
                           <Clock className="h-5 w-5 text-blue-600" />
-                          <span className="font-medium">Normal Teslimat</span>
+                          <span className="font-medium">Normal Teslimat (2-4 saat)</span>
                         </Label>
                       </div>
                     </RadioGroup>
@@ -514,9 +589,9 @@ export default function MultiStepForm() {
                       <div>
                         <p className="font-medium">Zamanlama</p>
                         <p className="text-sm text-muted-foreground">
-                          {formData.timePreference === 'vip' ? 'VIP Teslimat' :
-                           formData.timePreference === 'express' ? 'Ekspres Teslimat' :
-                           formData.timePreference === 'standard' ? 'Normal Teslimat' : ''}
+                          {formData.timePreference === 'vip' ? 'VIP Teslimat (1 saat)' :
+                           formData.timePreference === 'express' ? 'Ekspres Teslimat (1-2 saat)' :
+                           formData.timePreference === 'standard' ? 'Normal Teslimat (2-4 saat)' : ''}
                         </p>
                       </div>
                     </div>
@@ -546,7 +621,9 @@ export default function MultiStepForm() {
             </div>
 
             {/* Map Area */}
-            <div className="bg-muted rounded-lg overflow-hidden">
+            <div className={`bg-muted rounded-lg overflow-hidden ${
+              step === 1 || step === 5 ? 'block' : 'hidden lg:block'
+            }`}>
               <MapComponent
                 key={`${selectedFromNeighborhood}-${selectedToNeighborhood}`}
                 fromLocation={formData.locationFrom}
