@@ -211,9 +211,9 @@ export default function MultiStepForm() {
         locationFrom: {
           district: district.name,
           neighborhood: neighborhood.name,
-          coordinates: [neighborhood.center_lng, neighborhood.center_lat],
-          geometry: neighborhood.geometry,
-          bbox: neighborhood.bbox
+          coordinates: [district.center_lng, district.center_lat], // Use district coordinates
+          geometry: district.geometry,
+          bbox: district.bbox
         }
       })
     }
@@ -230,9 +230,9 @@ export default function MultiStepForm() {
         locationTo: {
           district: district.name,
           neighborhood: neighborhood.name,
-          coordinates: [neighborhood.center_lng, neighborhood.center_lat],
-          geometry: neighborhood.geometry,
-          bbox: neighborhood.bbox
+          coordinates: [district.center_lng, district.center_lat], // Use district coordinates
+          geometry: district.geometry,
+          bbox: district.bbox
         }
       })
     }

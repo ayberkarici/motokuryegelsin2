@@ -1,0 +1,2750 @@
+{
+  "Adalar": {
+    "neighborhood_count": 5,
+    "neighborhoods": [
+      {
+        "name": "Burgazada"
+      },
+      {
+        "name": "Heybeliada"
+      },
+      {
+        "name": "Kınalıada"
+      },
+      {
+        "name": "Maden"
+      },
+      {
+        "name": "Nizam"
+      }
+    ]
+  },
+  "Arnavutköy": {
+    "neighborhood_count": 37,
+    "neighborhoods": [
+      {
+        "name": "Adnan Menderes"
+      },
+      {
+        "name": "Anadolu"
+      },
+      {
+        "name": "Arnavutköy Merkez"
+      },
+      {
+        "name": "Atatürk"
+      },
+      {
+        "name": "Baklalı"
+      },
+      {
+        "name": "Balaban"
+      },
+      {
+        "name": "Boğazköy İstiklal"
+      },
+      {
+        "name": "Bolluca"
+      },
+      {
+        "name": "Boyalık"
+      },
+      {
+        "name": "Çilingir"
+      },
+      {
+        "name": "Deliklikaya"
+      },
+      {
+        "name": "Dursunköy"
+      },
+      {
+        "name": "Durusu"
+      },
+      {
+        "name": "Hacımaşlı"
+      },
+      {
+        "name": "Hadımköy"
+      },
+      {
+        "name": "Haraççı"
+      },
+      {
+        "name": "Hastane"
+      },
+      {
+        "name": "Hicret"
+      },
+      {
+        "name": "İmrahor"
+      },
+      {
+        "name": "İslambey"
+      },
+      {
+        "name": "Karaburun"
+      },
+      {
+        "name": "Karlıbayır"
+      },
+      {
+        "name": "Mareşal Fevzi Çakmak"
+      },
+      {
+        "name": "Mavigöl"
+      },
+      {
+        "name": "Mehmet Akif Ersoy"
+      },
+      {
+        "name": "Mustafa Kemal Paşa"
+      },
+      {
+        "name": "Nene Hatun"
+      },
+      {
+        "name": "Ömerli"
+      },
+      {
+        "name": "Sazlıbosna"
+      },
+      {
+        "name": "Taşoluk"
+      },
+      {
+        "name": "Tayakadın"
+      },
+      {
+        "name": "Terkos"
+      },
+      {
+        "name": "Yassıören"
+      },
+      {
+        "name": "Yavuz Selim"
+      },
+      {
+        "name": "Yeniköy"
+      },
+      {
+        "name": "Yeşilbayır"
+      },
+      {
+        "name": "Yunus Emre"
+      }
+    ]
+  },
+  "Ataşehir": {
+    "neighborhood_count": 17,
+    "neighborhoods": [
+      {
+        "name": "Aşıkveysel"
+      },
+      {
+        "name": "Atatürk"
+      },
+      {
+        "name": "Barbaros"
+      },
+      {
+        "name": "Esatpaşa"
+      },
+      {
+        "name": "Ferhatpaşa"
+      },
+      {
+        "name": "Fetih"
+      },
+      {
+        "name": "İçerenköy"
+      },
+      {
+        "name": "İnönü"
+      },
+      {
+        "name": "Kayışdağı"
+      },
+      {
+        "name": "Küçükbakkalköy"
+      },
+      {
+        "name": "Mevlana"
+      },
+      {
+        "name": "Mimarsinan"
+      },
+      {
+        "name": "Mustafa Kemal"
+      },
+      {
+        "name": "Örnek"
+      },
+      {
+        "name": "Yeniçamlıca"
+      },
+      {
+        "name": "Yenişehir"
+      },
+      {
+        "name": "Yenisahra"
+      }
+    ]
+  },
+  "Avcılar": {
+    "neighborhood_count": 10,
+    "neighborhoods": [
+      {
+        "name": "Ambarlı"
+      },
+      {
+        "name": "Cihangir"
+      },
+      {
+        "name": "Denizköşkler"
+      },
+      {
+        "name": "Firuzköy"
+      },
+      {
+        "name": "Gümüşpala"
+      },
+      {
+        "name": "Merkez"
+      },
+      {
+        "name": "Mustafa Kemal Paşa"
+      },
+      {
+        "name": "Tahtakale"
+      },
+      {
+        "name": "Üniversite"
+      },
+      {
+        "name": "Yeşilkent"
+      }
+    ]
+  },
+  "Bağcılar": {
+    "neighborhood_count": 20,
+    "neighborhoods": [
+      {
+        "name": "15 Temmuz"
+      },
+      {
+        "name": "Bağlar"
+      },
+      {
+        "name": "Barbaros"
+      },
+      {
+        "name": "Çınar"
+      },
+      {
+        "name": "Demirkapı"
+      },
+      {
+        "name": "Fevzi Çakmak"
+      },
+      {
+        "name": "Göztepe"
+      },
+      {
+        "name": "Güneşli"
+      },
+      {
+        "name": "Hürriyet"
+      },
+      {
+        "name": "İnönü"
+      },
+      {
+        "name": "Kâzım Karabekir"
+      },
+      {
+        "name": "Kemalpaşa"
+      },
+      {
+        "name": "Kirazlı"
+      },
+      {
+        "name": "Mahmutbey"
+      },
+      {
+        "name": "Merkez"
+      },
+      {
+        "name": "Yavuzselim"
+      },
+      {
+        "name": "Yenigün"
+      },
+      {
+        "name": "Yenimahalle"
+      },
+      {
+        "name": "Yıldıztepe"
+      },
+      {
+        "name": "Yüzyıl"
+      }
+    ]
+  },
+  "Bahçelievler": {
+    "neighborhood_count": 10,
+    "neighborhoods": [
+      {
+        "name": "Cumhuriyet"
+      },
+      {
+        "name": "Çobançeşme"
+      },
+      {
+        "name": "Fevzi Çakmak"
+      },
+      {
+        "name": "Hürriyet"
+      },
+      {
+        "name": "Kocasinan"
+      },
+      {
+        "name": "Siyavuşpaşa"
+      },
+      {
+        "name": "Soğanlı"
+      },
+      {
+        "name": "Şirinevler"
+      },
+      {
+        "name": "Yenibosna"
+      },
+      {
+        "name": "Zafer"
+      }
+    ]
+  },
+  "Bakırköy": {
+    "neighborhood_count": 15,
+    "neighborhoods": [
+      {
+        "name": "Ataköy 1. kısım"
+      },
+      {
+        "name": "Ataköy 2-5-6. kısım"
+      },
+      {
+        "name": "Ataköy 3-4-11. kısım"
+      },
+      {
+        "name": "Ataköy 7-8-9-10. kısım"
+      },
+      {
+        "name": "Basınköy"
+      },
+      {
+        "name": "Cevizlik"
+      },
+      {
+        "name": "Kartaltepe"
+      },
+      {
+        "name": "Osmaniye"
+      },
+      {
+        "name": "Sakızağacı"
+      },
+      {
+        "name": "Şenlikköy"
+      },
+      {
+        "name": "Yenimahalle"
+      },
+      {
+        "name": "Yeşilköy"
+      },
+      {
+        "name": "Yeşilyurt"
+      },
+      {
+        "name": "Zeytinlik"
+      },
+      {
+        "name": "Zuhuratbaba"
+      }
+    ]
+  },
+  "Başakşehir": {
+    "neighborhood_count": 9,
+    "neighborhoods": [
+      {
+        "name": "Altınşehir"
+      },
+      {
+        "name": "Bahçeşehir 1. Kısım"
+      },
+      {
+        "name": "Bahçeşehir 2. Kısım"
+      },
+      {
+        "name": "Başak"
+      },
+      {
+        "name": "Güvercintepe"
+      },
+      {
+        "name": "Kayabaşı"
+      },
+      {
+        "name": "Şahintepe"
+      },
+      {
+        "name": "Şamlar"
+      },
+      {
+        "name": "Ziya Gökalp"
+      }
+    ]
+  },
+  "Bayrampaşa": {
+    "neighborhood_count": 11,
+    "neighborhoods": [
+      {
+        "name": "Altıntepsi"
+      },
+      {
+        "name": "Cevatpaşa"
+      },
+      {
+        "name": "İsmetpaşa"
+      },
+      {
+        "name": "Kartaltepe"
+      },
+      {
+        "name": "Kocatepe"
+      },
+      {
+        "name": "Muratpaşa"
+      },
+      {
+        "name": "Orta"
+      },
+      {
+        "name": "Terazidere"
+      },
+      {
+        "name": "Vatan"
+      },
+      {
+        "name": "Yenidoğan"
+      },
+      {
+        "name": "Yıldırım"
+      }
+    ]
+  },
+  "Beşiktaş": {
+    "neighborhood_count": 22,
+    "neighborhoods": [
+      {
+        "name": "Abbasağa"
+      },
+      {
+        "name": "Akat"
+      },
+      {
+        "name": "Balmumcu"
+      },
+      {
+        "name": "Bebek"
+      },
+      {
+        "name": "Cihannüma"
+      },
+      {
+        "name": "Dikilitaş"
+      },
+      {
+        "name": "Etiler"
+      },
+      {
+        "name": "Gayrettepe"
+      },
+      {
+        "name": "Konaklar"
+      },
+      {
+        "name": "Kuruçeşme"
+      },
+      {
+        "name": "Kültür"
+      },
+      {
+        "name": "Levazım"
+      },
+      {
+        "name": "Levent"
+      },
+      {
+        "name": "Mecidiye"
+      },
+      {
+        "name": "Muradiye"
+      },
+      {
+        "name": "Nisbetiye"
+      },
+      {
+        "name": "Ortaköy"
+      },
+      {
+        "name": "Sinanpaşa"
+      },
+      {
+        "name": "Türkali"
+      },
+      {
+        "name": "Ulus"
+      },
+      {
+        "name": "Vişnezade"
+      },
+      {
+        "name": "Yıldız"
+      }
+    ]
+  },
+  "Beykoz": {
+    "neighborhood_count": 44,
+    "neighborhoods": [
+      {
+        "name": "Acarlar"
+      },
+      {
+        "name": "Akbaba"
+      },
+      {
+        "name": "Alibahadır"
+      },
+      {
+        "name": "Anadolufeneri"
+      },
+      {
+        "name": "Anadoluhisarı"
+      },
+      {
+        "name": "Anadolukavağı"
+      },
+      {
+        "name": "Baklacı"
+      },
+      {
+        "name": "Bozhane"
+      },
+      {
+        "name": "Cumhuriyet"
+      },
+      {
+        "name": "Çamlıbahçe"
+      },
+      {
+        "name": "Çengeldere"
+      },
+      {
+        "name": "Çiftlik"
+      },
+      {
+        "name": "Çiğdem"
+      },
+      {
+        "name": "Çubuklu"
+      },
+      {
+        "name": "Dereseki"
+      },
+      {
+        "name": "Elmalı"
+      },
+      {
+        "name": "Göksu"
+      },
+      {
+        "name": "Göllü"
+      },
+      {
+        "name": "Görele"
+      },
+      {
+        "name": "Göztepe"
+      },
+      {
+        "name": "Gümüşsuyu"
+      },
+      {
+        "name": "İncirköy"
+      },
+      {
+        "name": "İshaklı"
+      },
+      {
+        "name": "Kanlıca"
+      },
+      {
+        "name": "Kavacık"
+      },
+      {
+        "name": "Kaynarca"
+      },
+      {
+        "name": "Kılıçlı"
+      },
+      {
+        "name": "Merkez"
+      },
+      {
+        "name": "Mahmutşevketpaşa"
+      },
+      {
+        "name": "Ortaçeşme"
+      },
+      {
+        "name": "Öğümce"
+      },
+      {
+        "name": "Örnekköy"
+      },
+      {
+        "name": "Paşabahçe"
+      },
+      {
+        "name": "Paşamandıra"
+      },
+      {
+        "name": "Polonezköy"
+      },
+      {
+        "name": "Poyrazköy"
+      },
+      {
+        "name": "Riva"
+      },
+      {
+        "name": "Rüzgarlıbahçe"
+      },
+      {
+        "name": "Soğuksu"
+      },
+      {
+        "name": "Tokatköy"
+      },
+      {
+        "name": "Yalıköy"
+      },
+      {
+        "name": "Yavuzselim"
+      },
+      {
+        "name": "Yenimahalle"
+      },
+      {
+        "name": "Zerzevatçı"
+      }
+    ]
+  },
+  "Beylikdüzü": {
+    "neighborhood_count": 10,
+    "neighborhoods": [
+      {
+        "name": "Adnan Kahveci"
+      },
+      {
+        "name": "Barış"
+      },
+      {
+        "name": "Büyükşehir"
+      },
+      {
+        "name": "Cumhuriyet"
+      },
+      {
+        "name": "Dereağzı"
+      },
+      {
+        "name": "Gürpınar"
+      },
+      {
+        "name": "Kavaklı"
+      },
+      {
+        "name": "Marmara"
+      },
+      {
+        "name": "Sahil"
+      },
+      {
+        "name": "Yakuplu"
+      }
+    ]
+  },
+  "Beyoğlu": {
+    "neighborhood_count": 45,
+    "neighborhoods": [
+      {
+        "name": "Arapcami"
+      },
+      {
+        "name": "Asmalımescit"
+      },
+      {
+        "name": "Bedrettin"
+      },
+      {
+        "name": "Bereketzade"
+      },
+      {
+        "name": "Bostan"
+      },
+      {
+        "name": "Bülbül"
+      },
+      {
+        "name": "Camiikebir"
+      },
+      {
+        "name": "Cihangir"
+      },
+      {
+        "name": "Çatmamescit"
+      },
+      {
+        "name": "Çukur"
+      },
+      {
+        "name": "Emekyemez"
+      },
+      {
+        "name": "Evliya Çelebi"
+      },
+      {
+        "name": "Fetihtepe"
+      },
+      {
+        "name": "Firuzağa"
+      },
+      {
+        "name": "Gümüşsuyu"
+      },
+      {
+        "name": "Hacıahmet"
+      },
+      {
+        "name": "Hacımimi"
+      },
+      {
+        "name": "Halıcıoğlu"
+      },
+      {
+        "name": "Hüseyinağa"
+      },
+      {
+        "name": "İstiklal"
+      },
+      {
+        "name": "Kadı Mehmet Efendi"
+      },
+      {
+        "name": "Kamerhatun"
+      },
+      {
+        "name": "Kalyoncukulluğu"
+      },
+      {
+        "name": "Kaptanpaşa"
+      },
+      {
+        "name": "Katip Mustafa Çelebi"
+      },
+      {
+        "name": "Keçecipiri"
+      },
+      {
+        "name": "Kemankeş Kara Mustafa Paşa"
+      },
+      {
+        "name": "Kılıçalipaşa"
+      },
+      {
+        "name": "Kocatepe"
+      },
+      {
+        "name": "Kulaksız"
+      },
+      {
+        "name": "Kuloğlu"
+      },
+      {
+        "name": "Küçükpiyale"
+      },
+      {
+        "name": "Müeyyetzade"
+      },
+      {
+        "name": "Ömeravni"
+      },
+      {
+        "name": "Örnektepe"
+      },
+      {
+        "name": "Piripaşa"
+      },
+      {
+        "name": "Piyalepaşa"
+      },
+      {
+        "name": "Pürtelaş"
+      },
+      {
+        "name": "Sururi"
+      },
+      {
+        "name": "Sütlüce"
+      },
+      {
+        "name": "Şahkulu"
+      },
+      {
+        "name": "Şehit Muhtar"
+      },
+      {
+        "name": "Tomtom"
+      },
+      {
+        "name": "Yahya Kahya"
+      },
+      {
+        "name": "Yenişehir"
+      }
+    ]
+  },
+  "Büyükçekmece": {
+    "neighborhood_count": 22,
+    "neighborhoods": [
+      {
+        "name": "19 Mayıs"
+      },
+      {
+        "name": "Ahmediye"
+      },
+      {
+        "name": "Alkent 2000"
+      },
+      {
+        "name": "Atatürk"
+      },
+      {
+        "name": "Celaliye"
+      },
+      {
+        "name": "Cumhuriyet"
+      },
+      {
+        "name": "Çakmaklı"
+      },
+      {
+        "name": "Dizdariye"
+      },
+      {
+        "name": "Ekinoba"
+      },
+      {
+        "name": "Güzelce"
+      },
+      {
+        "name": "Hürriyet"
+      },
+      {
+        "name": "Kamiloba"
+      },
+      {
+        "name": "Karaağaç"
+      },
+      {
+        "name": "Kumburgaz"
+      },
+      {
+        "name": "Mimaroba"
+      },
+      {
+        "name": "Mimarsinan"
+      },
+      {
+        "name": "Muratçeşme"
+      },
+      {
+        "name": "Pınartepe"
+      },
+      {
+        "name": "Sinanoba"
+      },
+      {
+        "name": "Türkoba"
+      },
+      {
+        "name": "Ulus"
+      },
+      {
+        "name": "Yenimahalle"
+      }
+    ]
+  },
+  "Çatalca": {
+    "neighborhood_count": 38,
+    "neighborhoods": [
+      {
+        "name": "Akalan"
+      },
+      {
+        "name": "Atatürk"
+      },
+      {
+        "name": "Aydınlar"
+      },
+      {
+        "name": "Bahşayiş"
+      },
+      {
+        "name": "Başak"
+      },
+      {
+        "name": "Belgrat"
+      },
+      {
+        "name": "Celepköy"
+      },
+      {
+        "name": "Çakıl"
+      },
+      {
+        "name": "Çanakça"
+      },
+      {
+        "name": "Çiftlikköy"
+      },
+      {
+        "name": "Dağyenice"
+      },
+      {
+        "name": "Elbasan"
+      },
+      {
+        "name": "Ferhatpaşa"
+      },
+      {
+        "name": "Gökçeali"
+      },
+      {
+        "name": "Gümüşpınar"
+      },
+      {
+        "name": "Hallaçlı"
+      },
+      {
+        "name": "Hisarbeyli"
+      },
+      {
+        "name": "İhsaniye"
+      },
+      {
+        "name": "İnceğiz"
+      },
+      {
+        "name": "İzzettin"
+      },
+      {
+        "name": "Kabakça"
+      },
+      {
+        "name": "Kaleiçi"
+      },
+      {
+        "name": "Kalfa"
+      },
+      {
+        "name": "Karacaköy"
+      },
+      {
+        "name": "Karamandere"
+      },
+      {
+        "name": "Kestanelik"
+      },
+      {
+        "name": "Kızılcaali"
+      },
+      {
+        "name": "Muratbey"
+      },
+      {
+        "name": "Nakkaş"
+      },
+      {
+        "name": "Oklalı"
+      },
+      {
+        "name": "Ormanlı"
+      },
+      {
+        "name": "Ovayenice"
+      },
+      {
+        "name": "Örcünlü"
+      },
+      {
+        "name": "Örencik"
+      },
+      {
+        "name": "Subaşı"
+      },
+      {
+        "name": "Yalıköy"
+      },
+      {
+        "name": "Yaylacık"
+      },
+      {
+        "name": "Yazlık"
+      }
+    ]
+  },
+  "Çekmeköy": {
+    "neighborhood_count": 20,
+    "neighborhoods": [
+      {
+        "name": "Alemdağ"
+      },
+      {
+        "name": "Aydınlar"
+      },
+      {
+        "name": "Cumhuriyet"
+      },
+      {
+        "name": "Çamlık"
+      },
+      {
+        "name": "Çatalmeşe"
+      },
+      {
+        "name": "Ekşioğlu"
+      },
+      {
+        "name": "Hamidiye"
+      },
+      {
+        "name": "Hüseyinli"
+      },
+      {
+        "name": "Kirazlıdere"
+      },
+      {
+        "name": "Koçullu"
+      },
+      {
+        "name": "Mehmet Akif"
+      },
+      {
+        "name": "Merkez"
+      },
+      {
+        "name": "Mimar Sinan"
+      },
+      {
+        "name": "Nişantepe"
+      },
+      {
+        "name": "Ömerli"
+      },
+      {
+        "name": "Reşadiye"
+      },
+      {
+        "name": "Sırapınar"
+      },
+      {
+        "name": "Soğukpınar"
+      },
+      {
+        "name": "Sultançiftliği"
+      },
+      {
+        "name": "Taşdelen"
+      }
+    ]
+  },
+  "Esenler": {
+    "neighborhood_count": 16,
+    "neighborhoods": [
+      {
+        "name": "15 Temmuz"
+      },
+      {
+        "name": "Birlik"
+      },
+      {
+        "name": "Çiftehavuzlar"
+      },
+      {
+        "name": "Davutpaşa"
+      },
+      {
+        "name": "Fevzi Çakmak"
+      },
+      {
+        "name": "Havaalanı"
+      },
+      {
+        "name": "Kazım Karabekir"
+      },
+      {
+        "name": "Kemer"
+      },
+      {
+        "name": "Menderes"
+      },
+      {
+        "name": "Mimar Sinan"
+      },
+      {
+        "name": "Namık Kemal"
+      },
+      {
+        "name": "Nenehatun"
+      },
+      {
+        "name": "Oruçreis"
+      },
+      {
+        "name": "Tuna"
+      },
+      {
+        "name": "Turgutreis"
+      },
+      {
+        "name": "Yavuz Selim"
+      }
+    ]
+  },
+  "Esenyurt": {
+    "neighborhood_count": 42,
+    "neighborhoods": [
+      {
+        "name": "Akçaburgaz"
+      },
+      {
+        "name": "Akevler"
+      },
+      {
+        "name": "Akşemseddin"
+      },
+      {
+        "name": "Ardıçlı"
+      },
+      {
+        "name": "Aşık Veysel"
+      },
+      {
+        "name": "Atatürk"
+      },
+      {
+        "name": "Bağlarçeşme"
+      },
+      {
+        "name": "Balık Yolu"
+      },
+      {
+        "name": "Barbaros Hayrettin Paşa"
+      },
+      {
+        "name": "Battalgazi"
+      },
+      {
+        "name": "Cumhuriyet"
+      },
+      {
+        "name": "Çınar"
+      },
+      {
+        "name": "Esenkent"
+      },
+      {
+        "name": "Gökevler"
+      },
+      {
+        "name": "Güzelyurt"
+      },
+      {
+        "name": "Hürriyet"
+      },
+      {
+        "name": "İncirtepe"
+      },
+      {
+        "name": "İnönü"
+      },
+      {
+        "name": "İstiklal"
+      },
+      {
+        "name": "Koza"
+      },
+      {
+        "name": "Mehmet Akif Ersoy"
+      },
+      {
+        "name": "Mehterçeşme"
+      },
+      {
+        "name": "Mevlana"
+      },
+      {
+        "name": "Namık Kemal"
+      },
+      {
+        "name": "Necip Fazıl Kısakürek"
+      },
+      {
+        "name": "Orhan Gazi"
+      },
+      {
+        "name": "Osmangazi"
+      },
+      {
+        "name": "Örnek"
+      },
+      {
+        "name": "Pınar"
+      },
+      {
+        "name": "Piri Reis"
+      },
+      {
+        "name": "Saadetdere"
+      },
+      {
+        "name": "Selahaddin Eyyubi"
+      },
+      {
+        "name": "Sultaniye"
+      },
+      {
+        "name": "Süleymaniye"
+      },
+      {
+        "name": "Şehitler"
+      },
+      {
+        "name": "Talatpaşa"
+      },
+      {
+        "name": "Turgut Özal"
+      },
+      {
+        "name": "Üçevler"
+      },
+      {
+        "name": "Yenikent"
+      },
+      {
+        "name": "Yeşilkent"
+      },
+      {
+        "name": "Yunus Emre"
+      },
+      {
+        "name": "Zafer"
+      }
+    ]
+  },
+  "Eyüpsultan": {
+    "neighborhood_count": 22,
+    "neighborhoods": [
+      {
+        "name": "5. Levent"
+      },
+      {
+        "name": "Akşemsettin"
+      },
+      {
+        "name": "Alibeyköy"
+      },
+      {
+        "name": "Çırçır"
+      },
+      {
+        "name": "Defterdar"
+      },
+      {
+        "name": "Düğmeciler"
+      },
+      {
+        "name": "Emniyettepe"
+      },
+      {
+        "name": "Esentepe"
+      },
+      {
+        "name": "Merkez"
+      },
+      {
+        "name": "Göktürk"
+      },
+      {
+        "name": "Güzeltepe"
+      },
+      {
+        "name": "İslambey"
+      },
+      {
+        "name": "Karadolap"
+      },
+      {
+        "name": "Mimarsinan"
+      },
+      {
+        "name": "Mithatpaşa"
+      },
+      {
+        "name": "Nişanca"
+      },
+      {
+        "name": "Rami Cuma"
+      },
+      {
+        "name": "Rami Yeni"
+      },
+      {
+        "name": "Sakarya"
+      },
+      {
+        "name": "Silahtarağa"
+      },
+      {
+        "name": "Topçular"
+      },
+      {
+        "name": "Yeşilpınar"
+      }
+    ]
+  },
+  "Fatih": {
+    "neighborhood_count": 57,
+    "neighborhoods": [
+      {
+        "name": "Aksaray"
+      },
+      {
+        "name": "Akşemsettin"
+      },
+      {
+        "name": "Alemdar"
+      },
+      {
+        "name": "Ali Kuşçu"
+      },
+      {
+        "name": "Atikali"
+      },
+      {
+        "name": "Ayvansaray"
+      },
+      {
+        "name": "Balabanağa"
+      },
+      {
+        "name": "Balat"
+      },
+      {
+        "name": "Beyazıt"
+      },
+      {
+        "name": "Binbirdirek"
+      },
+      {
+        "name": "Cankurtaran"
+      },
+      {
+        "name": "Cerrahpaşa"
+      },
+      {
+        "name": "Cibali"
+      },
+      {
+        "name": "Demirtaş"
+      },
+      {
+        "name": "Derviş Ali"
+      },
+      {
+        "name": "Eminsinan"
+      },
+      {
+        "name": "Hacıkadın"
+      },
+      {
+        "name": "Hasekisultan"
+      },
+      {
+        "name": "Hırkaişerif"
+      },
+      {
+        "name": "Hobyar"
+      },
+      {
+        "name": "Hoca Giyasettin"
+      },
+      {
+        "name": "Hocapaşa"
+      },
+      {
+        "name": "İskenderpaşa"
+      },
+      {
+        "name": "Kalenderhane"
+      },
+      {
+        "name": "Karagümrük"
+      },
+      {
+        "name": "Katip Kasım"
+      },
+      {
+        "name": "Kemalpaşa"
+      },
+      {
+        "name": "Kocamustafapaşa"
+      },
+      {
+        "name": "Küçükayasofya"
+      },
+      {
+        "name": "Mercan"
+      },
+      {
+        "name": "Mesihpaşa"
+      },
+      {
+        "name": "Mevlanakapı"
+      },
+      {
+        "name": "Mimar Hayrettin"
+      },
+      {
+        "name": "Mimar Kemalettin"
+      },
+      {
+        "name": "Mollafenari"
+      },
+      {
+        "name": "Mollagürani"
+      },
+      {
+        "name": "Mollahüsrev"
+      },
+      {
+        "name": "Muhsinehatun"
+      },
+      {
+        "name": "Nişanca"
+      },
+      {
+        "name": "Rüstempaşa"
+      },
+      {
+        "name": "Saraçishak"
+      },
+      {
+        "name": "Sarıdemir"
+      },
+      {
+        "name": "Seyyid Ömer"
+      },
+      {
+        "name": "Silivrikapı"
+      },
+      {
+        "name": "Sultanahmet"
+      },
+      {
+        "name": "Sururi"
+      },
+      {
+        "name": "Süleymaniye"
+      },
+      {
+        "name": "Sümbülefendi"
+      },
+      {
+        "name": "Şehremini"
+      },
+      {
+        "name": "Şehsuvarbey"
+      },
+      {
+        "name": "Tahtakale"
+      },
+      {
+        "name": "Tayahatun"
+      },
+      {
+        "name": "Topkapı"
+      },
+      {
+        "name": "Yavuzsinan"
+      },
+      {
+        "name": "Yavuz Sultan Selim"
+      },
+      {
+        "name": "Yedikule"
+      },
+      {
+        "name": "Zeyrek"
+      }
+    ]
+  },
+  "Gaziosmanpaşa": {
+    "neighborhood_count": 16,
+    "neighborhoods": [
+      {
+        "name": "Bağlarbaşı"
+      },
+      {
+        "name": "Barbaros Hayrettin Paşa"
+      },
+      {
+        "name": "Fevzi Çakmak"
+      },
+      {
+        "name": "Hürriyet"
+      },
+      {
+        "name": "Karadeniz"
+      },
+      {
+        "name": "Karayolları"
+      },
+      {
+        "name": "Karlıtepe"
+      },
+      {
+        "name": "Kâzım Karabekir"
+      },
+      {
+        "name": "Merkez"
+      },
+      {
+        "name": "Mevlana"
+      },
+      {
+        "name": "Pazariçi"
+      },
+      {
+        "name": "Sarıgöl"
+      },
+      {
+        "name": "Şemsipaşa"
+      },
+      {
+        "name": "Yenidoğan"
+      },
+      {
+        "name": "Yenimahalle"
+      },
+      {
+        "name": "Yıldıztabya"
+      }
+    ]
+  },
+  "Güngören": {
+    "neighborhood_count": 11,
+    "neighborhoods": [
+      {
+        "name": "Akıncılar"
+      },
+      {
+        "name": "Abdurrahman Nafiz Gürman"
+      },
+      {
+        "name": "Gençosman"
+      },
+      {
+        "name": "Güneştepe"
+      },
+      {
+        "name": "Güven"
+      },
+      {
+        "name": "Haznedar"
+      },
+      {
+        "name": "Mareşal Fevzi Çakmak"
+      },
+      {
+        "name": "Mehmet Nezih Özmen"
+      },
+      {
+        "name": "Merkez"
+      },
+      {
+        "name": "Sanayi"
+      },
+      {
+        "name": "Tozkoparan"
+      }
+    ]
+  },
+  "Kadıköy": {
+    "neighborhood_count": 21,
+    "neighborhoods": [
+      {
+        "name": "19 Mayıs"
+      },
+      {
+        "name": "Acıbadem"
+      },
+      {
+        "name": "Bostancı"
+      },
+      {
+        "name": "Caddebostan"
+      },
+      {
+        "name": "Caferağa"
+      },
+      {
+        "name": "Dumlupınar"
+      },
+      {
+        "name": "Eğitim"
+      },
+      {
+        "name": "Erenköy"
+      },
+      {
+        "name": "Fenerbahçe"
+      },
+      {
+        "name": "Feneryolu"
+      },
+      {
+        "name": "Fikirtepe"
+      },
+      {
+        "name": "Göztepe"
+      },
+      {
+        "name": "Hasanpaşa"
+      },
+      {
+        "name": "Koşuyolu"
+      },
+      {
+        "name": "Kozyatağı"
+      },
+      {
+        "name": "Merdivenköy"
+      },
+      {
+        "name": "Osmanağa"
+      },
+      {
+        "name": "Rasimpaşa"
+      },
+      {
+        "name": "Sahrayıcedid"
+      },
+      {
+        "name": "Suadiye"
+      },
+      {
+        "name": "Zühtüpaşa"
+      }
+    ]
+  },
+  "Kâğıthane": {
+    "neighborhood_count": 19,
+    "neighborhoods": [
+      {
+        "name": "Çağlayan"
+      },
+      {
+        "name": "Çeliktepe"
+      },
+      {
+        "name": "Gültepe"
+      },
+      {
+        "name": "Emniyet Evleri"
+      },
+      {
+        "name": "Gürsel"
+      },
+      {
+        "name": "Hamidiye"
+      },
+      {
+        "name": "Harmantepe"
+      },
+      {
+        "name": "Hürriyet"
+      },
+      {
+        "name": "Mehmet Akif Ersoy"
+      },
+      {
+        "name": "Merkez"
+      },
+      {
+        "name": "Nurtepe"
+      },
+      {
+        "name": "Ortabayır"
+      },
+      {
+        "name": "Sultan Selim"
+      },
+      {
+        "name": "Seyrantepe"
+      },
+      {
+        "name": "Şirintepe"
+      },
+      {
+        "name": "Talatpaşa"
+      },
+      {
+        "name": "Telsizler"
+      },
+      {
+        "name": "Yahya Kemal"
+      },
+      {
+        "name": "Yeşilce"
+      }
+    ]
+  },
+  "Kartal": {
+    "neighborhood_count": 20,
+    "neighborhoods": [
+      {
+        "name": "Atalar"
+      },
+      {
+        "name": "Cevizli"
+      },
+      {
+        "name": "Cumhuriyet"
+      },
+      {
+        "name": "Çavuşoğlu"
+      },
+      {
+        "name": "Esentepe"
+      },
+      {
+        "name": "Gümüşpınar"
+      },
+      {
+        "name": "Hürriyet"
+      },
+      {
+        "name": "Karlıktepe"
+      },
+      {
+        "name": "Kordonboyu"
+      },
+      {
+        "name": "Orhantepe"
+      },
+      {
+        "name": "Ortamahalle"
+      },
+      {
+        "name": "Petrol-İş"
+      },
+      {
+        "name": "Soğanlık"
+      },
+      {
+        "name": "Topselvi"
+      },
+      {
+        "name": "Uğur Mumcu"
+      },
+      {
+        "name": "Yakacık Çarşı"
+      },
+      {
+        "name": "Yakacık Yeni"
+      },
+      {
+        "name": "Yalı"
+      },
+      {
+        "name": "Yukarımahalle"
+      },
+      {
+        "name": "Yunus"
+      }
+    ]
+  },
+  "Küçükçekmece": {
+    "neighborhood_count": 20,
+    "neighborhoods": [
+      {
+        "name": "Atakent"
+      },
+      {
+        "name": "Atatürk"
+      },
+      {
+        "name": "Beşyol"
+      },
+      {
+        "name": "Cennet"
+      },
+      {
+        "name": "Cumhuriyet"
+      },
+      {
+        "name": "Fevzi Çakmak"
+      },
+      {
+        "name": "Gültepe"
+      },
+      {
+        "name": "Halkalı"
+      },
+      {
+        "name": "İnönü"
+      },
+      {
+        "name": "İstasyon"
+      },
+      {
+        "name": "Kanarya"
+      },
+      {
+        "name": "Kartaltepe"
+      },
+      {
+        "name": "Kemalpaşa"
+      },
+      {
+        "name": "Mehmet Akif"
+      },
+      {
+        "name": "Söğütlüçeşme"
+      },
+      {
+        "name": "Sultanmurat"
+      },
+      {
+        "name": "Tevfikbey"
+      },
+      {
+        "name": "Yarımburgaz"
+      },
+      {
+        "name": "Yenimahalle"
+      },
+      {
+        "name": "Yeşilova"
+      }
+    ]
+  },
+  "Maltepe": {
+    "neighborhood_count": 18,
+    "neighborhoods": [
+      {
+        "name": "Altayçeşme"
+      },
+      {
+        "name": "Altıntepe"
+      },
+      {
+        "name": "Aydınevler"
+      },
+      {
+        "name": "Bağlarbaşı"
+      },
+      {
+        "name": "Başıbüyük"
+      },
+      {
+        "name": "Büyükbakkalköy"
+      },
+      {
+        "name": "Cevizli"
+      },
+      {
+        "name": "Çınar"
+      },
+      {
+        "name": "Esenkent"
+      },
+      {
+        "name": "Feyzullah"
+      },
+      {
+        "name": "Fındıklı"
+      },
+      {
+        "name": "Girne"
+      },
+      {
+        "name": "Gülensu"
+      },
+      {
+        "name": "Gülsuyu"
+      },
+      {
+        "name": "İdealtepe"
+      },
+      {
+        "name": "Küçükyalı"
+      },
+      {
+        "name": "Yalı"
+      },
+      {
+        "name": "Zümrütevler"
+      }
+    ]
+  },
+  "Pendik": {
+    "neighborhood_count": 28,
+    "neighborhoods": [
+      {
+        "name": "Ahmet Yesevi"
+      },
+      {
+        "name": "Batı"
+      },
+      {
+        "name": "Çamçeşme"
+      },
+      {
+        "name": "Çamlık"
+      },
+      {
+        "name": "Çınardere"
+      },
+      {
+        "name": "Doğu"
+      },
+      {
+        "name": "Dumlupınar"
+      },
+      {
+        "name": "Ertuğrulgazi"
+      },
+      {
+        "name": "Esenyalı"
+      },
+      {
+        "name": "Fevzi Çakmak"
+      },
+      {
+        "name": "Güllübağlar"
+      },
+      {
+        "name": "Güzelyalı"
+      },
+      {
+        "name": "Harmandere"
+      },
+      {
+        "name": "Kavakpınar"
+      },
+      {
+        "name": "Kaynarca"
+      },
+      {
+        "name": "Kurtköy"
+      },
+      {
+        "name": "Orhangazi"
+      },
+      {
+        "name": "Orta"
+      },
+      {
+        "name": "Ramazanoğlu"
+      },
+      {
+        "name": "Sanayi"
+      },
+      {
+        "name": "Sapanbağları"
+      },
+      {
+        "name": "Sülüntepe"
+      },
+      {
+        "name": "Şeyhli"
+      },
+      {
+        "name": "Velibaba"
+      },
+      {
+        "name": "Yayalar"
+      },
+      {
+        "name": "Yenimahalle"
+      },
+      {
+        "name": "Yenişehir"
+      },
+      {
+        "name": "Yeşilbağlar"
+      }
+    ]
+  },
+  "Sancaktepe": {
+    "neighborhood_count": 17,
+    "neighborhoods": [
+      {
+        "name": "Abdurrahmangazi"
+      },
+      {
+        "name": "Akpınar"
+      },
+      {
+        "name": "Atatürk"
+      },
+      {
+        "name": "Emek"
+      },
+      {
+        "name": "Eyüp Sultan"
+      },
+      {
+        "name": "Hilal"
+      },
+      {
+        "name": "İnönü"
+      },
+      {
+        "name": "Kemal Türkler"
+      },
+      {
+        "name": "Meclis"
+      },
+      {
+        "name": "Merve"
+      },
+      {
+        "name": "Mevlana"
+      },
+      {
+        "name": "Osmangazi"
+      },
+      {
+        "name": "Safa"
+      },
+      {
+        "name": "Sarıgazi"
+      },
+      {
+        "name": "Veysel Karani"
+      },
+      {
+        "name": "Yenidoğan"
+      },
+      {
+        "name": "Yunus Emre"
+      }
+    ]
+  },
+  "Sarıyer": {
+    "neighborhood_count": 35,
+    "neighborhoods": [
+      {
+        "name": "Ayazağa"
+      },
+      {
+        "name": "Baltalimanı"
+      },
+      {
+        "name": "Bahçeköy Kemer"
+      },
+      {
+        "name": "Bahçeköy"
+      },
+      {
+        "name": "Bahçeköy Yenimahalle"
+      },
+      {
+        "name": "Büyükdere"
+      },
+      {
+        "name": "Cumhuriyet"
+      },
+      {
+        "name": "Çayırbaşı"
+      },
+      {
+        "name": "Darüşşafaka"
+      },
+      {
+        "name": "Demirciköy"
+      },
+      {
+        "name": "Derbent (Çamlıtepe)"
+      },
+      {
+        "name": "Emirgân"
+      },
+      {
+        "name": "Fatih Sultan Mehmet"
+      },
+      {
+        "name": "Ferahevler"
+      },
+      {
+        "name": "Garipçe"
+      },
+      {
+        "name": "İstinye"
+      },
+      {
+        "name": "Kâzım Karabekir"
+      },
+      {
+        "name": "Kireçburnu"
+      },
+      {
+        "name": "Kocataş"
+      },
+      {
+        "name": "Kumköy (Kilyos)"
+      },
+      {
+        "name": "Maden"
+      },
+      {
+        "name": "Pınar"
+      },
+      {
+        "name": "Poligon"
+      },
+      {
+        "name": "PTT Evleri"
+      },
+      {
+        "name": "Reşitpaşa"
+      },
+      {
+        "name": "Rumelihisarı"
+      },
+      {
+        "name": "Rumelifeneri"
+      },
+      {
+        "name": "Rumelikavağı"
+      },
+      {
+        "name": "Maslak"
+      },
+      {
+        "name": "Merkez"
+      },
+      {
+        "name": "Tarabya"
+      },
+      {
+        "name": "Uskumruköy"
+      },
+      {
+        "name": "Yeniköy"
+      },
+      {
+        "name": "Yenimahalle"
+      },
+      {
+        "name": "Zekeriyaköy"
+      }
+    ]
+  },
+  "Silivri": {
+    "neighborhood_count": 20,
+    "neighborhoods": [
+      {
+        "name": "Alibey"
+      },
+      {
+        "name": "Alipaşa"
+      },
+      {
+        "name": "Büyük Çavuşlu"
+      },
+      {
+        "name": "Cumhuriyet"
+      },
+      {
+        "name": "Çanta Fatih"
+      },
+      {
+        "name": "Çanta Mimarsinan"
+      },
+      {
+        "name": "Değirmenköy İsmetpaşa"
+      },
+      {
+        "name": "Değirmenköy Fevzipaşa"
+      },
+      {
+        "name": "Gazitepe (Haraççı)"
+      },
+      {
+        "name": "Gümüşyaka"
+      },
+      {
+        "name": "Kavaklı Hürriyet"
+      },
+      {
+        "name": "Kavaklı Cumhuriyet"
+      },
+      {
+        "name": "Küçük Kılıçlı"
+      },
+      {
+        "name": "Mimar Sinan"
+      },
+      {
+        "name": "Ortaköy"
+      },
+      {
+        "name": "Piri Mehmet Paşa"
+      },
+      {
+        "name": "Selimpaşa"
+      },
+      {
+        "name": "Semizkumlar"
+      },
+      {
+        "name": "Yenimahalle"
+      },
+      {
+        "name": "Yolçatı"
+      }
+    ]
+  },
+  "Sultanbeyli": {
+    "neighborhood_count": 14,
+    "neighborhoods": [
+      {
+        "name": "Abdurrahmangazi"
+      },
+      {
+        "name": "Adil"
+      },
+      {
+        "name": "Ahmet Yesevi"
+      },
+      {
+        "name": "Akşemsettin"
+      },
+      {
+        "name": "Battalgazi"
+      },
+      {
+        "name": "Hamidiye"
+      },
+      {
+        "name": "Hasanpaşa"
+      },
+      {
+        "name": "Mecidiye"
+      },
+      {
+        "name": "Mehmet Akif"
+      },
+      {
+        "name": "Mimarsinan"
+      },
+      {
+        "name": "Necip Fazıl"
+      },
+      {
+        "name": "Orhangazi"
+      },
+      {
+        "name": "Turgutreis"
+      },
+      {
+        "name": "Yavuz Selim"
+      }
+    ]
+  },
+  "Sultangazi": {
+    "neighborhood_count": 15,
+    "neighborhoods": [
+      {
+        "name": "50. Yıl"
+      },
+      {
+        "name": "75. Yıl"
+      },
+      {
+        "name": "Cebeci"
+      },
+      {
+        "name": "Cumhuriyet"
+      },
+      {
+        "name": "Esentepe"
+      },
+      {
+        "name": "Eski Habibler"
+      },
+      {
+        "name": "Gazi"
+      },
+      {
+        "name": "Habibler"
+      },
+      {
+        "name": "İsmetpaşa"
+      },
+      {
+        "name": "Malkoçoğlu"
+      },
+      {
+        "name": "Sultançiftliği"
+      },
+      {
+        "name": "Uğur Mumcu"
+      },
+      {
+        "name": "Yayla"
+      },
+      {
+        "name": "Yunusemre"
+      },
+      {
+        "name": "Zübeydehanım"
+      }
+    ]
+  },
+  "Şile": {
+    "neighborhood_count": 5,
+    "neighborhoods": [
+      {
+        "name": "Ağva"
+      },
+      {
+        "name": "Balibey"
+      },
+      {
+        "name": "Çavuş"
+      },
+      {
+        "name": "Hacıkasım"
+      },
+      {
+        "name": "Kumbaba"
+      }
+    ]
+  },
+  "Şişli": {
+    "neighborhood_count": 25,
+    "neighborhoods": [
+      {
+        "name": "19 Mayıs"
+      },
+      {
+        "name": "Bozkurt"
+      },
+      {
+        "name": "Cumhuriyet"
+      },
+      {
+        "name": "Duatepe"
+      },
+      {
+        "name": "Ergenekon"
+      },
+      {
+        "name": "Esentepe"
+      },
+      {
+        "name": "Eskişehir"
+      },
+      {
+        "name": "Feriköy"
+      },
+      {
+        "name": "Fulya"
+      },
+      {
+        "name": "Gülbahar"
+      },
+      {
+        "name": "Halaskargazi"
+      },
+      {
+        "name": "Halide Edip Adıvar"
+      },
+      {
+        "name": "Halil Rıfat Paşa"
+      },
+      {
+        "name": "Harbiye"
+      },
+      {
+        "name": "İnönü"
+      },
+      {
+        "name": "İzzetpaşa"
+      },
+      {
+        "name": "Kaptanpaşa"
+      },
+      {
+        "name": "Kuştepe"
+      },
+      {
+        "name": "Mahmut Şevket Paşa"
+      },
+      {
+        "name": "Mecidiyeköy"
+      },
+      {
+        "name": "Merkez"
+      },
+      {
+        "name": "Meşrutiyet"
+      },
+      {
+        "name": "Paşa"
+      },
+      {
+        "name": "Teşvikiye"
+      },
+      {
+        "name": "Yayla"
+      }
+    ]
+  },
+  "Tuzla": {
+    "neighborhood_count": 16,
+    "neighborhoods": [
+      {
+        "name": "Akfırat"
+      },
+      {
+        "name": "Anadolu"
+      },
+      {
+        "name": "Aydınlı"
+      },
+      {
+        "name": "Aydıntepe"
+      },
+      {
+        "name": "Cami"
+      },
+      {
+        "name": "Evliya Çelebi"
+      },
+      {
+        "name": "İçmeler"
+      },
+      {
+        "name": "İstasyon"
+      },
+      {
+        "name": "Mescit"
+      },
+      {
+        "name": "Mimar Sinan"
+      },
+      {
+        "name": "Orhanlı"
+      },
+      {
+        "name": "Orta"
+      },
+      {
+        "name": "Postane"
+      },
+      {
+        "name": "Şifa"
+      },
+      {
+        "name": "Tepeören"
+      },
+      {
+        "name": "Yayla"
+      }
+    ]
+  },
+  "Ümraniye": {
+    "neighborhood_count": 35,
+    "neighborhoods": [
+      {
+        "name": "Adem Yavuz"
+      },
+      {
+        "name": "Altınşehir"
+      },
+      {
+        "name": "Armağanevler"
+      },
+      {
+        "name": "Aşağıdudullu"
+      },
+      {
+        "name": "Atakent"
+      },
+      {
+        "name": "Atatürk"
+      },
+      {
+        "name": "Cemil Meriç"
+      },
+      {
+        "name": "Çakmak"
+      },
+      {
+        "name": "Çamlık"
+      },
+      {
+        "name": "Dumlupınar"
+      },
+      {
+        "name": "Elmalıkent"
+      },
+      {
+        "name": "Esenevler"
+      },
+      {
+        "name": "Esenkent"
+      },
+      {
+        "name": "Esenşehir"
+      },
+      {
+        "name": "Fatih Sultan Mehmet"
+      },
+      {
+        "name": "Finanskent"
+      },
+      {
+        "name": "Hekimbaşı"
+      },
+      {
+        "name": "Huzur"
+      },
+      {
+        "name": "Ihlamurkuyu"
+      },
+      {
+        "name": "İnkılap"
+      },
+      {
+        "name": "İstiklal"
+      },
+      {
+        "name": "Kâzım Karabekir"
+      },
+      {
+        "name": "Madenler"
+      },
+      {
+        "name": "Mehmet Akif"
+      },
+      {
+        "name": "Namık Kemal"
+      },
+      {
+        "name": "Necip Fazıl"
+      },
+      {
+        "name": "Parseller"
+      },
+      {
+        "name": "Site"
+      },
+      {
+        "name": "Şerifali"
+      },
+      {
+        "name": "Tantavi"
+      },
+      {
+        "name": "Tatlısu"
+      },
+      {
+        "name": "Tepeüstü"
+      },
+      {
+        "name": "Topağacı"
+      },
+      {
+        "name": "Yamanevler"
+      },
+      {
+        "name": "Yukarıdudullu"
+      }
+    ]
+  },
+  "Üsküdar": {
+    "neighborhood_count": 32,
+    "neighborhoods": [
+      {
+        "name": "Acıbadem"
+      },
+      {
+        "name": "Ahmediye"
+      },
+      {
+        "name": "Altunizade"
+      },
+      {
+        "name": "Aziz Mahmud Hüdayi"
+      },
+      {
+        "name": "Barbaros"
+      },
+      {
+        "name": "Beylerbeyi"
+      },
+      {
+        "name": "Bulgurlu"
+      },
+      {
+        "name": "Burhaniye"
+      },
+      {
+        "name": "Cumhuriyet"
+      },
+      {
+        "name": "Çengelköy"
+      },
+      {
+        "name": "Ferah"
+      },
+      {
+        "name": "Güzeltepe"
+      },
+      {
+        "name": "İcadiye"
+      },
+      {
+        "name": "Kandilli"
+      },
+      {
+        "name": "Kirazlıtepe"
+      },
+      {
+        "name": "Kısıklı"
+      },
+      {
+        "name": "Kuleli"
+      },
+      {
+        "name": "Kuzguncuk"
+      },
+      {
+        "name": "Küçük Çamlıca"
+      },
+      {
+        "name": "Küçüksu"
+      },
+      {
+        "name": "Küplüce"
+      },
+      {
+        "name": "Mehmet Akif Ersoy"
+      },
+      {
+        "name": "Mimar Sinan"
+      },
+      {
+        "name": "Murat Reis"
+      },
+      {
+        "name": "Salacak"
+      },
+      {
+        "name": "Selami Ali"
+      },
+      {
+        "name": "Selimiye"
+      },
+      {
+        "name": "Sultantepe"
+      },
+      {
+        "name": "Ünalan"
+      },
+      {
+        "name": "Valide-i Atik"
+      },
+      {
+        "name": "Yavuztürk"
+      },
+      {
+        "name": "Zeynep Kamil"
+      }
+    ]
+  },
+  "Zeytinburnu": {
+    "neighborhood_count": 12,
+    "neighborhoods": [
+      {
+        "name": "Beştelsiz"
+      },
+      {
+        "name": "Çırpıcı"
+      },
+      {
+        "name": "Gökalp"
+      },
+      {
+        "name": "Kazlıçeşme"
+      },
+      {
+        "name": "Merkezefendi"
+      },
+      {
+        "name": "Nuripaşa"
+      },
+      {
+        "name": "Seyitnizam"
+      },
+      {
+        "name": "Sümer"
+      },
+      {
+        "name": "Telsiz"
+      },
+      {
+        "name": "Veliefendi"
+      },
+      {
+        "name": "Yenidoğan"
+      },
+      {
+        "name": "Yeşiltepe"
+      }
+    ]
+  }
+}

@@ -8,13 +8,13 @@ import { Button } from '@/components/ui/button'
 import { supabase } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { cn } from '@/lib/utils'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
-  // Don't wrap login page with layout
   if (pathname === '/admin/login') {
     return <>{children}</>
   }
@@ -26,42 +26,40 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const navItems = [
     { href: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
-    { href: '/admin/locations', icon: MapPin, label: 'İlçe & Mahalleler' },
-    { href: '/admin/blog', icon: FileText, label: 'Blog Yönetimi' },
+    { href: '/admin/locations', icon: MapPin, label: 'Lokasyonlar' },
+    { href: '/admin/blog', icon: FileText, label: 'Blog' },
   ]
 
   return (
     <AdminAuthCheck>
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        {/* Mobile menu button */}
+      <div className="min-h-screen bg-background">
+        {/* Mobile Toggle */}
         <div className="lg:hidden fixed top-4 left-4 z-50">
           <Button
             variant="outline"
             size="icon"
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="bg-slate-900 border-slate-800 text-slate-100"
           >
-            {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {sidebarOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </Button>
         </div>
 
         {/* Sidebar */}
         <aside
-          className={`
-            fixed top-0 left-0 z-40 h-screen w-64 bg-slate-900 border-r border-slate-800 transition-transform duration-300
-            ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-            lg:translate-x-0
-          `}
+          className={cn(
+            "fixed top-0 left-0 z-40 h-screen w-64 border-r bg-card transition-transform duration-300",
+            sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+          )}
         >
-          <div className="flex flex-col h-full">
-            {/* Logo */}
-            <div className="p-6 border-b border-slate-800">
-              <h1 className="text-xl font-bold text-white">Moto Kurye Admin</h1>
-              <p className="text-sm text-slate-400 mt-1">Yönetim Paneli</p>
+          <div className="flex h-full flex-col">
+            {/* Header */}
+            <div className="border-b p-6">
+              <h1 className="text-xl font-bold">Admin Panel</h1>
+              <p className="text-sm text-muted-foreground">Moto Kurye Gelsin</p>
             </div>
 
             {/* Navigation */}
-            <nav className="flex-1 p-4 space-y-2">
+            <nav className="flex-1 space-y-1 p-4">
               {navItems.map((item) => {
                 const isActive = pathname === item.href
                 return (
@@ -69,46 +67,45 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                     key={item.href}
                     href={item.href}
                     onClick={() => setSidebarOpen(false)}
-                    className={`
-                      flex items-center gap-3 px-4 py-3 rounded-lg transition-colors
-                      ${isActive
-                        ? 'bg-blue-600 text-white'
-                        : 'text-slate-300 hover:bg-slate-800 hover:text-white'
-                      }
-                    `}
+                    className={cn(
+                      "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                      isActive
+                        ? "bg-primary text-primary-foreground"
+                        : "hover:bg-accent hover:text-accent-foreground"
+                    )}
                   >
-                    <item.icon className="h-5 w-5" />
-                    <span className="font-medium">{item.label}</span>
+                    <item.icon className="h-4 w-4" />
+                    {item.label}
                   </Link>
                 )
               })}
             </nav>
 
             {/* Logout */}
-            <div className="p-4 border-t border-slate-800">
+            <div className="border-t p-4">
               <Button
                 onClick={handleLogout}
-                variant="outline"
-                className="w-full justify-start gap-3 border-slate-700 text-slate-300 hover:bg-red-600 hover:text-white hover:border-red-600"
+                variant="ghost"
+                className="w-full justify-start gap-3 text-destructive hover:bg-destructive hover:text-destructive-foreground"
               >
-                <LogOut className="h-5 w-5" />
+                <LogOut className="h-4 w-4" />
                 Çıkış Yap
               </Button>
             </div>
           </div>
         </aside>
 
-        {/* Main content */}
-        <main className="lg:ml-64 min-h-screen">
-          <div className="p-8">
+        {/* Main */}
+        <main className="lg:ml-64">
+          <div className="container py-6">
             {children}
           </div>
         </main>
 
-        {/* Overlay for mobile */}
+        {/* Overlay */}
         {sidebarOpen && (
           <div
-            className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+            className="fixed inset-0 z-30 bg-black/50 lg:hidden"
             onClick={() => setSidebarOpen(false)}
           />
         )}

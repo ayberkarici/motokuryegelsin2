@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase/client'
-import { Card } from '@/components/ui/card'
-import { MapPin, FileText, Eye, TrendingUp } from 'lucide-react'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { MapPin, FileText, Eye, TrendingUp, Package, Clock } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 interface Stats {
   districts: number
@@ -27,22 +29,18 @@ export default function AdminDashboard() {
 
   const fetchStats = async () => {
     try {
-      // Fetch districts count
       const { count: districtsCount } = await supabase
         .from('districts')
         .select('*', { count: 'exact', head: true })
 
-      // Fetch neighborhoods count
       const { count: neighborhoodsCount } = await supabase
         .from('neighborhoods')
         .select('*', { count: 'exact', head: true })
 
-      // Fetch blog posts count
       const { count: blogPostsCount } = await supabase
         .from('blog_posts')
         .select('*', { count: 'exact', head: true })
 
-      // Fetch total blog views
       const { data: viewsData } = await supabase
         .from('blog_posts')
         .select('view_count')
@@ -62,103 +60,168 @@ export default function AdminDashboard() {
     }
   }
 
-  const statCards = [
-    {
-      title: 'İlçeler',
-      value: stats.districts,
-      icon: MapPin,
-      color: 'bg-blue-600',
-      description: 'Toplam ilçe sayısı',
-    },
-    {
-      title: 'Mahalleler',
-      value: stats.neighborhoods,
-      icon: MapPin,
-      color: 'bg-green-600',
-      description: 'Toplam mahalle sayısı',
-    },
-    {
-      title: 'Blog Yazıları',
-      value: stats.blogPosts,
-      icon: FileText,
-      color: 'bg-purple-600',
-      description: 'Yayınlanmış ve taslak',
-    },
-    {
-      title: 'Toplam Görüntülenme',
-      value: stats.totalViews,
-      icon: Eye,
-      color: 'bg-orange-600',
-      description: 'Blog görüntülenme sayısı',
-    },
-  ]
-
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-white mb-2">Dashboard</h1>
-        <p className="text-slate-400">Moto Kurye Gelsin yönetim paneline hoş geldiniz</p>
+      <div className="space-y-1">
+        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+        <p className="text-muted-foreground">
+          Yönetim paneline hoş geldiniz
+        </p>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {statCards.map((stat) => (
-          <Card key={stat.title} className="bg-slate-900 border-slate-800 p-6">
-            <div className="flex items-start justify-between">
-              <div className="space-y-2">
-                <p className="text-sm font-medium text-slate-400">{stat.title}</p>
-                <p className="text-3xl font-bold text-white">
-                  {loading ? '...' : stat.value.toLocaleString()}
-                </p>
-                <p className="text-xs text-slate-500">{stat.description}</p>
-              </div>
-              <div className={`${stat.color} p-3 rounded-lg`}>
-                <stat.icon className="h-6 w-6 text-white" />
-              </div>
+      {/* Stats Cards */}
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Toplam İlçe</CardTitle>
+            <MapPin className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {loading ? '...' : stats.districts}
             </div>
-          </Card>
-        ))}
+            <p className="text-xs text-muted-foreground">
+              İstanbul geneli
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Toplam Mahalle</CardTitle>
+            <MapPin className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {loading ? '...' : stats.neighborhoods}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Aktif bölgeler
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Blog Yazıları</CardTitle>
+            <FileText className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {loading ? '...' : stats.blogPosts}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Toplam içerik
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Görüntülenme</CardTitle>
+            <Eye className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {loading ? '...' : stats.totalViews.toLocaleString()}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Blog görüntüleme
+            </p>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Quick Actions */}
-      <Card className="bg-slate-900 border-slate-800 p-6">
-        <h2 className="text-xl font-bold text-white mb-4">Hızlı İşlemler</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <a
-            href="/admin/locations"
-            className="flex items-center gap-3 p-4 bg-slate-800 rounded-lg hover:bg-slate-750 transition-colors border border-slate-700"
-          >
-            <MapPin className="h-5 w-5 text-blue-500" />
-            <div>
-              <p className="font-medium text-white">İlçe & Mahalle Yönetimi</p>
-              <p className="text-sm text-slate-400">Lokasyon verilerini düzenle</p>
-            </div>
-          </a>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <MapPin className="h-5 w-5 text-blue-600" />
+              Lokasyon Yönetimi
+            </CardTitle>
+            <CardDescription>
+              İlçe ve mahalle verilerini düzenle
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link href="/admin/locations">
+              <Button className="w-full">
+                Yönet
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
 
-          <a
-            href="/admin/blog"
-            className="flex items-center gap-3 p-4 bg-slate-800 rounded-lg hover:bg-slate-750 transition-colors border border-slate-700"
-          >
-            <FileText className="h-5 w-5 text-purple-500" />
-            <div>
-              <p className="font-medium text-white">Blog Yönetimi</p>
-              <p className="text-sm text-slate-400">Yazı ekle veya düzenle</p>
-            </div>
-          </a>
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="h-5 w-5 text-purple-600" />
+              Blog Yönetimi
+            </CardTitle>
+            <CardDescription>
+              Blog yazıları ekle veya düzenle
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link href="/admin/blog">
+              <Button className="w-full">
+                Yönet
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
 
-          <a
-            href="/"
-            target="_blank"
-            className="flex items-center gap-3 p-4 bg-slate-800 rounded-lg hover:bg-slate-750 transition-colors border border-slate-700"
-          >
-            <TrendingUp className="h-5 w-5 text-green-500" />
-            <div>
-              <p className="font-medium text-white">Siteyi Görüntüle</p>
-              <p className="text-sm text-slate-400">Ana sayfaya git</p>
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <TrendingUp className="h-5 w-5 text-green-600" />
+              Siteyi Görüntüle
+            </CardTitle>
+            <CardDescription>
+              Ana sayfaya git ve kontrol et
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link href="/" target="_blank">
+              <Button variant="outline" className="w-full">
+                Görüntüle
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Recent Activity Card */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Clock className="h-5 w-5" />
+            Son Aktiviteler
+          </CardTitle>
+          <CardDescription>
+            Sistemdeki son değişiklikler
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="flex items-center gap-4 text-sm">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <div className="flex-1">
+                <p className="font-medium">Sistem aktif</p>
+                <p className="text-muted-foreground">Tüm servisler çalışıyor</p>
+              </div>
             </div>
-          </a>
-        </div>
+            <div className="flex items-center gap-4 text-sm">
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <div className="flex-1">
+                <p className="font-medium">Dashboard yenilendi</p>
+                <p className="text-muted-foreground">Modern tasarım uygulandı</p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
       </Card>
     </div>
   )
