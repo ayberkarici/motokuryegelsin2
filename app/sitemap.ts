@@ -1,9 +1,15 @@
 import { MetadataRoute } from 'next'
+import { getAllDistricts } from '@/lib/district-queries'
+import { createSlug } from '@/lib/utils'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://motokuryegelsin.com'
+  
+  // Get all districts for dynamic pages
+  const districts = await getAllDistricts()
 
-  return [
+  // Static pages
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -77,4 +83,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
   ]
+
+  // District pages (SEO landing pages)
+  const districtPages: MetadataRoute.Sitemap = districts.map((district) => ({
+    url: `${baseUrl}/ilceler/${createSlug(district.name)}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }))
+
+  return [...staticPages, ...districtPages]
 }

@@ -5,6 +5,37 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+// Convert Turkish characters to URL-safe slug
+export function createSlug(text: string): string {
+  const turkishMap: { [key: string]: string } = {
+    'ç': 'c', 'Ç': 'C',
+    'ğ': 'g', 'Ğ': 'G',
+    'ı': 'i', 'İ': 'I',
+    'ö': 'o', 'Ö': 'O',
+    'ş': 's', 'Ş': 'S',
+    'ü': 'u', 'Ü': 'U'
+  }
+  
+  return text
+    .split('')
+    .map(char => turkishMap[char] || char)
+    .join('')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+// Convert slug back to district name (for display)
+export function slugToDistrictName(slug: string): string {
+  // This will need to match against actual district names from DB
+  const capitalizeWords = (str: string) => 
+    str.split('-')
+       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+       .join(' ')
+  
+  return capitalizeWords(slug)
+}
+
 export interface LocationData {
   district: string;
   neighborhood: string;

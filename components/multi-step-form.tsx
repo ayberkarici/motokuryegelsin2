@@ -23,7 +23,11 @@ const cargoTypeInfo: Record<string, string> = {
   'oversized-package': 'Çanta boyutunu aşan, büyük ve ağır yükler için özel kurye hizmeti.',
 }
 
-export default function MultiStepForm() {
+interface MultiStepFormProps {
+  defaultDistrict?: string
+}
+
+export default function MultiStepForm({ defaultDistrict }: MultiStepFormProps = {}) {
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState<FormData>({
     locationFrom: null,
@@ -72,6 +76,16 @@ export default function MultiStepForm() {
   useEffect(() => {
     loadDistricts()
   }, [])
+
+  // Set default district if provided
+  useEffect(() => {
+    if (defaultDistrict && districts.length > 0) {
+      const district = districts.find(d => d.name === defaultDistrict)
+      if (district) {
+        setFromDistrict(district.id)
+      }
+    }
+  }, [defaultDistrict, districts])
 
   // Load "from" neighborhoods when district changes
   useEffect(() => {
