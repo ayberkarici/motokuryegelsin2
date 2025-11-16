@@ -57,7 +57,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
     immediatelyRender: false,
     editorProps: {
       attributes: {
-        class: 'prose prose-invert max-w-none focus:outline-none min-h-[400px] px-4 py-3',
+        class: 'prose max-w-none focus:outline-none min-h-[400px] px-4 py-3',
       },
     },
     onUpdate: ({ editor }) => {
@@ -96,17 +96,17 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
   }
 
   return (
-    <div className="border border-slate-700 rounded-lg overflow-hidden bg-slate-900">
+    <div className="border border-gray-300 rounded-lg overflow-hidden bg-white">
       {/* Toolbar */}
-      <div className="flex flex-wrap gap-1 p-2 border-b border-slate-700 bg-slate-800">
+      <div className="flex flex-wrap gap-1 p-2 border-b border-gray-300 bg-gray-50">
         {/* Text Style */}
-        <div className="flex gap-1 border-r border-slate-700 pr-2">
+        <div className="flex gap-1 border-r border-gray-300 pr-2">
           <Button
             type="button"
             variant="ghost"
             size="sm"
             onClick={() => editor.chain().focus().toggleBold().run()}
-            className={editor.isActive('bold') ? 'bg-slate-700' : ''}
+            className={editor.isActive('bold') ? 'bg-gray-200' : ''}
           >
             <Bold className="h-4 w-4" />
           </Button>
@@ -115,7 +115,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
             variant="ghost"
             size="sm"
             onClick={() => editor.chain().focus().toggleItalic().run()}
-            className={editor.isActive('italic') ? 'bg-slate-700' : ''}
+            className={editor.isActive('italic') ? 'bg-gray-200' : ''}
           >
             <Italic className="h-4 w-4" />
           </Button>
@@ -124,20 +124,20 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
             variant="ghost"
             size="sm"
             onClick={() => editor.chain().focus().toggleUnderline().run()}
-            className={editor.isActive('underline') ? 'bg-slate-700' : ''}
+            className={editor.isActive('underline') ? 'bg-gray-200' : ''}
           >
             <UnderlineIcon className="h-4 w-4" />
           </Button>
         </div>
 
         {/* Headings */}
-        <div className="flex gap-1 border-r border-slate-700 pr-2">
+        <div className="flex gap-1 border-r border-gray-300 pr-2">
           <Button
             type="button"
             variant="ghost"
             size="sm"
             onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-            className={editor.isActive('heading', { level: 1 }) ? 'bg-slate-700' : ''}
+            className={editor.isActive('heading', { level: 1 }) ? 'bg-gray-200' : ''}
           >
             <Heading1 className="h-4 w-4" />
           </Button>
@@ -146,7 +146,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
             variant="ghost"
             size="sm"
             onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-            className={editor.isActive('heading', { level: 2 }) ? 'bg-slate-700' : ''}
+            className={editor.isActive('heading', { level: 2 }) ? 'bg-gray-200' : ''}
           >
             <Heading2 className="h-4 w-4" />
           </Button>
@@ -155,20 +155,20 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
             variant="ghost"
             size="sm"
             onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-            className={editor.isActive('heading', { level: 3 }) ? 'bg-slate-700' : ''}
+            className={editor.isActive('heading', { level: 3 }) ? 'bg-gray-200' : ''}
           >
             <Heading3 className="h-4 w-4" />
           </Button>
         </div>
 
         {/* Lists */}
-        <div className="flex gap-1 border-r border-slate-700 pr-2">
+        <div className="flex gap-1 border-r border-gray-300 pr-2">
           <Button
             type="button"
             variant="ghost"
             size="sm"
             onClick={() => editor.chain().focus().toggleBulletList().run()}
-            className={editor.isActive('bulletList') ? 'bg-slate-700' : ''}
+            className={editor.isActive('bulletList') ? 'bg-gray-200' : ''}
           >
             <List className="h-4 w-4" />
           </Button>
@@ -177,20 +177,20 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
             variant="ghost"
             size="sm"
             onClick={() => editor.chain().focus().toggleOrderedList().run()}
-            className={editor.isActive('orderedList') ? 'bg-slate-700' : ''}
+            className={editor.isActive('orderedList') ? 'bg-gray-200' : ''}
           >
             <ListOrdered className="h-4 w-4" />
           </Button>
         </div>
 
         {/* Alignment */}
-        <div className="flex gap-1 border-r border-slate-700 pr-2">
+        <div className="flex gap-1 border-r border-gray-300 pr-2">
           <Button
             type="button"
             variant="ghost"
             size="sm"
             onClick={() => editor.chain().focus().setTextAlign('left').run()}
-            className={editor.isActive({ textAlign: 'left' }) ? 'bg-slate-700' : ''}
+            className={editor.isActive({ textAlign: 'left' }) ? 'bg-gray-200' : ''}
           >
             <AlignLeft className="h-4 w-4" />
           </Button>
@@ -199,7 +199,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
             variant="ghost"
             size="sm"
             onClick={() => editor.chain().focus().setTextAlign('center').run()}
-            className={editor.isActive({ textAlign: 'center' }) ? 'bg-slate-700' : ''}
+            className={editor.isActive({ textAlign: 'center' }) ? 'bg-gray-200' : ''}
           >
             <AlignCenter className="h-4 w-4" />
           </Button>
@@ -208,20 +208,20 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
             variant="ghost"
             size="sm"
             onClick={() => editor.chain().focus().setTextAlign('right').run()}
-            className={editor.isActive({ textAlign: 'right' }) ? 'bg-slate-700' : ''}
+            className={editor.isActive({ textAlign: 'right' }) ? 'bg-gray-200' : ''}
           >
             <AlignRight className="h-4 w-4" />
           </Button>
         </div>
 
         {/* Other */}
-        <div className="flex gap-1 border-r border-slate-700 pr-2">
+        <div className="flex gap-1 border-r border-gray-300 pr-2">
           <Button
             type="button"
             variant="ghost"
             size="sm"
             onClick={() => editor.chain().focus().toggleBlockquote().run()}
-            className={editor.isActive('blockquote') ? 'bg-slate-700' : ''}
+            className={editor.isActive('blockquote') ? 'bg-gray-200' : ''}
           >
             <Quote className="h-4 w-4" />
           </Button>
@@ -230,20 +230,20 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
             variant="ghost"
             size="sm"
             onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-            className={editor.isActive('codeBlock') ? 'bg-slate-700' : ''}
+            className={editor.isActive('codeBlock') ? 'bg-gray-200' : ''}
           >
             <Code className="h-4 w-4" />
           </Button>
         </div>
 
         {/* Link & Image */}
-        <div className="flex gap-1 border-r border-slate-700 pr-2">
+        <div className="flex gap-1 border-r border-gray-300 pr-2">
           <Button
             type="button"
             variant="ghost"
             size="sm"
             onClick={setLink}
-            className={editor.isActive('link') ? 'bg-slate-700' : ''}
+            className={editor.isActive('link') ? 'bg-gray-200' : ''}
           >
             <Link2 className="h-4 w-4" />
           </Button>
@@ -281,7 +281,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
       </div>
 
       {/* Editor Content */}
-      <EditorContent editor={editor} className="bg-slate-900 text-slate-100" />
+      <EditorContent editor={editor} className="bg-white text-gray-900" />
     </div>
   )
 }

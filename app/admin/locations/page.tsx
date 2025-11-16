@@ -106,19 +106,51 @@ export default function LocationsPage() {
   }
 
   const handleSaveDistrict = async () => {
+    // Validations
+    if (!districtForm.name.trim()) {
+      alert('İlçe adı gereklidir')
+      return
+    }
+
+    const lng = parseFloat(districtForm.center_lng)
+    const lat = parseFloat(districtForm.center_lat)
+
+    if (isNaN(lng) || isNaN(lat)) {
+      alert('Geçerli koordinat değerleri girin')
+      return
+    }
+
+    // Check for duplicate district name
+    const duplicateDistrict = districts.find(
+      d => d.name.toLowerCase() === districtForm.name.trim().toLowerCase() &&
+      d.id !== editingDistrict?.id
+    )
+
+    if (duplicateDistrict) {
+      alert('Bu ilçe adı zaten mevcut')
+      return
+    }
+
     try {
       const data = {
-        name: districtForm.name,
-        center_lng: parseFloat(districtForm.center_lng),
-        center_lat: parseFloat(districtForm.center_lat),
+        name: districtForm.name.trim(),
+        center_lng: lng,
+        center_lat: lat,
+        osm_id: editingDistrict?.osm_id || -Date.now(),
+        bbox: editingDistrict?.bbox || [lng - 0.01, lat - 0.01, lng + 0.01, lat + 0.01],
+        geometry: editingDistrict?.geometry || {
+          type: 'Point',
+          coordinates: [lng, lat]
+        },
       }
 
-      if (editingDistrict) {
-        await supabase.from('districts').update(data).eq('id', editingDistrict.id)
-      } else {
-        await supabase.from('districts').insert([data])
-      }
+      const result = editingDistrict
+        ? await supabase.from('districts').update(data).eq('id', editingDistrict.id)
+        : await supabase.from('districts').insert([data])
 
+      if (result.error) throw result.error
+
+      alert(editingDistrict ? 'İlçe başarıyla güncellendi' : 'İlçe başarıyla eklendi')
       setDistrictDialog(false)
       fetchData()
     } catch (error: any) {
@@ -130,7 +162,11 @@ export default function LocationsPage() {
     if (!confirm('Bu ilçeyi silmek istediğinizden emin misiniz? İlgili tüm mahalleler de silinecektir!')) return
 
     try {
-      await supabase.from('districts').delete().eq('id', id)
+      const result = await supabase.from('districts').delete().eq('id', id)
+
+      if (result.error) throw result.error
+
+      alert('İlçe başarıyla silindi')
       fetchData()
     } catch (error: any) {
       alert('Hata: ' + error.message)
@@ -155,20 +191,58 @@ export default function LocationsPage() {
   }
 
   const handleSaveNeighborhood = async () => {
+    // Validations
+    if (!neighborhoodForm.name.trim()) {
+      alert('Mahalle adı gereklidir')
+      return
+    }
+
+    if (!neighborhoodForm.district_id) {
+      alert('Lütfen bir ilçe seçin')
+      return
+    }
+
+    const lng = parseFloat(neighborhoodForm.center_lng)
+    const lat = parseFloat(neighborhoodForm.center_lat)
+
+    if (isNaN(lng) || isNaN(lat)) {
+      alert('Geçerli koordinat değerleri girin')
+      return
+    }
+
+    // Check for duplicate neighborhood name in the same district
+    const duplicateNeighborhood = neighborhoods.find(
+      n => n.name.toLowerCase() === neighborhoodForm.name.trim().toLowerCase() &&
+      n.district_id === neighborhoodForm.district_id &&
+      n.id !== editingNeighborhood?.id
+    )
+
+    if (duplicateNeighborhood) {
+      alert('Bu mahalle adı seçilen ilçede zaten mevcut')
+      return
+    }
+
     try {
       const data = {
-        name: neighborhoodForm.name,
+        name: neighborhoodForm.name.trim(),
         district_id: neighborhoodForm.district_id,
-        center_lng: parseFloat(neighborhoodForm.center_lng),
-        center_lat: parseFloat(neighborhoodForm.center_lat),
+        center_lng: lng,
+        center_lat: lat,
+        osm_id: editingNeighborhood?.osm_id || -Date.now(),
+        bbox: editingNeighborhood?.bbox || [lng - 0.01, lat - 0.01, lng + 0.01, lat + 0.01],
+        geometry: editingNeighborhood?.geometry || {
+          type: 'Point',
+          coordinates: [lng, lat]
+        },
       }
 
-      if (editingNeighborhood) {
-        await supabase.from('neighborhoods').update(data).eq('id', editingNeighborhood.id)
-      } else {
-        await supabase.from('neighborhoods').insert([data])
-      }
+      const result = editingNeighborhood
+        ? await supabase.from('neighborhoods').update(data).eq('id', editingNeighborhood.id)
+        : await supabase.from('neighborhoods').insert([data])
 
+      if (result.error) throw result.error
+
+      alert(editingNeighborhood ? 'Mahalle başarıyla güncellendi' : 'Mahalle başarıyla eklendi')
       setNeighborhoodDialog(false)
       fetchData()
     } catch (error: any) {
@@ -180,7 +254,11 @@ export default function LocationsPage() {
     if (!confirm('Bu mahalleyi silmek istediğinizden emin misiniz?')) return
 
     try {
-      await supabase.from('neighborhoods').delete().eq('id', id)
+      const result = await supabase.from('neighborhoods').delete().eq('id', id)
+
+      if (result.error) throw result.error
+
+      alert('Mahalle başarıyla silindi')
       fetchData()
     } catch (error: any) {
       alert('Hata: ' + error.message)
@@ -217,21 +295,92 @@ export default function LocationsPage() {
     }
 
     const validNeighborhoods = bulkNeighborhoods.filter(n => n.name.trim() !== '')
-    
+
     if (validNeighborhoods.length === 0) {
       alert('En az bir mahalle adı girmelisiniz')
       return
     }
 
-    try {
-      const data = validNeighborhoods.map(n => ({
-        name: n.name.trim(),
-        district_id: bulkDistrictId,
-        center_lng: n.center_lng ? parseFloat(n.center_lng) : 0,
-        center_lat: n.center_lat ? parseFloat(n.center_lat) : 0,
-      }))
+    // Validate coordinates for all neighborhoods
+    const invalidCoordinates = validNeighborhoods.some(n => {
+      const lng = n.center_lng.trim() !== '' ? parseFloat(n.center_lng) : null
+      const lat = n.center_lat.trim() !== '' ? parseFloat(n.center_lat) : null
 
-      await supabase.from('neighborhoods').insert(data)
+      // If one coordinate is provided, both must be provided and valid
+      if ((lng !== null && lat === null) || (lng === null && lat !== null)) {
+        return true
+      }
+
+      if (lng !== null && isNaN(lng)) return true
+      if (lat !== null && isNaN(lat)) return true
+
+      return false
+    })
+
+    if (invalidCoordinates) {
+      alert('Geçersiz koordinat değerleri var. Koordinat girecekseniz hem longitude hem de latitude değerlerini doğru formatta girin.')
+      return
+    }
+
+    // Check for duplicate names in the bulk list
+    const nameSet = new Set<string>()
+    const hasDuplicatesInList = validNeighborhoods.some(n => {
+      const nameLower = n.name.trim().toLowerCase()
+      if (nameSet.has(nameLower)) return true
+      nameSet.add(nameLower)
+      return false
+    })
+
+    if (hasDuplicatesInList) {
+      alert('Listede aynı mahalle adından birden fazla var. Lütfen tekrarlanan isimleri kaldırın.')
+      return
+    }
+
+    // Check for duplicates with existing neighborhoods in the selected district
+    const existingNames = neighborhoods
+      .filter(n => n.district_id === bulkDistrictId)
+      .map(n => n.name.toLowerCase())
+
+    const duplicateWithExisting = validNeighborhoods.find(n =>
+      existingNames.includes(n.name.trim().toLowerCase())
+    )
+
+    if (duplicateWithExisting) {
+      alert(`"${duplicateWithExisting.name}" mahalesi bu ilçede zaten mevcut. Lütfen farklı bir isim kullanın.`)
+      return
+    }
+
+    try {
+      const baseTimestamp = Date.now()
+      const data = validNeighborhoods.map((n, index) => {
+        const lng = n.center_lng.trim() !== '' ? parseFloat(n.center_lng) : null
+        const lat = n.center_lat.trim() !== '' ? parseFloat(n.center_lat) : null
+
+        // If coordinates are not provided, use district center
+        const district = districts.find(d => d.id === bulkDistrictId)
+
+        const finalLng = lng !== null ? lng : (district?.center_lng || 0)
+        const finalLat = lat !== null ? lat : (district?.center_lat || 0)
+
+        return {
+          name: n.name.trim(),
+          district_id: bulkDistrictId,
+          center_lng: finalLng,
+          center_lat: finalLat,
+          osm_id: -(baseTimestamp + index),
+          bbox: [finalLng - 0.01, finalLat - 0.01, finalLng + 0.01, finalLat + 0.01],
+          geometry: {
+            type: 'Point',
+            coordinates: [finalLng, finalLat]
+          },
+        }
+      })
+
+      const result = await supabase.from('neighborhoods').insert(data)
+
+      if (result.error) throw result.error
+
+      alert(`${validNeighborhoods.length} mahalle başarıyla eklendi`)
       setBulkNeighborhoodDialog(false)
       fetchData()
     } catch (error: any) {

@@ -52,9 +52,14 @@ const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation, h
         }
 
         const map = L.map(mapContainerRef.current!, {
-          zoomControl: true,
-          scrollWheelZoom: true,
-          dragging: true,
+          zoomControl: false,
+          scrollWheelZoom: false,
+          dragging: false,
+          touchZoom: false,
+          doubleClickZoom: false,
+          boxZoom: false,
+          keyboard: false,
+          tap: false,
           attributionControl: false,
         }).setView([41.0082, 28.9784], 11)
 

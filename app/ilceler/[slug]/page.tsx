@@ -5,6 +5,7 @@ import { MapPin, Package, Users, ArrowRight, Clock, Shield, Phone, Mail, CheckCi
 import { getAllDistricts, getDistrictByName, getNearbyDistricts } from '@/lib/district-queries'
 import { createSlug } from '@/lib/utils'
 import { getDistrictTheme } from '@/lib/district-themes'
+import { CONTACT_INFO } from '@/lib/config'
 import MultiStepForm from '@/components/multi-step-form'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -338,19 +339,19 @@ export default async function DistrictPage({ params }: PageProps) {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center border-b pb-2">
                     <span className="font-medium">Hafta İçi</span>
-                    <span className="text-gray-600">24 Saat</span>
+                    <span className="text-gray-600">{CONTACT_INFO.workingHours.weekday}</span>
                   </div>
                   <div className="flex justify-between items-center border-b pb-2">
                     <span className="font-medium">Hafta Sonu</span>
-                    <span className="text-gray-600">24 Saat</span>
+                    <span className="text-gray-600">{CONTACT_INFO.workingHours.weekend}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="font-medium">Resmi Tatiller</span>
-                    <span className="text-gray-600">Açık</span>
+                    <span className="text-gray-600">{CONTACT_INFO.workingHours.holidays}</span>
                   </div>
                   <div className="mt-4 p-3 bg-green-50 rounded-lg">
                     <p className="text-sm text-green-800 font-medium">
-                      7/24 kesintisiz hizmet
+                      {CONTACT_INFO.workingHours.description}
                     </p>
                   </div>
                 </CardContent>
@@ -568,8 +569,8 @@ export default async function DistrictPage({ params }: PageProps) {
                     </div>
                     <div className="text-left">
                       <p className="font-medium mb-1">Telefon</p>
-                      <a href="tel:+905001234567" className="text-orange-600 hover:text-orange-700">
-                        0500 123 45 67
+                      <a href={`tel:${CONTACT_INFO.phone}`} className="text-orange-600 hover:text-orange-700">
+                        {CONTACT_INFO.phoneFormatted}
                       </a>
                     </div>
                   </div>
@@ -584,8 +585,8 @@ export default async function DistrictPage({ params }: PageProps) {
                     </div>
                     <div className="text-left">
                       <p className="font-medium mb-1">E-posta</p>
-                      <a href="mailto:info@motokuryegelsin.com" className="text-orange-600 hover:text-orange-700">
-                        info@motokuryegelsin.com
+                      <a href={`mailto:${CONTACT_INFO.email}`} className="text-orange-600 hover:text-orange-700">
+                        {CONTACT_INFO.email}
                       </a>
                     </div>
                   </div>
