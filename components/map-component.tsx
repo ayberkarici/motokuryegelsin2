@@ -59,7 +59,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ fromLocation, toLocation, h
           doubleClickZoom: false,
           boxZoom: false,
           keyboard: false,
-          tap: false,
           attributionControl: false,
         }).setView([41.0082, 28.9784], 11)
 
