@@ -13,7 +13,7 @@ const WhatsAppIcon = () => (
 )
 
 const FixedWhatsAppButton = () => {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '905555555555'
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '905416955234'
 
   const handleClick = () => {
     const message = encodeURIComponent('Merhaba, kurye hizmeti hakkında bilgi almak istiyorum.')

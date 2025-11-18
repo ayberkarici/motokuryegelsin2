@@ -118,12 +118,6 @@ const Footer = () => {
                   <span>Kurumsal Çözümler</span>
                 </Link>
               </li>
-              <li>
-                <Link href="/hizmetler/724-hizmet" className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
-                  <Clock size={16} />
-                  <span>7/24 Hizmet</span>
-                </Link>
-              </li>
             </ul>
           </div>
 

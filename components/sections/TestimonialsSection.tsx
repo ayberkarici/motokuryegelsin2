@@ -36,7 +36,7 @@ const TestimonialsSection = () => {
       company: "Freelance",
       avatar: <User size={40} className="text-purple-600" />,
       rating: 5,
-      text: "Müşterilerimin faturalarını hızlıca ulaştırmam için vazgeçilmez hizmet. Fiyatları da çok uygun. 1 yıldır hiç sorun yaşamadım.",
+      text: "Müşterilerimin faturalarını hızlıca ulaştırmam için vazgeçilmez hizmet. Çok güvenilirler. 1 yıldır hiç sorun yaşamadım.",
       location: "Beyoğlu, İstanbul"
     },
     {

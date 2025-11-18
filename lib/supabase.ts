@@ -6,9 +6,18 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 // TypeScript types for our tables
+export interface Province {
+  id: string
+  name: string
+  center_lng: number
+  center_lat: number
+  created_at?: string
+}
+
 export interface District {
   id: string
   name: string
+  province_id: string
   osm_id: number
   bbox: number[] // [minLng, minLat, maxLng, maxLat]
   geometry: any // GeoJSON geometry object

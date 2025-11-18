@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { FormData, LocationData, formatWhatsAppMessage, createWhatsAppUrl } from '@/lib/utils'
-import { supabase, District, Neighborhood } from '@/lib/supabase'
+import { supabase, Province, District, Neighborhood } from '@/lib/supabase'
 import { MessageCircle, MapPin, Package, Clock, ChevronRight, ChevronLeft, Weight } from 'lucide-react'
 import MapComponent from './map-component'
 import { Button } from './ui/button'
@@ -39,7 +39,8 @@ export default function MultiStepForm({ defaultDistrict }: MultiStepFormProps = 
     scheduledDate: undefined
   })
 
-  // Districts and neighborhoods from Supabase
+  // Provinces, districts and neighborhoods from Supabase
+  const [provinces, setProvinces] = useState<Province[]>([])
   const [districts, setDistricts] = useState<District[]>([])
   const [fromDistrict, setFromDistrict] = useState<string>('')
   const [toDistrict, setToDistrict] = useState<string>('')
@@ -187,14 +188,14 @@ export default function MultiStepForm({ defaultDistrict }: MultiStepFormProps = 
 
   async function loadDistricts() {
     setLoading(true)
-    const { data, error } = await supabase
-      .from('districts')
-      .select('*')
-      .order('name')
+    const [{ data: provincesData }, { data: districtsData }] = await Promise.all([
+      supabase.from('provinces').select('*').order('name'),
+      supabase.from('districts').select('*').order('name')
+    ])
 
-    if (!error && data) {
-      setDistricts(data)
-    }
+    if (provincesData) setProvinces(provincesData)
+    if (districtsData) setDistricts(districtsData)
+
     setLoading(false)
   }
 
@@ -324,11 +325,19 @@ export default function MultiStepForm({ defaultDistrict }: MultiStepFormProps = 
                           disabled={loading}
                         >
                           <option value="">İlçe seçin...</option>
-                          {districts.map((d) => (
-                            <option key={d.id} value={d.id}>
-                              {d.name}
-                            </option>
-                          ))}
+                          {provinces.map((province) => {
+                            const provinceDistricts = districts.filter(d => d.province_id === province.id)
+                            if (provinceDistricts.length === 0) return null
+                            return (
+                              <optgroup key={province.id} label={province.name}>
+                                {provinceDistricts.map((d) => (
+                                  <option key={d.id} value={d.id}>
+                                    {d.name}
+                                  </option>
+                                ))}
+                              </optgroup>
+                            )
+                          })}
                         </select>
                       </div>
 
@@ -365,11 +374,19 @@ export default function MultiStepForm({ defaultDistrict }: MultiStepFormProps = 
                           disabled={loading}
                         >
                           <option value="">İlçe seçin...</option>
-                          {districts.map((d) => (
-                            <option key={d.id} value={d.id}>
-                              {d.name}
-                            </option>
-                          ))}
+                          {provinces.map((province) => {
+                            const provinceDistricts = districts.filter(d => d.province_id === province.id)
+                            if (provinceDistricts.length === 0) return null
+                            return (
+                              <optgroup key={province.id} label={province.name}>
+                                {provinceDistricts.map((d) => (
+                                  <option key={d.id} value={d.id}>
+                                    {d.name}
+                                  </option>
+                                ))}
+                              </optgroup>
+                            )
+                          })}
                         </select>
                       </div>
 

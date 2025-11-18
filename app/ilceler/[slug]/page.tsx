@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${district.name} Moto Kurye | Hızlı ve Güvenilir Teslimat`,
-    description: `${district.name} ilçesinde profesyonel moto kurye hizmeti. ${neighborhoodCount} mahallede 7/24 hızlı teslimat. Anında kurye çağır, dakikalar içinde teslim et.`,
+    description: `${district.name} ilçesinde profesyonel moto kurye hizmeti. ${neighborhoodCount} mahallede 7/24 hızlı teslimat. Anında kurye çağır, güvenli teslimat.`,
     keywords: `${district.name} kurye, ${district.name} moto kurye, ${district.name} motorlu kurye, İstanbul kurye, hızlı teslimat ${district.name}`,
     openGraph: {
       title: `${district.name} Moto Kurye | Hızlı Teslimat`,
@@ -148,7 +148,7 @@ export default async function DistrictPage({ params }: PageProps) {
             <div className="flex flex-wrap justify-center gap-6 text-lg">
               <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
                 <Package className="h-5 w-5" />
-                <span>Dakikalar İçinde Teslimat</span>
+                <span>Hızlı Teslimat</span>
               </div>
               <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
                 <Users className="h-5 w-5" />
@@ -266,7 +266,7 @@ export default async function DistrictPage({ params }: PageProps) {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600">
-                    {district.name} içinde dakikalar içinde teslimat garantisi
+                    {district.name} içinde hızlı ve güvenli teslimat
                   </p>
                 </CardContent>
               </Card>
@@ -366,21 +366,16 @@ export default async function DistrictPage({ params }: PageProps) {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center border-b pb-2">
-                    <span className="font-medium">Acil Teslimat</span>
-                    <span className="text-gray-600">15-30 dk</span>
+                    <span className="font-medium">VIP Teslimat</span>
+                    <span className="text-red-600 font-semibold">1 saat</span>
                   </div>
                   <div className="flex justify-between items-center border-b pb-2">
-                    <span className="font-medium">Standart Teslimat</span>
-                    <span className="text-gray-600">30-60 dk</span>
+                    <span className="font-medium">Express Teslimat</span>
+                    <span className="text-orange-600 font-semibold">1-2 saat</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="font-medium">Planlı Teslimat</span>
-                    <span className="text-gray-600">İstediğiniz saat</span>
-                  </div>
-                  <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-                    <p className="text-sm text-blue-800 font-medium">
-                      {district.name} içi ortalama 20 dakika
-                    </p>
+                    <span className="font-medium">Normal Teslimat</span>
+                    <span className="text-blue-600 font-semibold">2-4 saat</span>
                   </div>
                 </CardContent>
               </Card>
@@ -396,14 +391,6 @@ export default async function DistrictPage({ params }: PageProps) {
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm text-gray-600">Sigortalı kargo</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm text-gray-600">SMS ile takip</span>
-                    </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
                       <span className="text-sm text-gray-600">Profesyonel kuryeler</span>
@@ -539,8 +526,22 @@ export default async function DistrictPage({ params }: PageProps) {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600">
-                    Nakit ödeme, kredi kartı veya havale/EFT ile ödeme yapabilirsiniz. 
+                    Nakit ödeme veya havale/EFT ile ödeme yapabilirsiniz.
                     Ödeme yönteminizi sipariş sırasında belirleyebilirsiniz.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">
+                    Hangi bölgelere hizmet veriyorsunuz?
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">
+                    İstanbul'un tüm ilçelerine ve çevre illere (Kocaeli, Tekirdağ, Bursa, Sakarya, Yalova)
+                    hizmet veriyoruz. {district.name} başta olmak üzere geniş bir coğrafyada kurye hizmeti sunmaktayız.
                   </p>
                 </CardContent>
               </Card>

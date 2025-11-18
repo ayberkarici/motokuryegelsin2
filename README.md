@@ -223,7 +223,7 @@ Uygulama [http://localhost:3000](http://localhost:3000) adresinde çalışacakt�
 ### 🔧 Environment Variables
 ```bash
 NEXT_PUBLIC_SITE_URL=https://yourdomain.com
-NEXT_PUBLIC_WHATSAPP_NUMBER=905551234567
+NEXT_PUBLIC_WHATSAPP_NUMBER=905416955234
 ```
 
 ## 📞 Destek

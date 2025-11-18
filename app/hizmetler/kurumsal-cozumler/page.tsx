@@ -23,7 +23,7 @@ export default function KurumsalCozumlerPage() {
                 <Building2 className="w-16 h-16 mx-auto mb-6" />
                 <h1 className="text-4xl md:text-5xl font-bold mb-6">Kurumsal Kurye Çözümleri</h1>
                 <p className="text-xl text-indigo-100 mb-8">
-                  İşletmenizin tüm kurye ihtiyaçları için özel çözümler. Aylık anlaşmalarla avantajlı fiyatlar ve öncelikli hizmet.
+                  İşletmenizin tüm kurye ihtiyaçları için özel çözümler. Aylık anlaşmalarla öncelikli hizmet ve profesyonel destek.
                 </p>
                 <Link href="/iletisim" className="inline-flex items-center gap-2 bg-yellow-400 text-indigo-900 px-8 py-4 rounded-full font-semibold">
                   Teklif Alın <ArrowRight className="w-5 h-5" />
@@ -38,8 +38,8 @@ export default function KurumsalCozumlerPage() {
               <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 <div className="text-center p-6">
                   <TrendingUp className="w-12 h-12 mx-auto text-indigo-600 mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">Özel Fiyatlandırma</h3>
-                  <p className="text-gray-600">Aylık paket anlaşmalar ile %30'a varan indirimler</p>
+                  <h3 className="text-xl font-semibold mb-2">Özel Çözümler</h3>
+                  <p className="text-gray-600">İhtiyaçlarınıza özel esnek aylık paket anlaşmaları</p>
                 </div>
                 <div className="text-center p-6">
                   <Users className="w-12 h-12 mx-auto text-indigo-600 mb-4" />

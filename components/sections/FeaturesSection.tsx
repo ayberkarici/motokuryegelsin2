@@ -1,12 +1,31 @@
 import React from 'react'
-import { Zap, Shield, Clock, DollarSign, Users } from 'lucide-react'
+import { Zap, Shield, Clock, Users } from 'lucide-react'
+
+const TurkishLiraIcon = ({ size = 32, className = "" }: { size?: number; className?: string }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M6 18h12" />
+    <path d="M6 14h12" />
+    <path d="M8 4v12c0 2.2 1.8 4 4 4" />
+    <path d="M12 4c2.2 0 4 1.8 4 4" />
+  </svg>
+)
 
 const FeaturesSection = () => {
   const features = [
     {
       icon: <Zap size={32} className="text-white" />,
       title: "Süper Hızlı Teslimat",
-      description: "İstanbul içi 30 dakika garantisi ile paketinizi en hızlı şekilde ulaştırıyoruz.",
+      description: "İstanbul içi hızlı teslimat ile paketinizi en kısa sürede ulaştırıyoruz.",
       color: "bg-yellow-500"
     },
     {
@@ -16,13 +35,7 @@ const FeaturesSection = () => {
       color: "bg-green-500"
     },
     {
-      icon: <Clock size={32} className="text-white" />,
-      title: "7/24 Hizmet",
-      description: "Hafta içi ve hafta sonu, gece gündüz kesintisiz kurye hizmeti sunuyoruz.",
-      color: "bg-purple-500"
-    },
-    {
-      icon: <DollarSign size={32} className="text-white" />,
+      icon: <TurkishLiraIcon size={32} className="text-white" />,
       title: "Uygun Fiyat",
       description: "İstanbul'un en rekabetçi fiyatları ile kaliteli kurye hizmeti alın.",
       color: "bg-orange-500"

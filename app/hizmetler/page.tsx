@@ -11,18 +11,17 @@ export default function HizmetlerPage() {
       description: "Önemli belgelerinizi güvenle ve hızla ulaştırıyoruz",
       features: [
         "A4 zarflar ve belgeler",
-        "Sözleşme ve yasal dökümanlar", 
+        "Sözleşme ve yasal dökümanlar",
         "Fatura ve mali belgeler",
         "Tıbbi raporlar",
         "Akademik belgeler"
       ],
-      pricing: {
-        base: "25₺",
-        urgent: "35₺",
-        sameDay: "30₺"
+      deliveryTimes: {
+        vip: "1 saat",
+        express: "1-2 saat",
+        normal: "2-4 saat"
       },
-      deliveryTime: "15-30 dakika",
-      coverage: "İstanbul geneli"
+      coverage: "İstanbul'un tamamı ve çevre iller"
     },
     {
       icon: <Package size={48} className="text-blue-600" />,
@@ -35,13 +34,12 @@ export default function HizmetlerPage() {
         "Gıda ürünleri",
         "Hediye paketleri"
       ],
-      pricing: {
-        base: "35₺",
-        urgent: "50₺",
-        sameDay: "40₺"
+      deliveryTimes: {
+        vip: "1 saat",
+        express: "1-2 saat",
+        normal: "2-4 saat"
       },
-      deliveryTime: "30-45 dakika",
-      coverage: "39 ilçe"
+      coverage: "İstanbul'un tamamı ve çevre iller"
     },
     {
       icon: <Zap size={48} className="text-blue-600" />,
@@ -51,15 +49,13 @@ export default function HizmetlerPage() {
         "Öncelikli işlem garantisi",
         "Doğrudan rota planlaması",
         "Hızlı teslimat garantisi",
-        "7/24 hizmet"
       ],
-      pricing: {
-        base: "50₺",
-        urgent: "70₺",
-        sameDay: "60₺"
+      deliveryTimes: {
+        vip: "1 saat",
+        express: "1-2 saat",
+        normal: "2-4 saat"
       },
-      deliveryTime: "10-20 dakika",
-      coverage: "Merkezi ilçeler"
+      coverage: "İstanbul'un tamamı ve çevre iller"
     },
     {
       icon: <Building2 size={48} className="text-blue-600" />,
@@ -72,13 +68,12 @@ export default function HizmetlerPage() {
         "Aylık kullanım raporları",
         "Özel müşteri temsilcisi"
       ],
-      pricing: {
-        base: "Özel",
-        urgent: "Fiyat",
-        sameDay: "Paketi"
+      deliveryTimes: {
+        vip: "1 saat",
+        express: "1-2 saat",
+        normal: "2-4 saat"
       },
-      deliveryTime: "Esnek süre",
-      coverage: "Tüm İstanbul"
+      coverage: "İstanbul'un tamamı ve çevre iller"
     }
   ]
 
@@ -161,26 +156,21 @@ export default function HizmetlerPage() {
 
                     <div className="space-y-4">
                       <div>
-                        <h4 className="font-bold text-gray-900 mb-3">💰 Fiyatlandırma:</h4>
+                        <h4 className="font-bold text-gray-900 mb-3">⏱️ Teslimat Süreleri:</h4>
                         <div className="space-y-2">
                           <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Normal:</span>
-                            <span className="font-bold text-blue-600">{service.pricing.base}</span>
+                            <span className="text-sm text-gray-600">VIP Teslimat:</span>
+                            <span className="font-bold text-red-600">{service.deliveryTimes.vip}</span>
                           </div>
                           <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Aynı Gün:</span>
-                            <span className="font-bold text-blue-600">{service.pricing.sameDay}</span>
+                            <span className="text-sm text-gray-600">Express Teslimat:</span>
+                            <span className="font-bold text-orange-600">{service.deliveryTimes.express}</span>
                           </div>
                           <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Acil:</span>
-                            <span className="font-bold text-red-600">{service.pricing.urgent}</span>
+                            <span className="text-sm text-gray-600">Normal Teslimat:</span>
+                            <span className="font-bold text-blue-600">{service.deliveryTimes.normal}</span>
                           </div>
                         </div>
-                      </div>
-
-                      <div>
-                        <h4 className="font-bold text-gray-900 mb-2">⏱️ Teslimat Süresi:</h4>
-                        <p className="text-green-600 font-semibold">{service.deliveryTime}</p>
                       </div>
 
                       <div>
@@ -209,8 +199,11 @@ export default function HizmetlerPage() {
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Hizmet Alanlarımız
               </h2>
-              <p className="text-xl text-gray-600">
-                İstanbul'un 39 ilçesinde aktif hizmet veriyoruz
+              <p className="text-xl text-gray-600 mb-2">
+                İstanbul'un 39 ilçesinde ve çevre illerde aktif hizmet veriyoruz
+              </p>
+              <p className="text-lg text-gray-500">
+                İstanbul'un tamamı • Kocaeli • Tekirdağ • Bursa • Sakarya • Yalova
               </p>
             </div>
 

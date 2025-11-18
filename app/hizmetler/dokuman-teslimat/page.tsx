@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
-import { FileText, Clock, Shield, Zap, CheckCircle, ArrowRight } from 'lucide-react'
+import { FileText, Shield, Zap, CheckCircle, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Döküman Teslimat Hizmeti İstanbul | Evrak Kurye | Moto Kurye Gelsin',
@@ -38,7 +38,7 @@ export default function DokumanTeslimatPage() {
               "@type": "LocalBusiness",
               "name": "Moto Kurye Gelsin",
               "areaServed": "İstanbul, Türkiye",
-              "telephone": "+90-555-555-5555"
+              "telephone": "+90-541-695-52-34"
             },
             "description": "İstanbul genelinde hızlı ve güvenli döküman teslimat hizmeti",
             "offers": {
@@ -82,7 +82,7 @@ export default function DokumanTeslimatPage() {
           <section className="py-16 bg-white">
             <div className="container mx-auto px-4">
               <h2 className="text-3xl font-bold text-center mb-12">Neden Bizimle Çalışmalısınız?</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Zap className="w-8 h-8 text-blue-600" />
@@ -97,14 +97,6 @@ export default function DokumanTeslimatPage() {
                   </div>
                   <h3 className="text-xl font-semibold mb-2">Güvenli Taşıma</h3>
                   <p className="text-gray-600">Dökümanlarınız özel çantalarda korunarak taşınır</p>
-                </div>
-
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Clock className="w-8 h-8 text-purple-600" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">7/24 Hizmet</h3>
-                  <p className="text-gray-600">Hafta sonu ve tatil günleri dahil kesintisiz hizmet</p>
                 </div>
 
                 <div className="text-center">

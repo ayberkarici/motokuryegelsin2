@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase/client'
-import { Province, District, Neighborhood } from '@/lib/supabase'
+import { District, Neighborhood } from '@/lib/supabase'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -22,26 +22,22 @@ interface NeighborhoodInput {
 }
 
 export default function LocationsPage() {
-  const [provinces, setProvinces] = useState<Province[]>([])
   const [districts, setDistricts] = useState<District[]>([])
   const [neighborhoods, setNeighborhoods] = useState<Neighborhood[]>([])
   const [filteredNeighborhoods, setFilteredNeighborhoods] = useState<Neighborhood[]>([])
   const [loading, setLoading] = useState(true)
 
   // Dialog states
-  const [provinceDialog, setProvinceDialog] = useState(false)
   const [districtDialog, setDistrictDialog] = useState(false)
   const [neighborhoodDialog, setNeighborhoodDialog] = useState(false)
   const [bulkNeighborhoodDialog, setBulkNeighborhoodDialog] = useState(false)
-  const [editingProvince, setEditingProvince] = useState<Province | null>(null)
   const [editingDistrict, setEditingDistrict] = useState<District | null>(null)
   const [editingNeighborhood, setEditingNeighborhood] = useState<Neighborhood | null>(null)
 
   // Form states
-  const [provinceForm, setProvinceForm] = useState({ name: '', center_lng: '', center_lat: '' })
-  const [districtForm, setDistrictForm] = useState({ name: '', province_id: '', center_lng: '', center_lat: '' })
+  const [districtForm, setDistrictForm] = useState({ name: '', center_lng: '', center_lat: '' })
   const [neighborhoodForm, setNeighborhoodForm] = useState({ name: '', district_id: '', center_lng: '', center_lat: '' })
-
+  
   // Bulk neighborhood form
   const [bulkDistrictId, setBulkDistrictId] = useState('')
   const [bulkNeighborhoods, setBulkNeighborhoods] = useState<NeighborhoodInput[]>([
@@ -49,10 +45,8 @@ export default function LocationsPage() {
   ])
 
   // Search
-  const [provinceSearch, setProvinceSearch] = useState('')
   const [districtSearch, setDistrictSearch] = useState('')
   const [neighborhoodSearch, setNeighborhoodSearch] = useState('')
-  const [selectedProvinceFilter, setSelectedProvinceFilter] = useState<string>('all')
   const [selectedDistrictFilter, setSelectedDistrictFilter] = useState<string>('all')
 
   useEffect(() => {
@@ -65,13 +59,11 @@ export default function LocationsPage() {
 
   const fetchData = async () => {
     try {
-      const [{ data: provincesData }, { data: districtsData }, { data: neighborhoodsData }] = await Promise.all([
-        supabase.from('provinces').select('*').order('name'),
+      const [{ data: districtsData }, { data: neighborhoodsData }] = await Promise.all([
         supabase.from('districts').select('*').order('name'),
         supabase.from('neighborhoods').select('*').order('name'),
       ])
 
-      setProvinces(provincesData || [])
       setDistricts(districtsData || [])
       setNeighborhoods(neighborhoodsData || [])
     } catch (error) {
@@ -97,107 +89,26 @@ export default function LocationsPage() {
     setFilteredNeighborhoods(filtered)
   }
 
-  // Province CRUD
-  const openProvinceDialog = (province?: Province) => {
-    if (province) {
-      setEditingProvince(province)
-      setProvinceForm({
-        name: province.name,
-        center_lng: province.center_lng.toString(),
-        center_lat: province.center_lat.toString(),
-      })
-    } else {
-      setEditingProvince(null)
-      setProvinceForm({ name: '', center_lng: '', center_lat: '' })
-    }
-    setProvinceDialog(true)
-  }
-
-  const handleSaveProvince = async () => {
-    if (!provinceForm.name.trim()) {
-      alert('İl adı gereklidir')
-      return
-    }
-
-    const lng = parseFloat(provinceForm.center_lng)
-    const lat = parseFloat(provinceForm.center_lat)
-
-    if (isNaN(lng) || isNaN(lat)) {
-      alert('Geçerli koordinat değerleri girin')
-      return
-    }
-
-    const duplicateProvince = provinces.find(
-      p => p.name.toLowerCase() === provinceForm.name.trim().toLowerCase() &&
-      p.id !== editingProvince?.id
-    )
-
-    if (duplicateProvince) {
-      alert('Bu il adı zaten mevcut')
-      return
-    }
-
-    try {
-      const data = {
-        name: provinceForm.name.trim(),
-        center_lng: lng,
-        center_lat: lat,
-      }
-
-      const result = editingProvince
-        ? await supabase.from('provinces').update(data).eq('id', editingProvince.id)
-        : await supabase.from('provinces').insert([data])
-
-      if (result.error) throw result.error
-
-      alert(editingProvince ? 'İl başarıyla güncellendi' : 'İl başarıyla eklendi')
-      setProvinceDialog(false)
-      fetchData()
-    } catch (error: any) {
-      alert('Hata: ' + error.message)
-    }
-  }
-
-  const handleDeleteProvince = async (id: string) => {
-    if (!confirm('Bu ili silmek istediğinizden emin misiniz? İlgili tüm ilçeler ve mahalleler de silinecektir!')) return
-
-    try {
-      const result = await supabase.from('provinces').delete().eq('id', id)
-
-      if (result.error) throw result.error
-
-      alert('İl başarıyla silindi')
-      fetchData()
-    } catch (error: any) {
-      alert('Hata: ' + error.message)
-    }
-  }
-
   // District CRUD
   const openDistrictDialog = (district?: District) => {
     if (district) {
       setEditingDistrict(district)
       setDistrictForm({
         name: district.name,
-        province_id: district.province_id,
         center_lng: district.center_lng.toString(),
         center_lat: district.center_lat.toString(),
       })
     } else {
       setEditingDistrict(null)
-      setDistrictForm({ name: '', province_id: '', center_lng: '', center_lat: '' })
+      setDistrictForm({ name: '', center_lng: '', center_lat: '' })
     }
     setDistrictDialog(true)
   }
 
   const handleSaveDistrict = async () => {
+    // Validations
     if (!districtForm.name.trim()) {
       alert('İlçe adı gereklidir')
-      return
-    }
-
-    if (!districtForm.province_id) {
-      alert('Lütfen bir il seçin')
       return
     }
 
@@ -209,21 +120,20 @@ export default function LocationsPage() {
       return
     }
 
+    // Check for duplicate district name
     const duplicateDistrict = districts.find(
       d => d.name.toLowerCase() === districtForm.name.trim().toLowerCase() &&
-      d.province_id === districtForm.province_id &&
       d.id !== editingDistrict?.id
     )
 
     if (duplicateDistrict) {
-      alert('Bu ilçe adı seçilen ilde zaten mevcut')
+      alert('Bu ilçe adı zaten mevcut')
       return
     }
 
     try {
       const data = {
         name: districtForm.name.trim(),
-        province_id: districtForm.province_id,
         center_lng: lng,
         center_lat: lat,
         osm_id: editingDistrict?.osm_id || -Date.now(),
@@ -281,6 +191,7 @@ export default function LocationsPage() {
   }
 
   const handleSaveNeighborhood = async () => {
+    // Validations
     if (!neighborhoodForm.name.trim()) {
       alert('Mahalle adı gereklidir')
       return
@@ -299,6 +210,7 @@ export default function LocationsPage() {
       return
     }
 
+    // Check for duplicate neighborhood name in the same district
     const duplicateNeighborhood = neighborhoods.find(
       n => n.name.toLowerCase() === neighborhoodForm.name.trim().toLowerCase() &&
       n.district_id === neighborhoodForm.district_id &&
@@ -389,10 +301,12 @@ export default function LocationsPage() {
       return
     }
 
+    // Validate coordinates for all neighborhoods
     const invalidCoordinates = validNeighborhoods.some(n => {
       const lng = n.center_lng.trim() !== '' ? parseFloat(n.center_lng) : null
       const lat = n.center_lat.trim() !== '' ? parseFloat(n.center_lat) : null
 
+      // If one coordinate is provided, both must be provided and valid
       if ((lng !== null && lat === null) || (lng === null && lat !== null)) {
         return true
       }
@@ -408,6 +322,7 @@ export default function LocationsPage() {
       return
     }
 
+    // Check for duplicate names in the bulk list
     const nameSet = new Set<string>()
     const hasDuplicatesInList = validNeighborhoods.some(n => {
       const nameLower = n.name.trim().toLowerCase()
@@ -421,6 +336,7 @@ export default function LocationsPage() {
       return
     }
 
+    // Check for duplicates with existing neighborhoods in the selected district
     const existingNames = neighborhoods
       .filter(n => n.district_id === bulkDistrictId)
       .map(n => n.name.toLowerCase())
@@ -440,6 +356,7 @@ export default function LocationsPage() {
         const lng = n.center_lng.trim() !== '' ? parseFloat(n.center_lng) : null
         const lat = n.center_lat.trim() !== '' ? parseFloat(n.center_lat) : null
 
+        // If coordinates are not provided, use district center
         const district = districts.find(d => d.id === bulkDistrictId)
 
         const finalLng = lng !== null ? lng : (district?.center_lng || 0)
@@ -471,23 +388,13 @@ export default function LocationsPage() {
     }
   }
 
-  const getProvinceName = (provinceId: string) => {
-    return provinces.find(p => p.id === provinceId)?.name || 'Bilinmiyor'
-  }
-
   const getDistrictName = (districtId: string) => {
     return districts.find(d => d.id === districtId)?.name || 'Bilinmiyor'
   }
 
-  const filteredProvinces = provinces.filter(p =>
-    p.name.toLowerCase().includes(provinceSearch.toLowerCase())
+  const filteredDistricts = districts.filter(d =>
+    d.name.toLowerCase().includes(districtSearch.toLowerCase())
   )
-
-  const filteredDistricts = districts.filter(d => {
-    const matchesSearch = d.name.toLowerCase().includes(districtSearch.toLowerCase())
-    const matchesProvince = selectedProvinceFilter === 'all' || d.province_id === selectedProvinceFilter
-    return matchesSearch && matchesProvince
-  })
 
   if (loading) {
     return <div>Yükleniyor...</div>
@@ -498,15 +405,12 @@ export default function LocationsPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Lokasyon Yönetimi</h1>
         <p className="text-muted-foreground">
-          İl, ilçe ve mahalle verilerini yönetin
+          İlçe ve mahalle verilerini yönetin
         </p>
       </div>
 
-      <Tabs defaultValue="provinces" className="w-full">
+      <Tabs defaultValue="districts" className="w-full">
         <TabsList>
-          <TabsTrigger value="provinces">
-            İller ({provinces.length})
-          </TabsTrigger>
           <TabsTrigger value="districts">
             İlçeler ({districts.length})
           </TabsTrigger>
@@ -514,81 +418,6 @@ export default function LocationsPage() {
             Mahalleler ({neighborhoods.length})
           </TabsTrigger>
         </TabsList>
-
-        {/* Provinces Tab */}
-        <TabsContent value="provinces" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <div className="flex justify-between items-center">
-                <div>
-                  <CardTitle>İller</CardTitle>
-                  <CardDescription>Tüm illeri görüntüle ve yönet</CardDescription>
-                </div>
-                <Button onClick={() => openProvinceDialog()}>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Yeni İl
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="İl ara..."
-                  value={provinceSearch}
-                  onChange={(e) => setProvinceSearch(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
-
-              <div className="rounded-md border">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>İl Adı</TableHead>
-                      <TableHead>İlçe Sayısı</TableHead>
-                      <TableHead>Koordinat (Lng, Lat)</TableHead>
-                      <TableHead className="text-right">İşlemler</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredProvinces.map((province) => (
-                      <TableRow key={province.id}>
-                        <TableCell className="font-medium">{province.name}</TableCell>
-                        <TableCell>
-                          <Badge variant="secondary">
-                            {districts.filter(d => d.province_id === province.id).length} ilçe
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="font-mono text-sm text-muted-foreground">
-                          {province.center_lng.toFixed(4)}, {province.center_lat.toFixed(4)}
-                        </TableCell>
-                        <TableCell className="text-right">
-                          <div className="flex justify-end gap-2">
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => openProvinceDialog(province)}
-                            >
-                              <Pencil className="h-4 w-4" />
-                            </Button>
-                            <Button
-                              variant="destructive"
-                              size="sm"
-                              onClick={() => handleDeleteProvince(province.id)}
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
 
         {/* Districts Tab */}
         <TabsContent value="districts" className="space-y-4">
@@ -606,27 +435,14 @@ export default function LocationsPage() {
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex gap-4">
-                <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder="İlçe ara..."
-                    value={districtSearch}
-                    onChange={(e) => setDistrictSearch(e.target.value)}
-                    className="pl-10"
-                  />
-                </div>
-                <Select value={selectedProvinceFilter} onValueChange={setSelectedProvinceFilter}>
-                  <SelectTrigger className="w-[200px]">
-                    <SelectValue placeholder="İl filtrele" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Tüm İller</SelectItem>
-                    {provinces.map(p => (
-                      <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="İlçe ara..."
+                  value={districtSearch}
+                  onChange={(e) => setDistrictSearch(e.target.value)}
+                  className="pl-10"
+                />
               </div>
 
               <div className="rounded-md border">
@@ -634,7 +450,6 @@ export default function LocationsPage() {
                   <TableHeader>
                     <TableRow>
                       <TableHead>İlçe Adı</TableHead>
-                      <TableHead>İl</TableHead>
                       <TableHead>Mahalle Sayısı</TableHead>
                       <TableHead>Koordinat (Lng, Lat)</TableHead>
                       <TableHead className="text-right">İşlemler</TableHead>
@@ -644,9 +459,6 @@ export default function LocationsPage() {
                     {filteredDistricts.map((district) => (
                       <TableRow key={district.id}>
                         <TableCell className="font-medium">{district.name}</TableCell>
-                        <TableCell>
-                          <Badge variant="outline">{getProvinceName(district.province_id)}</Badge>
-                        </TableCell>
                         <TableCell>
                           <Badge variant="secondary">
                             {neighborhoods.filter(n => n.district_id === district.id).length} mahalle
@@ -775,61 +587,6 @@ export default function LocationsPage() {
         </TabsContent>
       </Tabs>
 
-      {/* Province Dialog */}
-      <Dialog open={provinceDialog} onOpenChange={setProvinceDialog}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>{editingProvince ? 'İl Düzenle' : 'Yeni İl Ekle'}</DialogTitle>
-            <DialogDescription>
-              İl bilgilerini girin
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="province-name">İl Adı</Label>
-              <Input
-                id="province-name"
-                value={provinceForm.name}
-                onChange={(e) => setProvinceForm({ ...provinceForm, name: e.target.value })}
-                placeholder="Örn: İstanbul"
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="province-lng">Longitude (Boylam)</Label>
-                <Input
-                  id="province-lng"
-                  type="number"
-                  step="0.0001"
-                  value={provinceForm.center_lng}
-                  onChange={(e) => setProvinceForm({ ...provinceForm, center_lng: e.target.value })}
-                  placeholder="28.9784"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="province-lat">Latitude (Enlem)</Label>
-                <Input
-                  id="province-lat"
-                  type="number"
-                  step="0.0001"
-                  value={provinceForm.center_lat}
-                  onChange={(e) => setProvinceForm({ ...provinceForm, center_lat: e.target.value })}
-                  placeholder="41.0082"
-                />
-              </div>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setProvinceDialog(false)}>
-              İptal
-            </Button>
-            <Button onClick={handleSaveProvince}>
-              Kaydet
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
       {/* District Dialog */}
       <Dialog open={districtDialog} onOpenChange={setDistrictDialog}>
         <DialogContent>
@@ -848,22 +605,6 @@ export default function LocationsPage() {
                 onChange={(e) => setDistrictForm({ ...districtForm, name: e.target.value })}
                 placeholder="Örn: Kadıköy"
               />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="district-province">İl</Label>
-              <Select
-                value={districtForm.province_id}
-                onValueChange={(value) => setDistrictForm({ ...districtForm, province_id: value })}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="İl seçin" />
-                </SelectTrigger>
-                <SelectContent>
-                  {provinces.map(p => (
-                    <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">

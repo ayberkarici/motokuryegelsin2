@@ -98,9 +98,9 @@ export default function GizlilikPage() {
               </p>
               <div className="mt-4 p-4 bg-gray-50 rounded-lg">
                 <p className="text-gray-700">
-                  <strong>E-posta:</strong> info@hizkurye.com<br/>
-                  <strong>Telefon:</strong> +90 555 123 45 67<br/>
-                  <strong>Adres:</strong> Levent Mahallesi, Büyükdere Caddesi No: 123, Beşiktaş, İstanbul
+                  <strong>E-posta:</strong> MotoKuryeGelsin@gmail.com<br/>
+                  <strong>Telefon:</strong> +90 541 695 52 34<br/>
+                  <strong>Adres:</strong> Baraj sk. No: 44-46 Ümraniye / İstanbul
                 </p>
               </div>
             </section>

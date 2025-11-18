@@ -270,16 +270,16 @@ export default function IletisimPage() {
                   answer: "7/24 kesintisiz hizmet veriyoruz. Hafta içi, hafta sonu ve resmi tatillerde bile siparişlerinizi alıyoruz."
                 },
                 {
-                  question: "Teslimat süresi ne kadar?",
-                  answer: "Normal siparişler için 30-45 dakika, acil siparişler için 15-20 dakika teslimat süresi sunuyoruz."
+                  question: "Teslimat süreleri nasıl?",
+                  answer: "VIP Gönderi: 1 saat • Ekspres Gönderi: 1-2 saat • Normal Gönderi: 2-4 saat. İhtiyacınıza göre uygun teslimat seçeneğini belirleyebilirsiniz."
                 },
                 {
-                  question: "Hangi ilçelere hizmet veriyorsunuz?",
-                  answer: "İstanbul'un 39 ilçesinin tamamına hizmet veriyoruz. Detaylı liste için hizmetler sayfamızı ziyaret edebilirsiniz."
+                  question: "Hangi bölgelere hizmet veriyorsunuz?",
+                  answer: "İstanbul'un tüm ilçelerine ve çevre illere (Kocaeli, Tekirdağ, Bursa, Sakarya, Yalova) hizmet veriyoruz."
                 },
                 {
                   question: "Ödeme nasıl yapılır?",
-                  answer: "Nakit, kredi kartı ve online ödeme seçenekleri bulunmaktadır. Kurumsal müşterilerimiz için faturalandırma imkanı da mevcuttur."
+                  answer: "Nakit ödeme, havale ve EFT yoluyla ödeme yapabilirsiniz. Kurumsal müşterilerimiz için detaylı faturalandırma imkanı da mevcuttur."
                 }
               ].map((faq, index) => (
                 <div key={index} className="bg-gray-50 p-6 rounded-lg">

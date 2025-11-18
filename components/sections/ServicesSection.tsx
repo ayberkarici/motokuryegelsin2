@@ -29,15 +29,8 @@ const ServicesSection = () => {
       icon: <Building size={48} />,
       title: "Kurumsal Çözümler",
       description: "İşletmenize özel aylık paket ve kurumsal faturalama",
-      features: ["Özel fiyatlandırma", "Hesap yöneticisi", "Toplu faturalama", "%30'a indirim"],
+      features: ["Özel fiyatlandırma", "Hesap yöneticisi", "Toplu faturalama", "Aylık raporlama"],
       link: "/hizmetler/kurumsal-cozumler"
-    },
-    {
-      icon: <Clock size={48} />,
-      title: "7/24 Hizmet",
-      description: "Gece, gündüz, hafta sonu ve tatil günleri kesintisiz hizmet",
-      features: ["Gece teslimat", "Hafta sonu hizmeti", "Tatil günleri", "7/24 destek"],
-      link: "/hizmetler/724-hizmet"
     }
   ]
 
@@ -53,7 +46,7 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <div
               key={index}
