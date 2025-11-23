@@ -1,7 +1,23 @@
+import { Metadata } from 'next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import { Phone, MessageCircle, Mail, MapPin, Clock, Facebook, Instagram, Twitter, Linkedin, Bike } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'İletişim - MotoKuryeGelsin | Müşteri Hizmetleri',
+  description: 'MotoKuryeGelsin ile iletişime geçin. WhatsApp destek hattı ve online sipariş. Ümraniye İstanbul merkezli hızlı kurye hizmeti.',
+  keywords: 'kurye iletişim, motokuryegelsin iletişim, kurye telefon, kurye whatsapp, istanbul kurye iletişim',
+  openGraph: {
+    title: 'İletişim - MotoKuryeGelsin',
+    description: 'Müşteri hizmetleri ve destek. Bize ulaşın, size en iyi hizmeti sunalım.',
+    url: 'https://motokuryegelsin.com/iletisim',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://motokuryegelsin.com/iletisim',
+  },
+}
 
 export default function IletisimPage() {
   return (
@@ -38,7 +54,7 @@ export default function IletisimPage() {
                     <div>
                       <h3 className="font-bold text-gray-900 mb-1">Telefon</h3>
                       <p className="text-gray-600">+90 541 695 52 34</p>
-                      <p className="text-sm text-gray-500">7/24 Müşteri Hizmetleri</p>
+                      <p className="text-sm text-gray-500">Müşteri Hizmetleri</p>
                     </div>
                   </div>
 
@@ -83,7 +99,7 @@ export default function IletisimPage() {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 mb-1">Çalışma Saatleri</h3>
-                      <p className="text-gray-600">7/24 Kesintisiz Hizmet</p>
+                      <p className="text-gray-600">Geniş Çalışma Saatleri</p>
                       <p className="text-sm text-gray-500">Hafta içi, hafta sonu ve resmi tatiller</p>
                     </div>
                   </div>
@@ -267,7 +283,7 @@ export default function IletisimPage() {
               {[
                 {
                   question: "Kurye hizmetiniz hangi saatlerde aktif?",
-                  answer: "7/24 kesintisiz hizmet veriyoruz. Hafta içi, hafta sonu ve resmi tatillerde bile siparişlerinizi alıyoruz."
+                  answer: "Hafta içi ve hafta sonu geniş çalışma saatleri ile hizmet veriyoruz. Detaylı çalışma saatlerimiz için bizi arayabilirsiniz."
                 },
                 {
                   question: "Teslimat süreleri nasıl?",

@@ -1,8 +1,23 @@
-"use client"
+import { Metadata } from 'next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import MultiStepForm from '@/components/multi-step-form'
 import { Bike } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'Kurye Çağır - Anında Online Sipariş | MotoKuryeGelsin',
+  description: 'İstanbul içi hızlı kurye siparişi. Birkaç adımda online kurye çağırın, anında fiyat alın. Döküman, paket ve acil teslimat hizmeti.',
+  keywords: 'kurye çağır, online kurye siparişi, hızlı kurye, kurye sipariş, istanbul kurye çağır',
+  openGraph: {
+    title: 'Kurye Çağır - Anında Online Sipariş | MotoKuryeGelsin',
+    description: 'Birkaç adımda online kurye çağırın, anında fiyat alın. Hızlı teslimat.',
+    url: 'https://motokuryegelsin.com/kurye-cagir',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://motokuryegelsin.com/kurye-cagir',
+  },
+}
 
 export default function KuryeCagirPage() {
   return (

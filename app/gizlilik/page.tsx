@@ -1,5 +1,21 @@
+import { Metadata } from 'next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+
+export const metadata: Metadata = {
+  title: 'Gizlilik Politikası - MotoKuryeGelsin',
+  description: 'MotoKuryeGelsin gizlilik politikası ve kişisel verilerin korunması hakkında bilgiler. KVKK uyumlu veri işleme politikalarımız.',
+  keywords: 'gizlilik politikası, kvkk, kişisel verilerin korunması, veri güvenliği',
+  openGraph: {
+    title: 'Gizlilik Politikası - MotoKuryeGelsin',
+    description: 'Kişisel verilerinizin korunması ve gizlilik politikamız hakkında detaylı bilgi.',
+    url: 'https://motokuryegelsin.com/gizlilik',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://motokuryegelsin.com/gizlilik',
+  },
+}
 
 export default function GizlilikPage() {
   return (

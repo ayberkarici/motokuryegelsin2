@@ -13,8 +13,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Blog | Moto Kurye Gelsin',
     description: 'Kurye ve teslimat dünyasından haberler, ipuçları ve bilgiler.',
+    url: 'https://motokuryegelsin.com/blog',
     type: 'website',
     locale: 'tr_TR',
+  },
+  alternates: {
+    canonical: 'https://motokuryegelsin.com/blog',
   },
 }
 

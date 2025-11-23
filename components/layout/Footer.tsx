@@ -143,7 +143,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Clock size={16} className="text-blue-400" />
-                <span className="text-gray-300 text-sm">7/24 Aktif</span>
+                <span className="text-gray-300 text-sm">Hızlı Hizmet</span>
               </div>
             </div>
           </div>

@@ -10,10 +10,10 @@ export const CONTACT_INFO = {
   email: 'MotoKuryeGelsin@gmail.com',
   address: 'Baraj sk. No: 44-46 Ümraniye / İstanbul',
   workingHours: {
-    weekday: '24 Saat',
-    weekend: '24 Saat',
-    holidays: 'Açık',
-    description: '7/24 Kesintisiz Hizmet'
+    weekday: '09:00 - 22:00',
+    weekend: '10:00 - 20:00',
+    holidays: 'Arayınız',
+    description: 'Hafta içi ve hafta sonu geniş çalışma saatleri'
   }
 } as const
 

@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   title: 'Kurumsal Kurye Çözümleri İstanbul | Toplu Kurye Hizmeti | B2B',
   description: 'İşletmeniz için özel kurumsal kurye çözümleri. Aylık paket anlaşmalar, kurumsal faturalama ve öncelikli hizmet. İstanbul genelinde B2B kurye hizmeti.',
   keywords: 'kurumsal kurye, B2B kurye, toplu kurye, kurumsal anlaşma, işletme kuryesi',
+  openGraph: {
+    title: 'Kurumsal Kurye Çözümleri İstanbul | Moto Kurye Gelsin',
+    description: 'İşletmeniz için özel kurye çözümleri. Aylık paket anlaşmalar ve B2B hizmetler.',
+    url: 'https://motokuryegelsin.com/hizmetler/kurumsal-cozumler',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://motokuryegelsin.com/hizmetler/kurumsal-cozumler',
+  },
 }
 
 export default function KurumsalCozumlerPage() {

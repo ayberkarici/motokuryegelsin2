@@ -6,8 +6,17 @@ import { Zap, Clock, ArrowRight, CheckCircle } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Acil Kurye Hizmeti İstanbul | 1 Saat İçinde Teslimat | Moto Kurye',
-  description: 'İstanbul genelinde acil kurye hizmeti. Evrak, paket ve önemli gönderileriniz hızlı adresinde. 24 saat acil teslimat çözümleri.',
+  description: 'İstanbul genelinde acil kurye hizmeti. Evrak, paket ve önemli gönderileriniz hızlı adresinde. Acil teslimat çözümleri.',
   keywords: 'acil kurye, hızlı teslimat, 1 saat teslimat, express kurye, istanbul acil kurye',
+  openGraph: {
+    title: 'Acil Kurye Hizmeti İstanbul | Moto Kurye',
+    description: 'İstanbul genelinde acil kurye hizmeti. 1 saat içinde teslimat.',
+    url: 'https://motokuryegelsin.com/hizmetler/acil-kurye',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://motokuryegelsin.com/hizmetler/acil-kurye',
+  },
 }
 
 export default function AcilKuryePage() {
@@ -46,7 +55,7 @@ export default function AcilKuryePage() {
           <section className="py-16 bg-red-600 text-white text-center">
             <div className="container mx-auto px-4">
               <Clock className="w-16 h-16 mx-auto mb-4" />
-              <h2 className="text-3xl font-bold mb-6">7/24 Acil Durum Hattı</h2>
+              <h2 className="text-3xl font-bold mb-6">Acil Durum Hattı</h2>
               <Link href="/kurye-cagir" className="inline-flex items-center gap-2 bg-white text-red-600 px-8 py-4 rounded-full font-semibold">
                 Hemen Ara <ArrowRight className="w-5 h-5" />
               </Link>

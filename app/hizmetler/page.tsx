@@ -1,7 +1,24 @@
+import { Metadata } from 'next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import { FileText, Package, Zap, Building2, Truck, Moon, Shield, Bike, MessageCircle } from 'lucide-react'
+import { createSlug } from '@/lib/utils'
+
+export const metadata: Metadata = {
+  title: 'Kurye Hizmetlerimiz - MotoKuryeGelsin',
+  description: 'Döküman teslimatı, paket kargo, acil kurye ve kurumsal çözümler. İstanbul\'un tamamında hızlı ve güvenilir kurye hizmetleri.',
+  keywords: 'kurye hizmetleri, döküman teslimat, paket kargo, acil kurye, kurumsal kurye çözümleri, istanbul kurye',
+  openGraph: {
+    title: 'Kurye Hizmetlerimiz - MotoKuryeGelsin',
+    description: 'Döküman, paket, acil kurye ve kurumsal çözümler. İstanbul\'da hızlı hizmet.',
+    url: 'https://motokuryegelsin.com/hizmetler',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://motokuryegelsin.com/hizmetler',
+  },
+}
 
 export default function HizmetlerPage() {
   const services = [
@@ -86,7 +103,7 @@ export default function HizmetlerPage() {
     {
       icon: <Moon size={48} className="text-blue-600" />,
       title: "Gece Kurye",
-      description: "24 saat hizmet ile gece teslimatları"
+      description: "Geniş çalışma saatleri ile teslimat hizmeti"
     },
     {
       icon: <Shield size={48} className="text-blue-600" />,
@@ -202,8 +219,11 @@ export default function HizmetlerPage() {
               <p className="text-xl text-gray-600 mb-2">
                 İstanbul'un 39 ilçesinde ve çevre illerde aktif hizmet veriyoruz
               </p>
-              <p className="text-lg text-gray-500">
+              <p className="text-lg text-gray-500 mb-4">
                 İstanbul'un tamamı • Kocaeli • Tekirdağ • Bursa • Sakarya • Yalova
+              </p>
+              <p className="text-gray-600">
+                İlçe detayları için ilçe adına tıklayın ve o bölgeye özel hizmetlerimizi keşfedin
               </p>
             </div>
 
@@ -217,12 +237,14 @@ export default function HizmetlerPage() {
                 "Silivri", "Sultanbeyli", "Şile", "Şişli", "Tuzla", "Ümraniye",
                 "Üsküdar", "Zeytinburnu", "Sultangazi"
               ].map((district, index) => (
-                <div 
+                <Link 
                   key={index}
-                  className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center hover:bg-blue-100 transition-colors"
+                  href={`/ilceler/${createSlug(district)}`}
+                  className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center hover:bg-blue-100 hover:border-blue-400 hover:shadow-md transition-all group"
+                  title={`${district} Kurye Hizmeti`}
                 >
-                  <span className="text-blue-700 font-medium text-sm">{district}</span>
-                </div>
+                  <span className="text-blue-700 font-medium text-sm group-hover:text-blue-900">{district}</span>
+                </Link>
               ))}
             </div>
           </div>

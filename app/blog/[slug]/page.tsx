@@ -77,7 +77,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       images: post.og_image ? [post.og_image] : undefined,
     },
     alternates: {
-      canonical: `/blog/${post.slug}`,
+      canonical: `https://motokuryegelsin.com/blog/${post.slug}`,
     },
   }
 }

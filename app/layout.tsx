@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://hizkurye.com'),
+  metadataBase: new URL('https://motokuryegelsin.com'),
   title: {
     default: 'MotoKuryeGelsin - İstanbul\'un En Hızlı Kurye Servisi',
     template: '%s | MotoKuryeGelsin'
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'tr_TR',
-    url: 'https://hizkurye.com',
+    url: 'https://motokuryegelsin.com',
     title: 'MotoKuryeGelsin - İstanbul\'un En Hızlı Kurye Servisi',
     description: 'İstanbul içi hızlı ve güvenli teslimat. 39 ilçe kapsama alanı.',
     siteName: 'MotoKuryeGelsin',
@@ -40,6 +40,9 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
+  },
+  alternates: {
+    canonical: 'https://motokuryegelsin.com',
   },
   verification: {
     google: 'google-site-verification-code',

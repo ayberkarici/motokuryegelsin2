@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { MapPin, Package, Users, ArrowRight, Clock, Shield, Phone, Mail, CheckCircle, Truck, Timer, Star } from 'lucide-react'
+import { MapPin, Package, Users, ArrowRight, Clock, Shield, Phone, Mail, CheckCircle, Truck, Timer, Star, MessageCircle } from 'lucide-react'
 import { getAllDistricts, getDistrictByName, getNearbyDistricts } from '@/lib/district-queries'
 import { createSlug } from '@/lib/utils'
 import { getDistrictTheme } from '@/lib/district-themes'
@@ -43,14 +43,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const neighborhoodCount = districtData?.neighborhoods.length || 0
 
   return {
-    title: `${district.name} Moto Kurye | Hızlı ve Güvenilir Teslimat`,
-    description: `${district.name} ilçesinde profesyonel moto kurye hizmeti. ${neighborhoodCount} mahallede 7/24 hızlı teslimat. Anında kurye çağır, güvenli teslimat.`,
-    keywords: `${district.name} kurye, ${district.name} moto kurye, ${district.name} motorlu kurye, İstanbul kurye, hızlı teslimat ${district.name}`,
+    title: `${district.name} Moto Kurye | ${neighborhoodCount} Mahallede Hızlı Teslimat | MotoKuryeGelsin`,
+    description: `${district.name} ilçesinde profesyonel moto kurye hizmeti. ${neighborhoodCount} mahallede hızlı teslimat. Evrak, paket ve acil kurye. VIP teslimat 1 saat içinde. Hemen kurye çağır!`,
+    keywords: `${district.name} kurye, ${district.name} moto kurye, ${district.name} motorlu kurye, İstanbul kurye, hızlı teslimat ${district.name}, ${district.name} acil kurye, ${district.name} evrak kurye, ${district.name} paket teslimat`,
     openGraph: {
-      title: `${district.name} Moto Kurye | Hızlı Teslimat`,
-      description: `${district.name} ve ${neighborhoodCount} mahallesinde profesyonel kurye hizmeti`,
+      title: `${district.name} Moto Kurye | ${neighborhoodCount} Mahallede Hızlı Teslimat`,
+      description: `${district.name} ve ${neighborhoodCount} mahallesinde profesyonel kurye hizmeti. Evrak, paket ve acil teslimat. 1 saat içinde VIP teslimat garantisi.`,
+      url: `https://motokuryegelsin.com/ilceler/${params.slug}`,
       type: 'website',
       locale: 'tr_TR',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${district.name} Moto Kurye Hizmeti`,
+      description: `${neighborhoodCount} mahallede hızlı ve güvenilir teslimat`,
     },
     alternates: {
       canonical: `https://motokuryegelsin.com/ilceler/${params.slug}`
@@ -85,7 +91,7 @@ export default async function DistrictPage({ params }: PageProps) {
               '@context': 'https://schema.org',
               '@type': 'Service',
               'name': `${district.name} Moto Kurye Hizmeti`,
-              'description': `${district.name} ilçesinde profesyonel moto kurye hizmeti. ${districtData.neighborhoods.length} mahallede 7/24 hızlı teslimat.`,
+              'description': `${district.name} ilçesinde profesyonel moto kurye hizmeti. ${districtData.neighborhoods.length} mahallede hızlı teslimat.`,
               'provider': {
                 '@type': 'Organization',
                 'name': 'Moto Kurye Gelsin',
@@ -142,7 +148,7 @@ export default async function DistrictPage({ params }: PageProps) {
             </h1>
             
             <p className="text-xl md:text-2xl mb-8 text-white drop-shadow-lg">
-              {districtData.neighborhoods.length} mahallede 7/24 hızlı ve güvenilir teslimat hizmeti
+              {districtData.neighborhoods.length} mahallede hızlı ve güvenilir teslimat hizmeti
             </p>
             
             <div className="flex flex-wrap justify-center gap-6 text-lg">
@@ -177,21 +183,90 @@ export default async function DistrictPage({ params }: PageProps) {
         </div>
       </section>
 
+      {/* Detailed District Information - SEO Rich Content */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold mb-6 text-center">
+              {district.name} Kurye Hizmeti Hakkında
+            </h2>
+            
+            <div className="prose prose-lg max-w-none space-y-6 text-gray-700">
+              <p className="leading-relaxed">
+                <strong>{district.name} moto kurye hizmeti</strong> ile İstanbul'un bu önemli ilçesinde 
+                evraklarınızı, paketlerinizi ve acil gönderilerinizi güvenle ve hızla ulaştırıyoruz. 
+                {district.name}'de bulunan {districtData.neighborhoods.length} mahallenin tamamına 
+                kesintisiz teslimat hizmeti sunmaktayız. Profesyonel kurye ekibimiz sayesinde 
+                işletmenizin ve kişisel ihtiyaçlarınızın her türlü teslimat gereksinimine cevap veriyoruz.
+              </p>
+
+              <p className="leading-relaxed">
+                {district.name} bölgesinde <Link href="/hizmetler/dokuman-teslimat" className="text-blue-600 hover:underline font-medium">döküman teslimat</Link>, 
+                {' '}<Link href="/hizmetler/paket-kargo" className="text-blue-600 hover:underline font-medium">paket kargo</Link>, 
+                {' '}<Link href="/hizmetler/acil-kurye" className="text-blue-600 hover:underline font-medium">acil kurye</Link> ve 
+                {' '}<Link href="/hizmetler/kurumsal-cozumler" className="text-blue-600 hover:underline font-medium">kurumsal çözümler</Link> dahil 
+                olmak üzere geniş bir hizmet yelpazesi sunuyoruz. Noter evrakları, sözleşmeler, 
+                ihale dökümanları, tıbbi raporlar, elektronik ürünler, yedek parçalar ve daha 
+                pek çok farklı türde gönderiyi aynı gün içinde güvenle teslim ediyoruz.
+              </p>
+
+              <div className="bg-blue-50 border-l-4 border-blue-500 p-6 my-6">
+                <h3 className="text-xl font-bold mb-3 text-gray-900">
+                  {district.name}'de Sunduğumuz Teslimat Seçenekleri
+                </h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span><strong>VIP Teslimat:</strong> 1 saat içinde öncelikli teslimat garantisi</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span><strong>Express Teslimat:</strong> 1-2 saat arası hızlı teslimat</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span><strong>Normal Teslimat:</strong> 2-4 saat içinde ekonomik teslimat</span>
+                  </li>
+                </ul>
+              </div>
+
+              <p className="leading-relaxed">
+                <strong>Geniş çalışma saatleri</strong> ile {district.name} içinde hafta içi ve hafta sonu 
+                kurye hizmeti sağlıyoruz. Acil evrak teslimi gerektiğinde veya son dakika ihaleleriniz 
+                olduğunda bize güvenebilirsiniz. 
+                Tecrübeli moto kurye ekibimiz, İstanbul trafiğinde en hızlı rotaları kullanarak 
+                gönderilerinizi zamanında teslim eder.
+              </p>
+
+              <p className="leading-relaxed">
+                {district.name} merkezli işletmeler için <Link href="/hizmetler/kurumsal-cozumler" className="text-blue-600 hover:underline font-medium">özel kurumsal paketler</Link> de 
+                sunuyoruz. Aylık sabit kontratlar, detaylı faturalama, özel fiyatlandırma ve 
+                öncelikli hizmet avantajlarından yararlanabilirsiniz. Hukuk büroları, muhasebe 
+                ofisleri, e-ticaret şirketleri, reklam ajansları ve sağlık kurumları gibi 
+                düzenli kurye ihtiyacı olan işletmelere özel çözümler üretiyoruz.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Neighborhoods Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center">
-              {district.name} Mahalleleri
+            <h2 className="text-3xl font-bold mb-4 text-center">
+              {district.name} Kurye Hizmeti Verdiğimiz Mahalleler
             </h2>
             
-            <p className="text-center text-gray-600 mb-8">
-              {district.name} ilçesinin tüm mahallelerine hizmet veriyoruz
+            <p className="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
+              {district.name} ilçesinin <strong>{districtData.neighborhoods.length} mahallesinin tamamına</strong> hızlı ve 
+              güvenilir kurye hizmeti sunuyoruz. Her mahallede aynı kaliteli hizmeti alacağınızdan emin olabilirsiniz. 
+              Aşağıda {district.name}'nin tüm mahallelerini bulabilirsiniz:
             </p>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {districtData.neighborhoods.map((neighborhood) => (
-                <Card key={neighborhood.id} className="hover:shadow-md transition-shadow">
+                <Card key={neighborhood.id} className="hover:shadow-md transition-shadow hover:border-orange-300">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-2">
                       <MapPin className="h-4 w-4 text-orange-500 flex-shrink-0" />
@@ -200,6 +275,118 @@ export default async function DistrictPage({ params }: PageProps) {
                   </CardContent>
                 </Card>
               ))}
+            </div>
+
+            <div className="mt-8 text-center">
+              <p className="text-gray-600 mb-4">
+                Mahallenizdeki adresinize en yakın kurye ile hızlı teslimat
+              </p>
+              <Button asChild variant="outline" size="lg">
+                <Link href="#order-form">
+                  <Package className="mr-2 h-5 w-5" />
+                  Hemen Sipariş Ver
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services We Offer in District */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-center">
+              {district.name}'de Sunduğumuz Kurye Hizmetleri
+            </h2>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <Link href="/hizmetler/dokuman-teslimat">
+                <Card className="h-full hover:shadow-lg transition-all hover:border-blue-500 cursor-pointer">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <Truck className="h-5 w-5 text-blue-600" />
+                      Döküman Teslimat
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-gray-600 mb-3">
+                      Noter evrakları, sözleşmeler, ihale dökümanları ve önemli belgeleriniz için
+                    </p>
+                    <span className="text-blue-600 text-sm font-medium inline-flex items-center gap-1">
+                      Detaylı Bilgi <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </CardContent>
+                </Card>
+              </Link>
+
+              <Link href="/hizmetler/paket-kargo">
+                <Card className="h-full hover:shadow-lg transition-all hover:border-green-500 cursor-pointer">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <Package className="h-5 w-5 text-green-600" />
+                      Paket Kargo
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-gray-600 mb-3">
+                      Küçük ve orta boy paketler, e-ticaret ürünleri, hediye gönderileri
+                    </p>
+                    <span className="text-green-600 text-sm font-medium inline-flex items-center gap-1">
+                      Detaylı Bilgi <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </CardContent>
+                </Card>
+              </Link>
+
+              <Link href="/hizmetler/acil-kurye">
+                <Card className="h-full hover:shadow-lg transition-all hover:border-red-500 cursor-pointer">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <Timer className="h-5 w-5 text-red-600" />
+                      Acil Kurye
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-gray-600 mb-3">
+                      Son dakika evrakları, acil belgeler ve zaman kritik gönderiler
+                    </p>
+                    <span className="text-red-600 text-sm font-medium inline-flex items-center gap-1">
+                      Detaylı Bilgi <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </CardContent>
+                </Card>
+              </Link>
+
+              <Link href="/hizmetler/kurumsal-cozumler">
+                <Card className="h-full hover:shadow-lg transition-all hover:border-purple-500 cursor-pointer">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <Users className="h-5 w-5 text-purple-600" />
+                      Kurumsal Çözümler
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-gray-600 mb-3">
+                      İşletmeniz için özel paketler, aylık kontratlar ve toplu hizmetler
+                    </p>
+                    <span className="text-purple-600 text-sm font-medium inline-flex items-center gap-1">
+                      Detaylı Bilgi <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </CardContent>
+                </Card>
+              </Link>
+            </div>
+
+            <div className="mt-10 text-center">
+              <p className="text-gray-700 mb-4">
+                Tüm hizmetlerimiz hakkında detaylı bilgi almak için
+              </p>
+              <Button asChild variant="default" size="lg">
+                <Link href="/hizmetler">
+                  Tüm Hizmetleri Görüntüle
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -443,7 +630,7 @@ export default async function DistrictPage({ params }: PageProps) {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm text-gray-600">7/24 destek hattı</span>
+      <span className="text-sm text-gray-600">Hızlı destek</span>
                     </li>
                   </ul>
                 </CardContent>
@@ -457,94 +644,199 @@ export default async function DistrictPage({ params }: PageProps) {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center">
+            <h2 className="text-3xl font-bold mb-4 text-center">
               {district.name} Kurye Hakkında Sık Sorulan Sorular
             </h2>
+            <p className="text-center text-gray-600 mb-8">
+              {district.name} bölgesinde kurye hizmeti hakkında en çok merak edilen sorular ve cevapları
+            </p>
 
             <div className="space-y-4">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">
+                  <CardTitle className="text-lg flex items-start gap-2">
+                    <span className="text-orange-500 text-xl">❓</span>
                     {district.name}'de kurye hizmeti nasıl çalışır?
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">
-                    Online formdan veya WhatsApp üzerinden sipariş veriyorsunuz. Kuryeniz {district.name}'deki konumunuzdan alarak, 
-                    belirttiğiniz adrese güvenle teslim ediyor. Tüm süreç boyunca SMS ile bilgilendiriliyorsunuz.
+                  <p className="text-gray-600 leading-relaxed">
+                    <Link href="/kurye-cagir" className="text-blue-600 hover:underline font-medium">Online formdan</Link> veya 
+                    WhatsApp üzerinden sipariş veriyorsunuz. Kuryeniz {district.name}'deki konumunuzdan alarak, 
+                    belirttiğiniz adrese güvenle teslim ediyor. Tüm süreç boyunca SMS ile bilgilendiriliyorsunuz. 
+                    İster evrak, ister paket teslimatı olsun, aynı günde teslim garantisi veriyoruz.
                   </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">
+                  <CardTitle className="text-lg flex items-start gap-2">
+                    <span className="text-orange-500 text-xl">📍</span>
                     {district.name}'in hangi mahallelerine hizmet veriyorsunuz?
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">
-                    {district.name}'in tüm {districtData.neighborhoods.length} mahallesine kesintisiz hizmet veriyoruz. 
-                    Yukarıdaki mahalleler listesinden size en yakın mahalleri görebilirsiniz.
+                  <p className="text-gray-600 leading-relaxed">
+                    {district.name}'in tüm <strong>{districtData.neighborhoods.length} mahallesine</strong> kesintisiz hizmet veriyoruz. 
+                    Yukarıdaki mahalleler listesinden size en yakın mahalleri görebilirsiniz. Her mahallede aynı 
+                    kaliteli ve hızlı hizmeti alacağınızdan emin olabilirsiniz. Mahalle sınırları dahilinde her 
+                    adrese teslimat yapıyoruz.
                   </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">
+                  <CardTitle className="text-lg flex items-start gap-2">
+                    <span className="text-orange-500 text-xl">⏱️</span>
+                    {district.name}'de teslimat süreleri ne kadar?
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 leading-relaxed">
+                    <strong>VIP Teslimat:</strong> 1 saat içinde öncelikli teslimat<br/>
+                    <strong>Express Teslimat:</strong> 1-2 saat arası hızlı teslimat<br/>
+                    <strong>Normal Teslimat:</strong> 2-4 saat içinde ekonomik teslimat<br/>
+                    İhtiyacınıza göre en uygun teslimat seçeneğini sipariş sırasında belirleyebilirsiniz.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-start gap-2">
+                    <span className="text-orange-500 text-xl">💰</span>
                     Teslimat ücreti nasıl hesaplanıyor?
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">
-                    Fiyatlandırma, mesafe, kargo tipi ve aciliyet durumuna göre belirleniyor. 
-                    Form üzerinden detayları girdikten sonra net fiyat bilgisi WhatsApp üzerinden size iletiliyor.
+                  <p className="text-gray-600 leading-relaxed">
+                    Fiyatlandırma; mesafe, kargo tipi (evrak, paket, büyük koli), aciliyet durumu ve teslimat 
+                    saatine göre belirleniyor. <Link href="/kurye-cagir" className="text-blue-600 hover:underline">Form üzerinden</Link> detayları 
+                    girdikten sonra net fiyat bilgisi WhatsApp üzerinden size anında iletiliyor. 
+                    Şeffaf fiyatlandırma politikamızla gizli maliyet söz konusu değildir.
                   </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">
-                    Gece saatlerinde de hizmet veriyor musunuz?
+                  <CardTitle className="text-lg flex items-start gap-2">
+                    <span className="text-orange-500 text-xl">🌙</span>
+                    Gece saatlerinde de {district.name}'de hizmet veriyor musunuz?
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">
-                    Evet! {district.name}'de 7/24 kesintisiz hizmet veriyoruz. Gece, gündüz, hafta sonu ve resmi tatillerde 
-                    kuryelerimiz her an hizmetinizdedir.
+                  <p className="text-gray-600 leading-relaxed">
+                    Hafta içi ve hafta sonu geniş çalışma saatleri ile {district.name}'de hizmet veriyoruz. 
+                    Mesai saatleri içinde ve hafta sonları da kurye hizmeti alabilirsiniz. Çalışma saatlerimiz 
+                    için bize ulaşabilirsiniz.
                   </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">
+                  <CardTitle className="text-lg flex items-start gap-2">
+                    <span className="text-orange-500 text-xl">💳</span>
                     Ödemeyi nasıl yapabilirim?
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">
-                    Nakit ödeme veya havale/EFT ile ödeme yapabilirsiniz.
-                    Ödeme yönteminizi sipariş sırasında belirleyebilirsiniz.
+                  <p className="text-gray-600 leading-relaxed">
+                    Nakit ödeme veya havale/EFT ile ödeme yapabilirsiniz. Ödeme yönteminizi sipariş sırasında 
+                    belirleyebilirsiniz. <Link href="/hizmetler/kurumsal-cozumler" className="text-blue-600 hover:underline">Kurumsal müşterilerimiz</Link> için 
+                    aylık toplu faturalama ve cari hesap seçenekleri de mevcuttur.
                   </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">
-                    Hangi bölgelere hizmet veriyorsunuz?
+                  <CardTitle className="text-lg flex items-start gap-2">
+                    <span className="text-orange-500 text-xl">📦</span>
+                    Ne tür gönderiler için kurye hizmeti alabilirim?
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">
-                    İstanbul'un tüm ilçelerine ve çevre illere (Kocaeli, Tekirdağ, Bursa, Sakarya, Yalova)
-                    hizmet veriyoruz. {district.name} başta olmak üzere geniş bir coğrafyada kurye hizmeti sunmaktayız.
+                  <p className="text-gray-600 leading-relaxed">
+                    <Link href="/hizmetler/dokuman-teslimat" className="text-blue-600 hover:underline">Evrak ve dökümanlar</Link> (noter, 
+                    sözleşme, ihale), <Link href="/hizmetler/paket-kargo" className="text-blue-600 hover:underline">paket ve koli</Link> (e-ticaret, 
+                    hediye), elektronik ürünler, yedek parça, tıbbi malzeme, gıda ürünleri ve daha pek çok 
+                    farklı türde gönderi için hizmet veriyoruz. 20 kg'a kadar paketler taşınabilir.
                   </p>
                 </CardContent>
               </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-start gap-2">
+                    <span className="text-orange-500 text-xl">🏢</span>
+                    {district.name}'deki işletmem için kurumsal hizmet alabilir miyim?
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 leading-relaxed">
+                    Evet! {district.name}'de bulunan işletmeler için <Link href="/hizmetler/kurumsal-cozumler" className="text-blue-600 hover:underline">özel 
+                    kurumsal çözümler</Link> sunuyoruz. Aylık paket anlaşmalar, özel fiyatlandırma, öncelikli hizmet, 
+                    detaylı raporlama ve özel müşteri temsilcisi gibi avantajlardan yararlanabilirsiniz. 
+                    <Link href="/iletisim" className="text-blue-600 hover:underline ml-1">İletişim sayfamızdan</Link> teklif alabilirsiniz.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-start gap-2">
+                    <span className="text-orange-500 text-xl">🌍</span>
+                    {district.name} dışına da teslimat yapıyor musunuz?
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 leading-relaxed">
+                    Evet! İstanbul'un tüm ilçelerine ve çevre illere (Kocaeli, Tekirdağ, Bursa, Sakarya, Yalova)
+                    hizmet veriyoruz. {district.name}'den başka ilçelere veya {district.name}'e diğer ilçelerden 
+                    teslimat yapabiliyoruz. Şehirler arası kurye hizmetimiz de mevcuttur.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-start gap-2">
+                    <span className="text-orange-500 text-xl">🔒</span>
+                    Gönderilerimin güvenliği nasıl sağlanıyor?
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 leading-relaxed">
+                    Tüm kuryelerimiz tecrübeli ve güvenilir profesyonellerdir. Gönderileriniz özel kurye çantalarında 
+                    korunarak taşınır. Her teslimat için imzalı teslim belgesi alınır. Önemli ve değerli gönderiler 
+                    için sigorta seçeneği de mevcuttur. 
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="mt-8 text-center bg-blue-50 p-6 rounded-lg">
+              <p className="text-gray-700 mb-4">
+                Başka sorularınız mı var? Size yardımcı olmaktan memnuniyet duyarız!
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button asChild variant="default">
+                  <Link href="/iletisim">
+                    <Phone className="mr-2 h-4 w-4" />
+                    Bize Ulaşın
+                  </Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <a href="https://wa.me/905416955234" target="_blank" rel="noopener noreferrer">
+                    <MessageCircle className="mr-2 h-4 w-4" />
+                    WhatsApp Destek
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         </div>

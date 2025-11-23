@@ -2,7 +2,8 @@ import { Metadata } from 'next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
-import { FileText, Shield, Zap, CheckCircle, ArrowRight } from 'lucide-react'
+import { FileText, Shield, Zap, CheckCircle, ArrowRight, Package, Building2 } from 'lucide-react'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 
 export const metadata: Metadata = {
   title: 'Döküman Teslimat Hizmeti İstanbul | Evrak Kurye | Moto Kurye Gelsin',
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     description: 'Evraklarınızı hızlı güvenle teslim ediyoruz.',
   },
   alternates: {
-    canonical: '/hizmetler/dokuman-teslimat',
+    canonical: 'https://motokuryegelsin.com/hizmetler/dokuman-teslimat',
   },
 }
 
@@ -131,6 +132,56 @@ export default function DokumanTeslimatPage() {
                       <span className="text-gray-700">{service}</span>
                     </div>
                   ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Related Services */}
+          <section className="py-16 bg-gray-50">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <h2 className="text-3xl font-bold text-center mb-8">Diğer Hizmetlerimiz</h2>
+                <div className="grid md:grid-cols-3 gap-6">
+                  <Link href="/hizmetler/paket-kargo">
+                    <Card className="h-full hover:shadow-lg transition-all hover:border-green-500">
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Package className="h-5 w-5 text-green-600" />
+                          Paket Kargo
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm text-gray-600">Küçük ve orta boy paketleriniz için aynı gün teslimat</p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                  <Link href="/hizmetler/acil-kurye">
+                    <Card className="h-full hover:shadow-lg transition-all hover:border-red-500">
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Zap className="h-5 w-5 text-red-600" />
+                          Acil Kurye
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm text-gray-600">Acil durumlar için 1 saat içinde teslimat garantisi</p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                  <Link href="/hizmetler/kurumsal-cozumler">
+                    <Card className="h-full hover:shadow-lg transition-all hover:border-purple-500">
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Building2 className="h-5 w-5 text-purple-600" />
+                          Kurumsal Çözümler
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm text-gray-600">İşletmeniz için özel paketler ve aylık kontratlar</p>
+                      </CardContent>
+                    </Card>
+                  </Link>
                 </div>
               </div>
             </div>
