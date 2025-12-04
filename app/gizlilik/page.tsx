@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Gizlilik Politikası - MotoKuryeGelsin',
     description: 'Kişisel verilerinizin korunması ve gizlilik politikamız hakkında detaylı bilgi.',
-    url: 'https://motokuryegelsin.com/gizlilik',
+    url: 'https://www.motokuryegelsin.com/gizlilik',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://motokuryegelsin.com/gizlilik',
+    canonical: 'https://www.motokuryegelsin.com/gizlilik',
   },
 }
 

@@ -3,7 +3,7 @@ import { getAllDistricts } from '@/lib/district-queries'
 import { createSlug } from '@/lib/utils'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://motokuryegelsin.com'
+  const baseUrl = 'https://www.motokuryegelsin.com'
   const currentDate = new Date().toISOString()
   
   // Get all districts for dynamic pages

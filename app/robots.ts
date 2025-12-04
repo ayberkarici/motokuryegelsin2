@@ -19,8 +19,9 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin/', '/api/'],
       },
     ],
-    sitemap: 'https://motokuryegelsin.com/sitemap.xml',
+    sitemap: 'https://www.motokuryegelsin.com/sitemap.xml',
   }
 }
+
 
 

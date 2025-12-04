@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Kurumsal Kurye Çözümleri İstanbul | Moto Kurye Gelsin',
     description: 'İşletmeniz için özel kurye çözümleri. Aylık paket anlaşmalar ve B2B hizmetler.',
-    url: 'https://motokuryegelsin.com/hizmetler/kurumsal-cozumler',
+    url: 'https://www.motokuryegelsin.com/hizmetler/kurumsal-cozumler',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://motokuryegelsin.com/hizmetler/kurumsal-cozumler',
+    canonical: 'https://www.motokuryegelsin.com/hizmetler/kurumsal-cozumler',
   },
 }
 

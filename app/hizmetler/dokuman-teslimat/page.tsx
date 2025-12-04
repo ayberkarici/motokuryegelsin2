@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     description: 'Evraklarınızı hızlı güvenle teslim ediyoruz.',
   },
   alternates: {
-    canonical: 'https://motokuryegelsin.com/hizmetler/dokuman-teslimat',
+    canonical: 'https://www.motokuryegelsin.com/hizmetler/dokuman-teslimat',
   },
 }
 

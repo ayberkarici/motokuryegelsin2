@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Paket Kargo Hizmeti İstanbul | Moto Kurye Gelsin',
     description: 'Paketlerinizi aynı gün içinde güvenle teslim ediyoruz. İstanbul genelinde hızlı kargo çözümleri.',
-    url: 'https://motokuryegelsin.com/hizmetler/paket-kargo',
+    url: 'https://www.motokuryegelsin.com/hizmetler/paket-kargo',
     type: 'website',
     locale: 'tr_TR',
   },
   alternates: {
-    canonical: 'https://motokuryegelsin.com/hizmetler/paket-kargo',
+    canonical: 'https://www.motokuryegelsin.com/hizmetler/paket-kargo',
   },
 }
 

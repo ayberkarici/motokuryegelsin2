@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: `${district.name} Moto Kurye | ${neighborhoodCount} Mahallede Hızlı Teslimat`,
       description: `${district.name} ve ${neighborhoodCount} mahallesinde profesyonel kurye hizmeti. Evrak, paket ve acil teslimat. 1 saat içinde VIP teslimat garantisi.`,
-      url: `https://motokuryegelsin.com/ilceler/${params.slug}`,
+      url: `https://www.motokuryegelsin.com/ilceler/${params.slug}`,
       type: 'website',
       locale: 'tr_TR',
     },
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: `${neighborhoodCount} mahallede hızlı ve güvenilir teslimat`,
     },
     alternates: {
-      canonical: `https://motokuryegelsin.com/ilceler/${params.slug}`
+      canonical: `https://www.motokuryegelsin.com/ilceler/${params.slug}`
     }
   }
 }
@@ -95,7 +95,7 @@ export default async function DistrictPage({ params }: PageProps) {
               'provider': {
                 '@type': 'Organization',
                 'name': 'Moto Kurye Gelsin',
-                'url': 'https://motokuryegelsin.com'
+                'url': 'https://www.motokuryegelsin.com'
               },
               'areaServed': {
                 '@type': 'City',
@@ -108,7 +108,7 @@ export default async function DistrictPage({ params }: PageProps) {
               'serviceType': 'Kurye Hizmeti',
               'availableChannel': {
                 '@type': 'ServiceChannel',
-                'serviceUrl': `https://motokuryegelsin.com/ilceler/${createSlug(district.name)}`
+                'serviceUrl': `https://www.motokuryegelsin.com/ilceler/${createSlug(district.name)}`
               }
             })
           }}

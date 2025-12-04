@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Blog | Moto Kurye Gelsin',
     description: 'Kurye ve teslimat dünyasından haberler, ipuçları ve bilgiler.',
-    url: 'https://motokuryegelsin.com/blog',
+    url: 'https://www.motokuryegelsin.com/blog',
     type: 'website',
     locale: 'tr_TR',
   },
   alternates: {
-    canonical: 'https://motokuryegelsin.com/blog',
+    canonical: 'https://www.motokuryegelsin.com/blog',
   },
 }
 
@@ -64,7 +64,7 @@ export default async function BlogPage() {
             "@type": "Blog",
             "name": "Moto Kurye Gelsin Blog",
             "description": "İstanbul kurye hizmetleri ve teslimat rehberi",
-            "url": "https://motokuryegelsin.com/blog",
+            "url": "https://www.motokuryegelsin.com/blog",
             "publisher": {
               "@type": "Organization",
               "name": "Moto Kurye Gelsin"

@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Acil Kurye Hizmeti İstanbul | Moto Kurye',
     description: 'İstanbul genelinde acil kurye hizmeti. 1 saat içinde teslimat.',
-    url: 'https://motokuryegelsin.com/hizmetler/acil-kurye',
+    url: 'https://www.motokuryegelsin.com/hizmetler/acil-kurye',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://motokuryegelsin.com/hizmetler/acil-kurye',
+    canonical: 'https://www.motokuryegelsin.com/hizmetler/acil-kurye',
   },
 }
 

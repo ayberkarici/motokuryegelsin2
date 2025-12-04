@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Kurye Çağır - Anında Online Sipariş | MotoKuryeGelsin',
     description: 'Birkaç adımda online kurye çağırın, anında fiyat alın. Hızlı teslimat.',
-    url: 'https://motokuryegelsin.com/kurye-cagir',
+    url: 'https://www.motokuryegelsin.com/kurye-cagir',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://motokuryegelsin.com/kurye-cagir',
+    canonical: 'https://www.motokuryegelsin.com/kurye-cagir',
   },
 }
 

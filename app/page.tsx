@@ -15,12 +15,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'MotoKuryeGelsin - İstanbul\'un En Hızlı Kurye Servisi',
     description: 'İstanbul\'da 39 ilçede hızlı ve güvenilir moto kurye hizmeti',
-    url: 'https://motokuryegelsin.com',
+    url: 'https://www.motokuryegelsin.com',
     type: 'website',
     locale: 'tr_TR',
   },
   alternates: {
-    canonical: 'https://motokuryegelsin.com',
+    canonical: 'https://www.motokuryegelsin.com',
   },
 }
 
@@ -34,8 +34,8 @@ export default function Home() {
             '@context': 'https://schema.org',
             '@type': 'Organization',
             'name': 'MotoKuryeGelsin',
-            'url': 'https://motokuryegelsin.com',
-            'logo': 'https://motokuryegelsin.com/logo.png',
+            'url': 'https://www.motokuryegelsin.com',
+            'logo': 'https://www.motokuryegelsin.com/logo.png',
             'description': 'İstanbul içi hızlı ve güvenilir moto kurye hizmeti. 39 ilçede hızlı teslimat.',
             'telephone': '+905416955234',
             'email': 'MotoKuryeGelsin@gmail.com',
@@ -71,8 +71,8 @@ export default function Home() {
             '@context': 'https://schema.org',
             '@type': 'LocalBusiness',
             'name': 'MotoKuryeGelsin',
-            'image': 'https://motokuryegelsin.com/logo.png',
-            'url': 'https://motokuryegelsin.com',
+            'image': 'https://www.motokuryegelsin.com/logo.png',
+            'url': 'https://www.motokuryegelsin.com',
             'telephone': '+905416955234',
             'priceRange': '$$',
             'address': {

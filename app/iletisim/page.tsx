@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'İletişim - MotoKuryeGelsin',
     description: 'Müşteri hizmetleri ve destek. Bize ulaşın, size en iyi hizmeti sunalım.',
-    url: 'https://motokuryegelsin.com/iletisim',
+    url: 'https://www.motokuryegelsin.com/iletisim',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://motokuryegelsin.com/iletisim',
+    canonical: 'https://www.motokuryegelsin.com/iletisim',
   },
 }
 

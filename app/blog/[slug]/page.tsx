@@ -77,7 +77,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       images: post.og_image ? [post.og_image] : undefined,
     },
     alternates: {
-      canonical: `https://motokuryegelsin.com/blog/${post.slug}`,
+      canonical: `https://www.motokuryegelsin.com/blog/${post.slug}`,
     },
   }
 }
@@ -110,7 +110,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             },
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": `https://motokuryegelsin.com/blog/${post.slug}`
+              "@id": `https://www.motokuryegelsin.com/blog/${post.slug}`
             }
           })
         }}
