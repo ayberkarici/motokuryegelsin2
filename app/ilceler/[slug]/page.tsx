@@ -60,6 +60,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     alternates: {
       canonical: `https://www.motokuryegelsin.com/ilceler/${params.slug}`
+    },
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    other: {
+      'page-type': 'district-landing',
+      'geo.region': 'TR-34',
+      'geo.placename': `${district.name}, İstanbul`,
     }
   }
 }

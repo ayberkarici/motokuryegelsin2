@@ -79,13 +79,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  // District pages (SEO landing pages)
-  const districtPages: MetadataRoute.Sitemap = districts.map((district) => ({
+  // District pages (SEO landing pages) - Higher priority for better crawl
+  const districtPages: MetadataRoute.Sitemap = districts.map((district, index) => ({
     url: `${baseUrl}/ilceler/${createSlug(district.name)}`,
     lastModified: currentDate,
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
+    changeFrequency: 'daily' as const,
+    priority: 0.9, // High priority for district landing pages
   }))
 
-  return [...staticPages, ...districtPages]
+  // Blog posts if any
+  const blogPages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/blog/istanbul-kurye-hizmeti-rehberi`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+  ]
+
+  return [...staticPages, ...districtPages, ...blogPages]
 }

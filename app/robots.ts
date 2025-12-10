@@ -6,20 +6,23 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/admin/', '/api/'],
+        disallow: ['/admin/', '/api/', '/_next/', '/static/'],
       },
       {
         userAgent: 'Googlebot',
-        allow: '/',
-        disallow: ['/admin/', '/api/'],
+        allow: ['/ilceler/', '/hizmetler/', '/blog/', '/'],
+        disallow: ['/admin/', '/api/', '/_next/'],
+        crawlDelay: 1,
       },
       {
         userAgent: 'Bingbot',
-        allow: '/',
-        disallow: ['/admin/', '/api/'],
+        allow: ['/ilceler/', '/hizmetler/', '/blog/', '/'],
+        disallow: ['/admin/', '/api/', '/_next/'],
+        crawlDelay: 2,
       },
     ],
     sitemap: 'https://www.motokuryegelsin.com/sitemap.xml',
+    host: 'https://www.motokuryegelsin.com',
   }
 }
 
