@@ -17,6 +17,22 @@ import {
   Linkedin
 } from 'lucide-react'
 
+// Popular districts for SEO internal linking
+const popularDistricts = [
+  { name: 'Kadıköy', slug: 'kadikoy' },
+  { name: 'Beşiktaş', slug: 'besiktas' },
+  { name: 'Şişli', slug: 'sisli' },
+  { name: 'Üsküdar', slug: 'uskudar' },
+  { name: 'Beyoğlu', slug: 'beyoglu' },
+  { name: 'Bakırköy', slug: 'bakirkoy' },
+  { name: 'Ataşehir', slug: 'atasehir' },
+  { name: 'Maltepe', slug: 'maltepe' },
+  { name: 'Pendik', slug: 'pendik' },
+  { name: 'Kartal', slug: 'kartal' },
+  { name: 'Sarıyer', slug: 'sariyer' },
+  { name: 'Fatih', slug: 'fatih' },
+]
+
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white">
@@ -146,6 +162,22 @@ const Footer = () => {
                 <span className="text-gray-300 text-sm">Hızlı Hizmet</span>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* District Links for SEO */}
+        <div className="border-t border-gray-800 mt-8 pt-8">
+          <h4 className="text-lg font-semibold mb-4 text-blue-400 text-center">Hizmet Bölgelerimiz</h4>
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
+            {popularDistricts.map((district) => (
+              <Link
+                key={district.slug}
+                href={`/ilceler/${district.slug}`}
+                className="text-gray-400 hover:text-white text-sm transition-colors"
+              >
+                {district.name} Kurye
+              </Link>
+            ))}
           </div>
         </div>
 

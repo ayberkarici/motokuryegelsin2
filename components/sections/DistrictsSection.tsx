@@ -1,51 +1,11 @@
-'use client'
-
 import Link from 'next/link'
 import { MapPin, ArrowRight } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { createSlug } from '@/lib/utils'
-import { useEffect, useState } from 'react'
 import { getAllDistricts } from '@/lib/district-queries'
-import { District } from '@/lib/district-queries'
 
-export default function DistrictsSection() {
-  const [districts, setDistricts] = useState<District[]>([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    async function loadDistricts() {
-      const data = await getAllDistricts()
-      setDistricts(data)
-      setLoading(false)
-    }
-    loadDistricts()
-  }, [])
-
-  if (loading) {
-    return (
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Hizmet Verdiğimiz İlçeler
-            </h2>
-            <p className="text-xl text-gray-600">
-              İstanbul'un tüm ilçelerinde profesyonel kurye hizmeti
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
-            {[...Array(12)].map((_, i) => (
-              <Card key={i} className="animate-pulse">
-                <CardContent className="p-4">
-                  <div className="h-6 bg-gray-200 rounded"></div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-    )
-  }
+export default async function DistrictsSection() {
+  const districts = await getAllDistricts()
 
   return (
     <section className="py-20 bg-gray-50">
