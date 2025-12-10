@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { MapPin, Package, Users, ArrowRight, Clock, Shield, Phone, Mail, CheckCircle, Truck, Timer, Star, MessageCircle } from 'lucide-react'
 import { getAllDistricts, getDistrictByName, getNearbyDistricts } from '@/lib/district-queries'
 import { createSlug } from '@/lib/utils'
@@ -133,11 +134,26 @@ export default async function DistrictPage({ params }: PageProps) {
 
       {/* Hero Section with Background Image */}
       <section className="relative text-white py-20 overflow-hidden min-h-[500px] flex items-center">
-        {/* Background Image with Overlay */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${district.photo_url || 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1200'})` }}
-        />
+        {/* Optimized Background Image with Skeleton Loading */}
+        <div className="absolute inset-0">
+          {/* Dark skeleton with glass shimmer effect */}
+          <div className="absolute inset-0 bg-gray-800">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full animate-[shimmer_2s_infinite]" />
+          </div>
+          
+          {/* Optimized Next.js Image */}
+          <Image
+            src={district.photo_url || 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1200&q=75'}
+            alt={`${district.name} İstanbul moto kurye hizmeti`}
+            fill
+            priority
+            quality={75}
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </div>
+        
+        {/* Gradient Overlay */}
         <div className={`absolute inset-0 ${getDistrictTheme(district.name)} opacity-80`}></div>
         
         {/* Animated Pattern Overlay */}
