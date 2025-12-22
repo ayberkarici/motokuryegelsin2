@@ -15,9 +15,9 @@ import Footer from '@/components/layout/Footer'
 import FixedWhatsAppButton from '@/components/fixed-whatsapp-button'
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 // Generate static params for all districts
@@ -31,8 +31,9 @@ export async function generateStaticParams() {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params
   const districts = await getAllDistricts()
-  const district = districts.find(d => createSlug(d.name) === params.slug)
+  const district = districts.find(d => createSlug(d.name) === slug)
   
   if (!district) {
     return {
@@ -50,7 +51,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: `${district.name} Moto Kurye | ${neighborhoodCount} Mahallede Hızlı Teslimat`,
       description: `${district.name} ve ${neighborhoodCount} mahallesinde profesyonel kurye hizmeti. Evrak, paket ve acil teslimat. 1 saat içinde VIP teslimat garantisi.`,
-      url: `https://www.motokuryegelsin.com/ilceler/${params.slug}`,
+      url: `https://www.motokuryegelsin.com/ilceler/${slug}`,
       type: 'website',
       locale: 'tr_TR',
     },
@@ -60,7 +61,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: `${neighborhoodCount} mahallede hızlı ve güvenilir teslimat`,
     },
     alternates: {
-      canonical: `https://www.motokuryegelsin.com/ilceler/${params.slug}`
+      canonical: `https://www.motokuryegelsin.com/ilceler/${slug}`
     },
     robots: {
       index: true,
@@ -83,8 +84,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function DistrictPage({ params }: PageProps) {
+  const { slug } = await params
   const districts = await getAllDistricts()
-  const district = districts.find(d => createSlug(d.name) === params.slug)
+  const district = districts.find(d => createSlug(d.name) === slug)
   
   if (!district) {
     notFound()
