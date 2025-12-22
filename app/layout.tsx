@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
+import FixedWhatsAppButton from '@/components/fixed-whatsapp-button'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.motokuryegelsin.com'),
@@ -63,6 +64,9 @@ export default function RootLayout({
         <meta name="theme-color" content="#2563eb" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         
+        {/* Ahrefs Site Verification */}
+        <meta name="ahrefs-site-verification" content="a3002a4beef9054c139f52b275f2dcbe9c6b8004bfe47cd5656b3714ca7e461b" />
+        
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-1P50LVFTHK"
@@ -84,7 +88,10 @@ export default function RootLayout({
           async
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <FixedWhatsAppButton />
+      </body>
     </html>
   )
 }

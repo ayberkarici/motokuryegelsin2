@@ -1,6 +1,7 @@
 "use client"
 
 import React from 'react'
+import { usePathname } from 'next/navigation'
 
 const WhatsAppIcon = () => (
   <svg
@@ -13,7 +14,13 @@ const WhatsAppIcon = () => (
 )
 
 const FixedWhatsAppButton = () => {
+  const pathname = usePathname()
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '905416955234'
+
+  // Admin sayfalarında gösterme
+  if (pathname?.startsWith('/admin')) {
+    return null
+  }
 
   const handleClick = () => {
     const message = encodeURIComponent('Merhaba, kurye hizmeti hakkında bilgi almak istiyorum.')
@@ -28,7 +35,7 @@ const FixedWhatsAppButton = () => {
       aria-label="WhatsApp Üzerinden Teklif Al"
     >
       <WhatsAppIcon />
-      <span className="text-base">WhatsApp Üzerinden Direkt Teklif Al</span>
+      <span className="text-base">WhatsApp Üzerinden Hemen Teklif Al</span>
     </button>
   )
 }

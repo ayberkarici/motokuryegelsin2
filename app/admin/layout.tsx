@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { AdminAuthCheck } from '@/components/admin/auth-check'
-import { LayoutDashboard, MapPin, FileText, LogOut, Menu, X } from 'lucide-react'
+import { LayoutDashboard, MapPin, FileText, LogOut, Menu, X, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { supabase } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
@@ -28,6 +28,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
     { href: '/admin/locations', icon: MapPin, label: 'Lokasyonlar' },
     { href: '/admin/blog', icon: FileText, label: 'Blog' },
+    { href: '/admin/blog/ai-generator', icon: Sparkles, label: 'AI Blog Oluşturucu' },
   ]
 
   return (

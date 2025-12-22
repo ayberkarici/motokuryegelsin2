@@ -5,6 +5,7 @@ import HeroSection from '@/components/sections/HeroSection'
 import ServicesSection from '@/components/sections/ServicesSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import DistrictsSection from '@/components/sections/DistrictsSection'
+import BlogSection from '@/components/sections/BlogSection'
 import FixedWhatsAppButton from '@/components/fixed-whatsapp-button'
 import './globals.css'
 
@@ -116,6 +117,7 @@ export default function Home() {
           <HeroSection />
           <ServicesSection />
           <DistrictsSection />
+          <BlogSection />
           <TestimonialsSection />
         </main>
         <Footer />
