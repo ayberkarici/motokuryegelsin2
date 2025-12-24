@@ -1,14 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // App Router is now default in Next.js 14
-  outputFileTracingExcludes: {
-    '*': [
-      'node_modules/**',
-      '.git/**',
-      '.next/**',
-      'scripts/**',
-    ],
-  },
+  // Standalone output - bundles all dependencies
+  output: 'standalone',
   images: {
     remotePatterns: [
       {

@@ -73,4 +73,4 @@ ehthumbs.db
 .idea/
 *.sublime-workspace
 
-/scripts/*
+/scripts/*.vercel
