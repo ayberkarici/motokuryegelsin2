@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { keywords, additionalContext } = body
+    const { keywords, additionalContext, tone, layout } = body
 
     if (!keywords || !Array.isArray(keywords) || keywords.length === 0) {
       return NextResponse.json(
@@ -115,12 +115,43 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Tone ve layout için ek talimatlar
+    let toneInstruction = ''
+    if (tone) {
+      const toneMap: Record<string, string> = {
+        'professional': 'Profesyonel ve kurumsal bir dil kullan. Resmi ifadeler ve iş dünyasına uygun ton.',
+        'friendly': 'Samimi ve arkadaşça bir dil kullan. Okuyucuyla sıcak bir bağ kur.',
+        'informative': 'Bilgilendirici ve eğitici bir ton kullan. Detaylı açıklamalar ve örnekler ver.',
+        'persuasive': 'İkna edici ve satış odaklı bir dil kullan. Harekete geçirici ifadeler kullan.',
+        'urgent': 'Aciliyet hissi veren bir ton kullan. "Hemen", "Şimdi", "Kaçırmayın" gibi ifadeler ekle.',
+        'storytelling': 'Hikaye anlatıcı bir ton kullan. Senaryolar, örnekler ve gerçek durumlar anlat.'
+      }
+      toneInstruction = toneMap[tone] || ''
+    }
+
+    let layoutInstruction = ''
+    if (layout) {
+      const layoutMap: Record<string, string> = {
+        'standard': 'Klasik blog yapısı kullan: Giriş paragrafı, ana konular (2-3 bölüm), sonuç ve CTA.',
+        'listicle': 'Liste formatında yaz. Başlıkta rakam kullan (örn: "5 Neden", "7 İpucu"). Her madde ayrı başlık altında.',
+        'how-to': 'Adım adım rehber formatında yaz. "1. Adım:", "2. Adım:" şeklinde numaralı adımlar kullan.',
+        'comparison': 'Karşılaştırma formatında yaz. Seçenekleri yan yana koyarak avantaj/dezavantajları listele.',
+        'faq': 'Soru-cevap formatında yaz. Her bölüm bir soru başlığı ve detaylı cevap içersin.',
+        'story': 'Hikaye anlatımı formatında yaz. Bir senaryo ile başla, problem tanımla, çözüm olarak hizmeti anlat.'
+      }
+      layoutInstruction = layoutMap[layout] || ''
+    }
+
     const userPrompt = `
 Aşağıdaki anahtar kelimeleri kullanarak bir blog yazısı oluştur:
 
 ANAHTAR KELİMELER: ${keywords.join(', ')}
 
-${additionalContext ? `EK BAĞLAM: ${additionalContext}` : ''}
+${toneInstruction ? `SÖYLEM TONU TALİMATI: ${toneInstruction}` : ''}
+
+${layoutInstruction ? `YAZI YAPISI TALİMATI: ${layoutInstruction}` : ''}
+
+${additionalContext ? `EK BAĞLAM VE TALİMATLAR:\n${additionalContext}` : ''}
 
 Kuralları takip et ve JSON formatında yanıt ver.`
 
