@@ -1,22 +1,31 @@
 import { Metadata } from 'next'
+import { getPageSeo } from '@/lib/seo-queries'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import { Target, Star, Gem, Bike, Phone, Package, Building2, Sparkles, MessageCircle } from 'lucide-react'
 
-export const metadata: Metadata = {
-  title: 'Hakkımızda - MotoKuryeGelsin',
-  description: 'MotoKuryeGelsin ailesi olarak uzun yıllardan beri İstanbul içi ve çevre illere profesyonel moto kurye hizmeti veriyoruz. Güvenilir, hızlı ve kaliteli teslimat.',
-  keywords: 'motokuryegelsin hakkında, kurye firması, istanbul kurye, güvenilir kurye, profesyonel teslimat',
-  openGraph: {
-    title: 'Hakkımızda - MotoKuryeGelsin',
-    description: 'İstanbul\'un güvenilir kurye hizmeti. Uzun yıllardır profesyonel teslimat.',
-    url: 'https://www.motokuryegelsin.com/hakkimizda',
-    type: 'website',
-  },
-  alternates: {
-    canonical: 'https://www.motokuryegelsin.com/hakkimizda',
-  },
+export const revalidate = 60
+
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getPageSeo('hakkimizda')
+  const title = seo?.title || 'Hakkımızda - MotoKuryeGelsin'
+  const description = seo?.description || 'MotoKuryeGelsin ailesi olarak uzun yıllardan beri İstanbul içi ve çevre illere profesyonel moto kurye hizmeti veriyoruz. Güvenilir, hızlı ve kaliteli teslimat.'
+  const keywords = seo?.keywords || 'motokuryegelsin hakkında, kurye firması, istanbul kurye, güvenilir kurye, profesyonel teslimat'
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      url: 'https://www.motokuryegelsin.com/hakkimizda',
+      type: 'website',
+    },
+    alternates: {
+      canonical: 'https://www.motokuryegelsin.com/hakkimizda',
+    },
+  }
 }
 
 export default function HakkimizdaPage() {

@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { getPageSeo } from '@/lib/seo-queries'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import HeroSection from '@/components/sections/HeroSection'
@@ -9,20 +10,28 @@ import BlogSection from '@/components/sections/BlogSection'
 import FixedWhatsAppButton from '@/components/fixed-whatsapp-button'
 import './globals.css'
 
-export const metadata: Metadata = {
-  title: 'MotoKuryeGelsin - İstanbul Moto Kurye | Hızlı ve Güvenilir Teslimat',
-  description: 'İstanbul\'un en hızlı ve güvenilir moto kurye hizmeti. 39 ilçede hızlı teslimat. Döküman, paket ve acil kurye hizmetleri. Anında kurye çağır!',
-  keywords: 'moto kurye istanbul, kurye hizmeti, hızlı teslimat istanbul, acil kurye, paket teslimat, döküman kurye',
-  openGraph: {
-    title: 'MotoKuryeGelsin - İstanbul\'un En Hızlı Kurye Servisi',
-    description: 'İstanbul\'da 39 ilçede hızlı ve güvenilir moto kurye hizmeti',
-    url: 'https://www.motokuryegelsin.com',
-    type: 'website',
-    locale: 'tr_TR',
-  },
-  alternates: {
-    canonical: 'https://www.motokuryegelsin.com',
-  },
+export const revalidate = 60
+
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getPageSeo('home')
+  const title = seo?.title || 'MotoKuryeGelsin - İstanbul Moto Kurye | Hızlı ve Güvenilir Teslimat'
+  const description = seo?.description || 'İstanbul\'un en hızlı ve güvenilir moto kurye hizmeti. 39 ilçede hızlı teslimat. Döküman, paket ve acil kurye hizmetleri. Anında kurye çağır!'
+  const keywords = seo?.keywords || 'moto kurye istanbul, kurye hizmeti, hızlı teslimat istanbul, acil kurye, paket teslimat, döküman kurye'
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      url: 'https://www.motokuryegelsin.com',
+      type: 'website',
+      locale: 'tr_TR',
+    },
+    alternates: {
+      canonical: 'https://www.motokuryegelsin.com',
+    },
+  }
 }
 
 export default function Home() {

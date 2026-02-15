@@ -1,20 +1,29 @@
 import { Metadata } from 'next'
+import { getPageSeo } from '@/lib/seo-queries'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
-export const metadata: Metadata = {
-  title: 'Gizlilik Politikası - MotoKuryeGelsin',
-  description: 'MotoKuryeGelsin gizlilik politikası ve kişisel verilerin korunması hakkında bilgiler. KVKK uyumlu veri işleme politikalarımız.',
-  keywords: 'gizlilik politikası, kvkk, kişisel verilerin korunması, veri güvenliği',
-  openGraph: {
-    title: 'Gizlilik Politikası - MotoKuryeGelsin',
-    description: 'Kişisel verilerinizin korunması ve gizlilik politikamız hakkında detaylı bilgi.',
-    url: 'https://www.motokuryegelsin.com/gizlilik',
-    type: 'website',
-  },
-  alternates: {
-    canonical: 'https://www.motokuryegelsin.com/gizlilik',
-  },
+export const revalidate = 60
+
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getPageSeo('gizlilik')
+  const title = seo?.title || 'Gizlilik Politikası - MotoKuryeGelsin'
+  const description = seo?.description || 'MotoKuryeGelsin gizlilik politikası ve kişisel verilerin korunması hakkında bilgiler. KVKK uyumlu veri işleme politikalarımız.'
+  const keywords = seo?.keywords || 'gizlilik politikası, kvkk, kişisel verilerin korunması, veri güvenliği'
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      url: 'https://www.motokuryegelsin.com/gizlilik',
+      type: 'website',
+    },
+    alternates: {
+      canonical: 'https://www.motokuryegelsin.com/gizlilik',
+    },
+  }
 }
 
 export default function GizlilikPage() {

@@ -1,23 +1,32 @@
 import { Metadata } from 'next'
+import { getPageSeo } from '@/lib/seo-queries'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import { FileText, Package, Zap, Building2, Truck, Moon, Shield, Bike, MessageCircle } from 'lucide-react'
 import { createSlug } from '@/lib/utils'
 
-export const metadata: Metadata = {
-  title: 'Kurye Hizmetlerimiz - MotoKuryeGelsin',
-  description: 'Döküman teslimatı, paket kargo, acil kurye ve kurumsal çözümler. İstanbul\'un tamamında hızlı ve güvenilir kurye hizmetleri.',
-  keywords: 'kurye hizmetleri, döküman teslimat, paket kargo, acil kurye, kurumsal kurye çözümleri, istanbul kurye',
-  openGraph: {
-    title: 'Kurye Hizmetlerimiz - MotoKuryeGelsin',
-    description: 'Döküman, paket, acil kurye ve kurumsal çözümler. İstanbul\'da hızlı hizmet.',
-    url: 'https://www.motokuryegelsin.com/hizmetler',
-    type: 'website',
-  },
-  alternates: {
-    canonical: 'https://www.motokuryegelsin.com/hizmetler',
-  },
+export const revalidate = 60
+
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getPageSeo('hizmetler')
+  const title = seo?.title || 'Kurye Hizmetlerimiz - MotoKuryeGelsin'
+  const description = seo?.description || 'Döküman teslimatı, paket kargo, acil kurye ve kurumsal çözümler. İstanbul\'un tamamında hızlı ve güvenilir kurye hizmetleri.'
+  const keywords = seo?.keywords || 'kurye hizmetleri, döküman teslimat, paket kargo, acil kurye, kurumsal kurye çözümleri, istanbul kurye'
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      url: 'https://www.motokuryegelsin.com/hizmetler',
+      type: 'website',
+    },
+    alternates: {
+      canonical: 'https://www.motokuryegelsin.com/hizmetler',
+    },
+  }
 }
 
 export default function HizmetlerPage() {

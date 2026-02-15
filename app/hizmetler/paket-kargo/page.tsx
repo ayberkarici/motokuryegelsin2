@@ -1,24 +1,33 @@
 import { Metadata } from 'next'
+import { getPageSeo } from '@/lib/seo-queries'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import { Package, Clock, Shield, Zap, CheckCircle, ArrowRight, FileText, Building2 } from 'lucide-react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 
-export const metadata: Metadata = {
-  title: 'Paket Kargo Hizmeti İstanbul | Moto Kurye | Hızlı Paket Teslimat',
-  description: 'İstanbul genelinde aynı gün paket kargo hizmeti. Küçük, orta ve büyük paketleriniz için motorlu kurye ile hızlı teslimat. aynı gün kapınızda.',
-  keywords: 'paket kargo, moto kurye, istanbul kargo, aynı gün teslimat, hızlı kargo, paket teslimat',
-  openGraph: {
-    title: 'Paket Kargo Hizmeti İstanbul | Moto Kurye Gelsin',
-    description: 'Paketlerinizi aynı gün içinde güvenle teslim ediyoruz. İstanbul genelinde hızlı kargo çözümleri.',
-    url: 'https://www.motokuryegelsin.com/hizmetler/paket-kargo',
-    type: 'website',
-    locale: 'tr_TR',
-  },
-  alternates: {
-    canonical: 'https://www.motokuryegelsin.com/hizmetler/paket-kargo',
-  },
+export const revalidate = 60
+
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getPageSeo('hizmetler-paket')
+  const title = seo?.title || 'Paket Kargo Hizmeti İstanbul | Moto Kurye | Hızlı Paket Teslimat'
+  const description = seo?.description || 'İstanbul genelinde aynı gün paket kargo hizmeti. Küçük, orta ve büyük paketleriniz için motorlu kurye ile hızlı teslimat.'
+  const keywords = seo?.keywords || 'paket kargo, moto kurye, istanbul kargo, aynı gün teslimat, hızlı kargo, paket teslimat'
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      url: 'https://www.motokuryegelsin.com/hizmetler/paket-kargo',
+      type: 'website',
+      locale: 'tr_TR',
+    },
+    alternates: {
+      canonical: 'https://www.motokuryegelsin.com/hizmetler/paket-kargo',
+    },
+  }
 }
 
 export default function PaketKargoPage() {

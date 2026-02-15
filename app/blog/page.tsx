@@ -1,25 +1,33 @@
 import { Metadata } from 'next'
+import { getPageSeo } from '@/lib/seo-queries'
 import Link from 'next/link'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { supabaseServer } from '@/lib/supabase/server'
 import { Calendar, Eye, ArrowRight } from 'lucide-react'
 
-export const revalidate = 0 // Disable cache, always fetch fresh data
-export const metadata: Metadata = {
-  title: 'Blog | Moto Kurye Gelsin - Kurye ve Teslimat Rehberi',
-  description: 'İstanbul kurye hizmetleri, teslimat ipuçları ve sektör haberleri. Moto kurye ile ilgili merak ettiğiniz her şey blog yazılarımızda.',
-  keywords: 'kurye blog, teslimat ipuçları, istanbul kurye, moto kurye haberleri',
-  openGraph: {
-    title: 'Blog | Moto Kurye Gelsin',
-    description: 'Kurye ve teslimat dünyasından haberler, ipuçları ve bilgiler.',
-    url: 'https://www.motokuryegelsin.com/blog',
-    type: 'website',
-    locale: 'tr_TR',
-  },
-  alternates: {
-    canonical: 'https://www.motokuryegelsin.com/blog',
-  },
+export const revalidate = 60
+
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getPageSeo('blog')
+  const title = seo?.title || 'Blog | Moto Kurye Gelsin - Kurye ve Teslimat Rehberi'
+  const description = seo?.description || 'İstanbul kurye hizmetleri, teslimat ipuçları ve sektör haberleri. Moto kurye ile ilgili merak ettiğiniz her şey blog yazılarımızda.'
+  const keywords = seo?.keywords || 'kurye blog, teslimat ipuçları, istanbul kurye, moto kurye haberleri'
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      url: 'https://www.motokuryegelsin.com/blog',
+      type: 'website',
+      locale: 'tr_TR',
+    },
+    alternates: {
+      canonical: 'https://www.motokuryegelsin.com/blog',
+    },
+  }
 }
 
 interface BlogPost {

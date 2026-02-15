@@ -1,22 +1,31 @@
 import { Metadata } from 'next'
+import { getPageSeo } from '@/lib/seo-queries'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import MultiStepForm from '@/components/multi-step-form'
 import { Bike } from 'lucide-react'
 
-export const metadata: Metadata = {
-  title: 'Kurye Çağır - Anında Online Sipariş | MotoKuryeGelsin',
-  description: 'İstanbul içi hızlı kurye siparişi. Birkaç adımda online kurye çağırın, anında fiyat alın. Döküman, paket ve acil teslimat hizmeti.',
-  keywords: 'kurye çağır, online kurye siparişi, hızlı kurye, kurye sipariş, istanbul kurye çağır',
-  openGraph: {
-    title: 'Kurye Çağır - Anında Online Sipariş | MotoKuryeGelsin',
-    description: 'Birkaç adımda online kurye çağırın, anında fiyat alın. Hızlı teslimat.',
-    url: 'https://www.motokuryegelsin.com/kurye-cagir',
-    type: 'website',
-  },
-  alternates: {
-    canonical: 'https://www.motokuryegelsin.com/kurye-cagir',
-  },
+export const revalidate = 60
+
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getPageSeo('kurye-cagir')
+  const title = seo?.title || 'Kurye Çağır - Anında Online Sipariş | MotoKuryeGelsin'
+  const description = seo?.description || 'İstanbul içi hızlı kurye siparişi. Birkaç adımda online kurye çağırın, anında fiyat alın. Döküman, paket ve acil teslimat hizmeti.'
+  const keywords = seo?.keywords || 'kurye çağır, online kurye siparişi, hızlı kurye, kurye sipariş, istanbul kurye çağır'
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      url: 'https://www.motokuryegelsin.com/kurye-cagir',
+      type: 'website',
+    },
+    alternates: {
+      canonical: 'https://www.motokuryegelsin.com/kurye-cagir',
+    },
+  }
 }
 
 export default function KuryeCagirPage() {

@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { MapPin, Package, Users, ArrowRight, Clock, Shield, Phone, Mail, CheckCircle, Truck, Timer, Star, MessageCircle } from 'lucide-react'
 import { getAllDistricts, getDistrictByName, getNearbyDistricts } from '@/lib/district-queries'
 import { createSlug } from '@/lib/utils'
+import { getPageSeo } from '@/lib/seo-queries'
 import { getDistrictTheme } from '@/lib/district-themes'
 import { CONTACT_INFO } from '@/lib/config'
 import MultiStepForm from '@/components/multi-step-form'
@@ -40,24 +41,31 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
   }
 
-  const districtData = await getDistrictByName(district.name)
+  const [districtData, seo] = await Promise.all([
+    getDistrictByName(district.name),
+    getPageSeo(`ilce-${params.slug}`),
+  ])
   const neighborhoodCount = districtData?.neighborhoods.length || 0
 
+  const title = seo?.title || `${district.name} Moto Kurye | ${neighborhoodCount} Mahallede Hızlı Teslimat | MotoKuryeGelsin`
+  const description = seo?.description || `${district.name} ilçesinde profesyonel moto kurye hizmeti. ${neighborhoodCount} mahallede hızlı teslimat. Evrak, paket ve acil kurye. VIP teslimat 1 saat içinde. Hemen kurye çağır!`
+  const keywords = seo?.keywords || `${district.name} kurye, ${district.name} moto kurye, ${district.name} motorlu kurye, İstanbul kurye, hızlı teslimat ${district.name}, ${district.name} acil kurye, ${district.name} evrak kurye, ${district.name} paket teslimat`
+
   return {
-    title: `${district.name} Moto Kurye | ${neighborhoodCount} Mahallede Hızlı Teslimat | MotoKuryeGelsin`,
-    description: `${district.name} ilçesinde profesyonel moto kurye hizmeti. ${neighborhoodCount} mahallede hızlı teslimat. Evrak, paket ve acil kurye. VIP teslimat 1 saat içinde. Hemen kurye çağır!`,
-    keywords: `${district.name} kurye, ${district.name} moto kurye, ${district.name} motorlu kurye, İstanbul kurye, hızlı teslimat ${district.name}, ${district.name} acil kurye, ${district.name} evrak kurye, ${district.name} paket teslimat`,
+    title,
+    description,
+    keywords,
     openGraph: {
-      title: `${district.name} Moto Kurye | ${neighborhoodCount} Mahallede Hızlı Teslimat`,
-      description: `${district.name} ve ${neighborhoodCount} mahallesinde profesyonel kurye hizmeti. Evrak, paket ve acil teslimat. 1 saat içinde VIP teslimat garantisi.`,
+      title,
+      description,
       url: `https://www.motokuryegelsin.com/ilceler/${params.slug}`,
       type: 'website',
       locale: 'tr_TR',
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${district.name} Moto Kurye Hizmeti`,
-      description: `${neighborhoodCount} mahallede hızlı ve güvenilir teslimat`,
+      title,
+      description,
     },
     alternates: {
       canonical: `https://www.motokuryegelsin.com/ilceler/${params.slug}`

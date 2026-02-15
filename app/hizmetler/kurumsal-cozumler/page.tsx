@@ -1,22 +1,31 @@
 import { Metadata } from 'next'
+import { getPageSeo } from '@/lib/seo-queries'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import { Building2, ArrowRight, CheckCircle, TrendingUp, Users, FileText } from 'lucide-react'
 
-export const metadata: Metadata = {
-  title: 'Kurumsal Kurye Çözümleri İstanbul | Toplu Kurye Hizmeti | B2B',
-  description: 'İşletmeniz için özel kurumsal kurye çözümleri. Aylık paket anlaşmalar, kurumsal faturalama ve öncelikli hizmet. İstanbul genelinde B2B kurye hizmeti.',
-  keywords: 'kurumsal kurye, B2B kurye, toplu kurye, kurumsal anlaşma, işletme kuryesi',
-  openGraph: {
-    title: 'Kurumsal Kurye Çözümleri İstanbul | Moto Kurye Gelsin',
-    description: 'İşletmeniz için özel kurye çözümleri. Aylık paket anlaşmalar ve B2B hizmetler.',
-    url: 'https://www.motokuryegelsin.com/hizmetler/kurumsal-cozumler',
-    type: 'website',
-  },
-  alternates: {
-    canonical: 'https://www.motokuryegelsin.com/hizmetler/kurumsal-cozumler',
-  },
+export const revalidate = 60
+
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getPageSeo('hizmetler-kurumsal')
+  const title = seo?.title || 'Kurumsal Kurye Çözümleri İstanbul | Toplu Kurye Hizmeti | B2B'
+  const description = seo?.description || 'İşletmeniz için özel kurumsal kurye çözümleri. Aylık paket anlaşmalar, kurumsal faturalama ve öncelikli hizmet. İstanbul genelinde B2B kurye hizmeti.'
+  const keywords = seo?.keywords || 'kurumsal kurye, B2B kurye, toplu kurye, kurumsal anlaşma, işletme kuryesi'
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      url: 'https://www.motokuryegelsin.com/hizmetler/kurumsal-cozumler',
+      type: 'website',
+    },
+    alternates: {
+      canonical: 'https://www.motokuryegelsin.com/hizmetler/kurumsal-cozumler',
+    },
+  }
 }
 
 export default function KurumsalCozumlerPage() {

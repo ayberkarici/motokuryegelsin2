@@ -1,22 +1,31 @@
 import { Metadata } from 'next'
+import { getPageSeo } from '@/lib/seo-queries'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import { Zap, Clock, ArrowRight, CheckCircle } from 'lucide-react'
 
-export const metadata: Metadata = {
-  title: 'Acil Kurye Hizmeti İstanbul | 1 Saat İçinde Teslimat | Moto Kurye',
-  description: 'İstanbul genelinde acil kurye hizmeti. Evrak, paket ve önemli gönderileriniz hızlı adresinde. Acil teslimat çözümleri.',
-  keywords: 'acil kurye, hızlı teslimat, 1 saat teslimat, express kurye, istanbul acil kurye',
-  openGraph: {
-    title: 'Acil Kurye Hizmeti İstanbul | Moto Kurye',
-    description: 'İstanbul genelinde acil kurye hizmeti. 1 saat içinde teslimat.',
-    url: 'https://www.motokuryegelsin.com/hizmetler/acil-kurye',
-    type: 'website',
-  },
-  alternates: {
-    canonical: 'https://www.motokuryegelsin.com/hizmetler/acil-kurye',
-  },
+export const revalidate = 60
+
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getPageSeo('hizmetler-acil')
+  const title = seo?.title || 'Acil Kurye Hizmeti İstanbul | 1 Saat İçinde Teslimat | Moto Kurye'
+  const description = seo?.description || 'İstanbul genelinde acil kurye hizmeti. Evrak, paket ve önemli gönderileriniz hızlı adresinde. Acil teslimat çözümleri.'
+  const keywords = seo?.keywords || 'acil kurye, hızlı teslimat, 1 saat teslimat, express kurye, istanbul acil kurye'
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      url: 'https://www.motokuryegelsin.com/hizmetler/acil-kurye',
+      type: 'website',
+    },
+    alternates: {
+      canonical: 'https://www.motokuryegelsin.com/hizmetler/acil-kurye',
+    },
+  }
 }
 
 export default function AcilKuryePage() {

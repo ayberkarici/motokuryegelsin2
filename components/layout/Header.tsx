@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { Bike } from 'lucide-react'
+import Image from 'next/image'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -17,9 +17,13 @@ const Header = () => {
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="text-blue-600">
-              <Bike size={32} />
-            </div>
+            <Image
+              src="/favicon-96x96.png"
+              alt="MotoKuryeGelsin"
+              width={40}
+              height={40}
+              priority
+            />
             <div>
               <h1 className="text-2xl font-bold text-blue-600">MotoKuryeGelsin</h1>
               <p className="text-xs text-gray-500">İstanbul Moto Kurye Hizmeti</p>

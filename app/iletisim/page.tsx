@@ -1,22 +1,31 @@
 import { Metadata } from 'next'
+import { getPageSeo } from '@/lib/seo-queries'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import { Phone, MessageCircle, Mail, MapPin, Clock, Facebook, Instagram, Twitter, Linkedin, Bike } from 'lucide-react'
 
-export const metadata: Metadata = {
-  title: 'İletişim - MotoKuryeGelsin | Müşteri Hizmetleri',
-  description: 'MotoKuryeGelsin ile iletişime geçin. WhatsApp destek hattı ve online sipariş. Ümraniye İstanbul merkezli hızlı kurye hizmeti.',
-  keywords: 'kurye iletişim, motokuryegelsin iletişim, kurye telefon, kurye whatsapp, istanbul kurye iletişim',
-  openGraph: {
-    title: 'İletişim - MotoKuryeGelsin',
-    description: 'Müşteri hizmetleri ve destek. Bize ulaşın, size en iyi hizmeti sunalım.',
-    url: 'https://www.motokuryegelsin.com/iletisim',
-    type: 'website',
-  },
-  alternates: {
-    canonical: 'https://www.motokuryegelsin.com/iletisim',
-  },
+export const revalidate = 60
+
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getPageSeo('iletisim')
+  const title = seo?.title || 'İletişim - MotoKuryeGelsin | Müşteri Hizmetleri'
+  const description = seo?.description || 'MotoKuryeGelsin ile iletişime geçin. WhatsApp destek hattı ve online sipariş. Ümraniye İstanbul merkezli hızlı kurye hizmeti.'
+  const keywords = seo?.keywords || 'kurye iletişim, motokuryegelsin iletişim, kurye telefon, kurye whatsapp, istanbul kurye iletişim'
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      url: 'https://www.motokuryegelsin.com/iletisim',
+      type: 'website',
+    },
+    alternates: {
+      canonical: 'https://www.motokuryegelsin.com/iletisim',
+    },
+  }
 }
 
 export default function IletisimPage() {

@@ -1,28 +1,37 @@
 import { Metadata } from 'next'
+import { getPageSeo } from '@/lib/seo-queries'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import { FileText, Shield, Zap, CheckCircle, ArrowRight, Package, Building2 } from 'lucide-react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 
-export const metadata: Metadata = {
-  title: 'Döküman Teslimat Hizmeti İstanbul | Evrak Kurye | Moto Kurye Gelsin',
-  description: 'İstanbul genelinde hızlı ve güvenli döküman teslimat hizmeti. Evrak, sözleşme, ihale dökümanı, noter evrakları için profesyonel moto kurye çözümleri. hızlı teslimat.',
-  keywords: 'döküman teslimat, evrak kurye, istanbul kurye, noter evrakı taşıma, ihale dökümanı, sözleşme teslimat, acil evrak',
-  openGraph: {
-    title: 'Döküman Teslimat Hizmeti İstanbul | Moto Kurye Gelsin',
-    description: 'Evraklarınızı hızlı güvenle teslim ediyoruz. İstanbul genelinde profesyonel döküman kurye hizmeti.',
-    type: 'website',
-    locale: 'tr_TR',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Döküman Teslimat Hizmeti İstanbul',
-    description: 'Evraklarınızı hızlı güvenle teslim ediyoruz.',
-  },
-  alternates: {
-    canonical: 'https://www.motokuryegelsin.com/hizmetler/dokuman-teslimat',
-  },
+export const revalidate = 60
+
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getPageSeo('hizmetler-dokuman')
+  const title = seo?.title || 'Döküman Teslimat Hizmeti İstanbul | Evrak Kurye | Moto Kurye Gelsin'
+  const description = seo?.description || 'İstanbul genelinde hızlı ve güvenli döküman teslimat hizmeti. Evrak, sözleşme, ihale dökümanı, noter evrakları için profesyonel moto kurye çözümleri.'
+  const keywords = seo?.keywords || 'döküman teslimat, evrak kurye, istanbul kurye, noter evrakı taşıma, ihale dökümanı, sözleşme teslimat, acil evrak'
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+      locale: 'tr_TR',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
+    alternates: {
+      canonical: 'https://www.motokuryegelsin.com/hizmetler/dokuman-teslimat',
+    },
+  }
 }
 
 export default function DokumanTeslimatPage() {
