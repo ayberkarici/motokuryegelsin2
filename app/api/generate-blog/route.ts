@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent'
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent'
 
 // Master Prompt for Blog Generation
 const MASTER_PROMPT = `Sen "Moto Kurye Gelsin" için SEO odaklı, profesyonel blog içerikleri üreten bir yapay zeka içerik yazarısın.
@@ -88,6 +88,11 @@ SİTE İÇİ LİNKLER:
   "meta_keywords": ["anahtar1", "anahtar2", "anahtar3"]
 }
 
+UZUNLUK LİMİTİ (KRİTİK):
+- İçerik (content alanı) 600-800 kelime arasında olmalı, ASLA 800 kelimeyi geçme
+- Tüm JSON çıktısı 3000 kelimeyi geçmemeli
+- Kısa ve öz yaz, gereksiz tekrarlardan kaçın
+
 ÖNEMLİ:
 - Sadece JSON döndür, başka bir şey yazma
 - Türkçe karakterleri slug'da kullanma (ç->c, ş->s, ğ->g, ü->u, ö->o, ı->i)
@@ -173,7 +178,7 @@ Kuralları takip et ve JSON formatında yanıt ver.`
           temperature: 0.7,
           topK: 40,
           topP: 0.95,
-          maxOutputTokens: 8192,
+          maxOutputTokens: 12000,
         },
         safetySettings: [
           {
@@ -217,23 +222,45 @@ Kuralları takip et ve JSON formatında yanıt ver.`
       )
     }
 
-    // Try to parse the JSON from the response
     let blogData
+    const cleanedText = generatedText
+      .replace(/```json\n?/g, '')
+      .replace(/```\n?/g, '')
+      .trim()
+
     try {
-      // Remove potential markdown code blocks
-      const cleanedText = generatedText
-        .replace(/```json\n?/g, '')
-        .replace(/```\n?/g, '')
-        .trim()
-      
       blogData = JSON.parse(cleanedText)
-    } catch (parseError) {
-      console.error('JSON Parse Error:', parseError)
-      console.error('Raw text:', generatedText)
-      return NextResponse.json(
-        { error: 'Failed to parse generated content', raw: generatedText },
-        { status: 500 }
-      )
+    } catch {
+      // JSON truncated - try to recover by closing open strings and braces
+      let fixed = cleanedText
+      // If content field was cut off, close the HTML and JSON structure
+      const contentMatch = fixed.match(/"content"\s*:\s*"/)
+      if (contentMatch) {
+        // Count unclosed braces/brackets
+        const opens = (fixed.match(/(?<!\\)\{/g) || []).length
+        const closes = (fixed.match(/(?<!\\)\}/g) || []).length
+        const openBrackets = (fixed.match(/(?<!\\)\[/g) || []).length
+        const closeBrackets = (fixed.match(/(?<!\\)\]/g) || []).length
+
+        // Check if we're inside a string value (odd number of unescaped quotes after last key)
+        const lastQuoteEven = (fixed.match(/(?<!\\)"/g) || []).length % 2 === 0
+        if (!lastQuoteEven) {
+          fixed += '"'
+        }
+
+        for (let i = 0; i < openBrackets - closeBrackets; i++) fixed += ']'
+        for (let i = 0; i < opens - closes; i++) fixed += '}'
+      }
+
+      try {
+        blogData = JSON.parse(fixed)
+      } catch (finalError) {
+        console.error('JSON Parse Error (unrecoverable):', finalError)
+        return NextResponse.json(
+          { error: 'Failed to parse generated content', raw: generatedText },
+          { status: 500 }
+        )
+      }
     }
 
     return NextResponse.json({ success: true, data: blogData })
