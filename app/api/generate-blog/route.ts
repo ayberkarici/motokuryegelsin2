@@ -9,8 +9,8 @@ const MASTER_PROMPT = `Sen "Moto Kurye Gelsin" için SEO odaklı, profesyonel bl
 ŞİRKET BİLGİLERİ:
 - Şirket: Moto Kurye Gelsin
 - Web: https://www.motokuryegelsin.com
-- Telefon: 0541 695 52 34
-- WhatsApp: 905416955234
+- Telefon: 0541 695 52 99
+- WhatsApp: 905416955299
 - Adres: Baraj sk. No: 44-46 Ümraniye / İstanbul
 - Slogan: "Hızlı, Güvenli, Ekonomik"
 
@@ -61,7 +61,7 @@ SİTE İÇİ LİNKLER:
    - Site içi linkler: <a href="/ilceler/kadikoy" class="text-blue-600 hover:text-blue-800 font-semibold underline">Kadıköy kurye hizmeti</a>
    - En az 4-5 site içi link ekle
    - CTA butonları: <a href="/kurye-cagir" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 mt-4">🚀 Hemen Kurye Çağır</a>
-   - WhatsApp linki: <a href="https://wa.me/905416955234" class="inline-block bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700">📱 WhatsApp ile İletişim</a>
+   - WhatsApp linki: <a href="https://wa.me/905416955299" class="inline-block bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700">📱 WhatsApp ile İletişim</a>
    
 6. BİLGİ KUTULARI:
    - İpucu kutusu: <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-4"><strong>💡 İpucu:</strong> içerik</div>

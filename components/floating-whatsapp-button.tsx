@@ -4,7 +4,7 @@ import { MessageCircle } from 'lucide-react'
 
 export default function FloatingWhatsAppButton() {
   const handleClick = () => {
-    const phoneNumber = '+905416955234'
+    const phoneNumber = '+905416955299'
     const message = encodeURIComponent('Merhaba, motokurye hizmeti hakkında bilgi almak istiyorum.')
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`
     window.open(whatsappUrl, '_blank')

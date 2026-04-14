@@ -4,9 +4,9 @@
  */
 
 export const CONTACT_INFO = {
-  phone: '+90 541 695 52 34',
-  phoneFormatted: '0541 695 52 34',
-  whatsapp: '905416955234',
+  phone: '+90 541 695 52 99',
+  phoneFormatted: '0541 695 52 99',
+  whatsapp: '905416955299',
   email: 'MotoKuryeGelsin@gmail.com',
   address: 'Baraj sk. No: 44-46 Ümraniye / İstanbul',
   workingHours: {

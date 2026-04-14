@@ -124,7 +124,7 @@ export default function GizlilikPage() {
               <div className="mt-4 p-4 bg-gray-50 rounded-lg">
                 <p className="text-gray-700">
                   <strong>E-posta:</strong> MotoKuryeGelsin@gmail.com<br/>
-                  <strong>Telefon:</strong> +90 541 695 52 34<br/>
+                  <strong>Telefon:</strong> +90 541 695 52 99<br/>
                   <strong>Adres:</strong> Baraj sk. No: 44-46 Ümraniye / İstanbul
                 </p>
               </div>

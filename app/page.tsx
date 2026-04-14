@@ -47,7 +47,7 @@ export default function Home() {
             'url': 'https://www.motokuryegelsin.com',
             'logo': 'https://www.motokuryegelsin.com/logo.png',
             'description': 'İstanbul içi hızlı ve güvenilir moto kurye hizmeti. 39 ilçede hızlı teslimat.',
-            'telephone': '+905416955234',
+            'telephone': '+905416955299',
             'email': 'MotoKuryeGelsin@gmail.com',
             'address': {
               '@type': 'PostalAddress',
@@ -66,7 +66,7 @@ export default function Home() {
             ],
             'contactPoint': {
               '@type': 'ContactPoint',
-              'telephone': '+905416955234',
+              'telephone': '+905416955299',
               'contactType': 'customer service',
               'availableLanguage': 'Turkish',
               'areaServed': 'TR'
@@ -83,7 +83,7 @@ export default function Home() {
             'name': 'MotoKuryeGelsin',
             'image': 'https://www.motokuryegelsin.com/logo.png',
             'url': 'https://www.motokuryegelsin.com',
-            'telephone': '+905416955234',
+            'telephone': '+905416955299',
             'priceRange': '$$',
             'address': {
               '@type': 'PostalAddress',

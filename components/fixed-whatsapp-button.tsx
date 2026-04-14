@@ -15,7 +15,7 @@ const WhatsAppIcon = () => (
 
 const FixedWhatsAppButton = () => {
   const pathname = usePathname()
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '905416955234'
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '905416955299'
 
   // Admin sayfalarında gösterme
   if (pathname?.startsWith('/admin')) {

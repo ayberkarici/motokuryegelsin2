@@ -872,7 +872,7 @@ export default async function DistrictPage({ params }: PageProps) {
                   </Link>
                 </Button>
                 <Button asChild variant="outline">
-                  <a href="https://wa.me/905416955234" target="_blank" rel="noopener noreferrer">
+                  <a href="https://wa.me/905416955299" target="_blank" rel="noopener noreferrer">
                     <MessageCircle className="mr-2 h-4 w-4" />
                     WhatsApp Destek
                   </a>

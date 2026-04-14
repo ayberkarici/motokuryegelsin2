@@ -62,7 +62,7 @@ export default function IletisimPage() {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 mb-1">Telefon</h3>
-                      <p className="text-gray-600">+90 541 695 52 34</p>
+                      <p className="text-gray-600">+90 541 695 52 99</p>
                       <p className="text-sm text-gray-500">Müşteri Hizmetleri</p>
                     </div>
                   </div>
@@ -73,7 +73,7 @@ export default function IletisimPage() {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 mb-1">WhatsApp</h3>
-                      <p className="text-gray-600">+90 541 695 52 34</p>
+                      <p className="text-gray-600">+90 541 695 52 99</p>
                       <p className="text-sm text-gray-500">Anında destek ve sipariş</p>
                     </div>
                   </div>
@@ -250,7 +250,7 @@ export default function IletisimPage() {
               </Link>
 
               <a 
-                href="https://wa.me/905416955234"
+                href="https://wa.me/905416955299"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 text-center group"
@@ -263,7 +263,7 @@ export default function IletisimPage() {
               </a>
 
               <a 
-                href="tel:+905416955234"
+                href="tel:+905416955299"
                 className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 text-center group"
               >
                 <div className="mb-4 group-hover:scale-110 transition-transform flex justify-center">

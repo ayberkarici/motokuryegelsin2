@@ -210,7 +210,7 @@ Teşekkürler!`;
 }
 
 // WhatsApp URL'si oluşturma
-export function createWhatsAppUrl(message: string, phoneNumber: string = '905416955234'): string {
+export function createWhatsAppUrl(message: string, phoneNumber: string = '905416955299'): string {
   const encodedMessage = encodeURIComponent(message);
   return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 }

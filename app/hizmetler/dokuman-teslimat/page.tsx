@@ -48,7 +48,7 @@ export default function DokumanTeslimatPage() {
               "@type": "LocalBusiness",
               "name": "Moto Kurye Gelsin",
               "areaServed": "İstanbul, Türkiye",
-              "telephone": "+90-541-695-52-34"
+              "telephone": "+90-541-695-52-99"
             },
             "description": "İstanbul genelinde hızlı ve güvenli döküman teslimat hizmeti",
             "offers": {
